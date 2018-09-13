@@ -7,26 +7,26 @@
     ],
     "builders": [
         {
-            "type" : "osc-ebssurrogate",
+            "type": "osc-ebssurrogate",
             "access_key": "{{user `ak`}}",
             "secret_key": "{{user `sk`}}",
             "region": "{{user `region`}}",
-            "ssh_username" : "centos",
-            "instance_type" : "t2.medium",
+            "ssh_username": "centos",
+            "instance_type": "t2.medium",
             "source_ami": "ami-880caa66",
             "skip_region_validation": true,
             "endpoints": {
-                "ec2" :    "fcu.{{user `region`}}.outscale.com"
+                "ec2": "fcu.{{user `region`}}.outscale.com"
             },
             "ami_virtualization_type": "hvm",
             "ami_name": "{{user `ami_name`}}",
-            "availability_zone":"{{user `region`}}a",
-            "launch_block_device_mappings" : [
+            "availability_zone": "{{user `region`}}a",
+            "launch_block_device_mappings": [
                 {
-            	    "volume_type" : "gp2",
-            	    "device_name" : "/dev/xvdf",
-            	    "delete_on_termination" : true,
-            	    "volume_size" : 10
+            	    "volume_type": "gp2",
+            	    "device_name": "/dev/xvdf",
+            	    "delete_on_termination": true,
+            	    "volume_size": 10
                 }
             ],
             "ami_root_device": {
@@ -34,9 +34,15 @@
                 "source_device_name": "/dev/xvdf",
                 "device_name": "/dev/sda1",
                 "delete_on_termination": true,
-                "volume_size": "10",
+                "volume_size": 10,
                 "volume_type": "gp2"
             }
         }
-    ]
+    ],
+    "variables": {
+        "ami_name": "{{env `AMI_NAME`}}",
+	"region": "{{env `REGION`}}",
+	"ak": "{{env `ACCESS_KEY`}}",
+	"sk": "{{env `SECRET_KEY`}}"
+    }
 }
