@@ -25,6 +25,9 @@ sudo cp osc-udev-rules-20160516-1.x86_64.rpm /mnt/tmp/
 sudo chroot /mnt/ rpm -i /tmp/osc-udev-rules-20160516-1.x86_64.rpm
 
 #### CLEANUP
+sudo umount /mnt/dev
+sudo umount /mnt/proc
+sudo umount /mnt/sys
 sudo umount /mnt
 sudo rm -rf /mnt/var/cache/yum
 sudo rm -rf /mnt/root/.ssh
