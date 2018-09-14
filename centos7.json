@@ -12,7 +12,7 @@
             "secret_key": "{{user `sk`}}",
             "region": "{{user `region`}}",
             "ssh_username": "centos",
-            "instance_type": "t2.medium",
+            "instance_type": "c4.large",
             "source_ami": "ami-880caa66",
             "skip_region_validation": true,
             "endpoints": {
