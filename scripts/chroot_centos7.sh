@@ -9,6 +9,10 @@ sudo dd if=/tmp/centos7.raw of=/dev/sda bs=1M status=progress
 xfs_admin -U generate /dev/sda1
 sudo mount /dev/sda1 /mnt
 
+#### CHROOT FIXES
+ln -s /etc/resolv.conf /mnt/etc/resolv/conf
+mount -o bind /dev /mnt/dev
+
 #### UPDATES
 sudo chroot /mnt/ yum upgrade -y
 sudo chroot /mnt/ yum clean all
