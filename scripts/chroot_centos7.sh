@@ -20,9 +20,10 @@ sudo chroot /mnt/ yum upgrade -y
 sudo chroot /mnt/ yum clean all
 
 #### OUTSCALE PACKAGES
-sudo wget https://osu.eu-west-2.outscale.com/outscale-official-packages/udev/osc-udev-rules-20160516-1.x86_64.rpm -P /mnt/tmp
-sudo wget https://osu.eu-west-2.outscale.com/outscale-official-packages/dhclient-configuration/dhclient-configuration-1.0.0-1-Centos7.x86_64.rpm -P /mnt/tmp
-sudo wget https://osu.eu-west-2.outscale.com/outscale-official-packages/fni/osc-fni-centos-1.0.0-0.x86_64.rpm -P /mnt/tmp
+sudo wget https://osu.eu-west-2.outscale.com/outscale-official-packages/udev/osc-udev-rules-20160516-1.x86_64.rpm
+sudo wget https://osu.eu-west-2.outscale.com/outscale-official-packages/dhclient-configuration/dhclient-configuration-1.0.0-1-Centos7.x86_64.rpm
+sudo wget https://osu.eu-west-2.outscale.com/outscale-official-packages/fni/osc-fni-centos-1.0.0-0.x86_64.rpm
+sudo mv *.rpm /mnt/tmp/
 sudo chroot /mnt/ rpm -i /tmp/*.rpm
 
 #### CLEANUP
