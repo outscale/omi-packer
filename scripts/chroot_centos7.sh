@@ -1,8 +1,7 @@
 #!/bin/bash
 
 #### BASIC IMAGE
-#sudo yum install -y wget
-sudo apt install -y wget
+sudo yum install -y wget
 cd /tmp
 wget http://cloud.centos.org/centos/7/images/CentOS-7-x86_64-GenericCloud.raw.tar.gz
 tar -zxvf CentOS-7-x86_64-GenericCloud.raw.tar.gz && mv *.raw centos7.raw
