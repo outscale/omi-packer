@@ -24,7 +24,6 @@ sudo chroot /mnt rpm -i https://osu.eu-west-2.outscale.com/outscale-official-pac
 sudo chroot /mnt rpm -i https://osu.eu-west-2.outscale.com/outscale-official-packages/fni/osc-fni-centos-1.0.0-0.x86_64.rpm
 
 #### CLEANUP
-cd /tmp
 sudo umount /mnt/dev
 sudo umount /mnt/proc
 sudo umount /mnt/sys
