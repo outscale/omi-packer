@@ -13,7 +13,7 @@
             "region": "{{user `region`}}",
             "ssh_username": "centos",
             "instance_type": "c4.large",
-            "source_ami": "ami-880caa66",
+            "source_ami": "ami-4a7bf2b3",
             "skip_region_validation": true,
             "endpoints": {
                 "ec2": "fcu.{{user `region`}}.outscale.com"
