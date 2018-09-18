@@ -40,7 +40,6 @@
                 "delete_on_termination": true,
                 "source_device_name": "/dev/xvdf",
                 "device_name": "/dev/sda1",
-                "delete_on_termination": true,
                 "volume_size": 10,
                 "volume_type": "gp2"
             }
