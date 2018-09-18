@@ -21,8 +21,8 @@ sudo chroot /mnt/ yum clean all
 
 #### OUTSCALE PACKAGES
 sudo chroot /mnt rpm -i http://osu.eu-west-2.outscale.com/outscale-official-packages/udev/osc-udev-rules-20160516-1.x86_64.rpm
-sudo chroot /mnt rpm -i http://osu.eu-west-2.outscale.com/outscale-official-packages/fni/osc-fni-centos-1.0.0-0.x86_64.rpm
 sudo chroot /mnt rpm -i http://osu.eu-west-2.outscale.com/outscale-official-packages/dhclient-configuration/dhclient-configuration-1.0.0-1-Centos7.x86_64.rpm
+sudo chroot /mnt rpm -i http://osu.eu-west-2.outscale.com/outscale-official-packages/flexible-network-interfaces/osc-fni-centos-1.0.0-0.x86_64.rpm
 
 #### CLEANUP
 sudo umount /mnt/dev
