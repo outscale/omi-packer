@@ -13,6 +13,7 @@ cp /etc/resolv.conf /mnt/etc/resolv.conf
 mount -o bind /dev /mnt/dev
 mount -o bind /proc /mnt/proc
 mount -o bind /sys /mnt/sys
+touch /mnt/.autorelabel
 
 #### UPDATES
 chroot /mnt/ yum upgrade -y
@@ -21,6 +22,9 @@ chroot /mnt/ yum clean all
 #### OUTSCALE PACKAGES
 chroot /mnt rpm -i http://osu.eu-west-2.outscale.com/outscale-official-packages/udev/osc-udev-rules-20160516-1.x86_64.rpm
 chroot /mnt rpm -i http://osu.eu-west-2.outscale.com/outscale-official-packages/dhclient-configuration/dhclient-configuration-1.0.0-1-Centos7.x86_64.rpm
+
+#### CONFIGURATION
+sed -i 's/^SELINUX=.*/SELINUX=disabled/g' /mnt/etc/selinux/config
 
 #### CLEANUP
 umount /mnt/dev
