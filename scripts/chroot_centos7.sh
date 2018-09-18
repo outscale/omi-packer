@@ -6,7 +6,7 @@ cd /tmp
 wget http://cloud.centos.org/centos/7/images/CentOS-7-x86_64-GenericCloud.raw.tar.gz
 tar -zxvf CentOS-7-x86_64-GenericCloud.raw.tar.gz && mv *.raw centos7.raw
 dd if=./centos7.raw of=/dev/sda bs=1G status=progress conv=sparse
-mount -o nouuid /dev/sda1 /mnt
+mount /dev/sda1 /mnt
 
 #### CHROOT FIXES
 cp /etc/resolv.conf /mnt/etc/resolv.conf
