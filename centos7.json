@@ -2,7 +2,6 @@
     "provisioners": [
         {
             "type": "shell",
-	    "execute_command": "chmod +x {{.Path}}; {{.Vars}} sudo -E -S bash -x '{{.Path}}'",
             "script": "./scripts/chroot_centos7.sh"
         }
     ],
