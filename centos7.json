@@ -2,7 +2,7 @@
     "provisioners": [
         {
             "type": "shell",
-            "scripts": ["./scripts/chroot_centos7.sh"]
+            "scripts": ["sudo ./scripts/chroot_centos7.sh"]
         }
     ],
     "builders": [
