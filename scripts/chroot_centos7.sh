@@ -5,7 +5,7 @@ yum install -y wget
 cd /tmp
 wget http://cloud.centos.org/centos/7/images/CentOS-7-x86_64-GenericCloud.raw.tar.gz
 tar -zxvf CentOS-7-x86_64-GenericCloud.raw.tar.gz && mv *.raw centos7.raw
-dd if=./centos7.raw of=/dev/sda bs=1G status=progress conv=sparse
+dd if=./centos7.raw of=/dev/sda bs=1G status=progress conv=sparse 2>&1
 mount -o nouuid /dev/sda1 /mnt
 
 #### CHROOT FIXES
