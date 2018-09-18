@@ -24,7 +24,8 @@
             "availability_zone": "{{user `region`}}a",
             "launch_block_device_mappings": [
                 {
-            	    "volume_type": "gp2",
+            	    "volume_type": "io1",
+		    "iops": 300,
             	    "device_name": "/dev/xvdf",
             	    "delete_on_termination": true,
             	    "volume_size": 10
