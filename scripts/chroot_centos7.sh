@@ -1,39 +1,39 @@
 #!/bin/bash
 
 #### BASIC IMAGE
-sudo yum install -y wget
+yum install -y wget
 cd /tmp
 wget http://cloud.centos.org/centos/7/images/CentOS-7-x86_64-GenericCloud.raw.tar.gz
 tar -zxvf CentOS-7-x86_64-GenericCloud.raw.tar.gz && mv *.raw centos7.raw
-sudo dd if=./centos7.raw of=/dev/sda bs=1G status=progress conv=sparse
-sudo mount -o nouuid /dev/sda1 /mnt
+dd if=./centos7.raw of=/dev/sda bs=1G status=progress conv=sparse
+mount -o nouuid /dev/sda1 /mnt
 
 #### CHROOT FIXES
-sudo cp /etc/resolv.conf /mnt/etc/resolv.conf
-sudo mount -o bind /dev /mnt/dev
-sudo mount -o bind /proc /mnt/proc
-sudo mount -o bind /sys /mnt/sys
+cp /etc/resolv.conf /mnt/etc/resolv.conf
+mount -o bind /dev /mnt/dev
+mount -o bind /proc /mnt/proc
+mount -o bind /sys /mnt/sys
 
 #### UPDATES
-sudo chroot /mnt/ yum upgrade -y
-sudo chroot /mnt/ yum clean all
+chroot /mnt/ yum upgrade -y
+chroot /mnt/ yum clean all
 
 #### OUTSCALE PACKAGES
-sudo chroot /mnt rpm -i http://osu.eu-west-2.outscale.com/outscale-official-packages/udev/osc-udev-rules-20160516-1.x86_64.rpm
-sudo chroot /mnt rpm -i http://osu.eu-west-2.outscale.com/outscale-official-packages/dhclient-configuration/dhclient-configuration-1.0.0-1-Centos7.x86_64.rpm
+chroot /mnt rpm -i http://osu.eu-west-2.outscale.com/outscale-official-packages/udev/osc-udev-rules-20160516-1.x86_64.rpm
+chroot /mnt rpm -i http://osu.eu-west-2.outscale.com/outscale-official-packages/dhclient-configuration/dhclient-configuration-1.0.0-1-Centos7.x86_64.rpm
 
 #### CLEANUP
-sudo umount /mnt/dev
-sudo umount /mnt/proc
-sudo umount /mnt/sys
-sudo umount /mnt
-sudo rm -rf /mnt/var/cache/yum
-sudo rm -rf /mnt/root/.ssh
-sudo rm -rf /mnt/root/.bash_history
-sudo rm -rf /mnt/home/centos/.ssh
-sudo rm -rf /mnt/home/centos/.bash_history
-sudo rm -rf /mnt/tmp/*
-sudo rm -rf /mnt/var/lib/dhcp/
-sudo rm -rf /mnt/var/tmp/*
-sudo rm -rf /mnt/var/log/*
-sudo rm -rf /mnt/var/lib/cloud/*
+umount /mnt/dev
+umount /mnt/proc
+umount /mnt/sys
+umount /mnt
+rm -rf /mnt/var/cache/yum
+rm -rf /mnt/root/.ssh
+rm -rf /mnt/root/.bash_history
+rm -rf /mnt/home/centos/.ssh
+rm -rf /mnt/home/centos/.bash_history
+rm -rf /mnt/tmp/*
+rm -rf /mnt/var/lib/dhcp/
+rm -rf /mnt/var/tmp/*
+rm -rf /mnt/var/log/*
+rm -rf /mnt/var/lib/cloud/*
