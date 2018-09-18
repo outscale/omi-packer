@@ -13,7 +13,6 @@ cp /etc/resolv.conf /mnt/etc/resolv.conf
 mount -o bind /dev /mnt/dev
 mount -o bind /proc /mnt/proc
 mount -o bind /sys /mnt/sys
-touch /mnt/.autorelabel
 
 #### UPDATES
 chroot /mnt/ yum upgrade -y
