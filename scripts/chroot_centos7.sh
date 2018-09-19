@@ -21,6 +21,7 @@ chroot /mnt/ yum clean all
 #### OUTSCALE PACKAGES
 chroot /mnt rpm -i http://osu.eu-west-2.outscale.com/outscale-official-packages/udev/osc-udev-rules-20160516-1.x86_64.rpm
 chroot /mnt rpm -i http://osu.eu-west-2.outscale.com/outscale-official-packages/dhclient-configuration/dhclient-configuration-1.0.0-1-Centos7.x86_64.rpm
+chroot /mnt rpm -i http://osu.eu-west-2.outscale.com/outscale-official-packages/fni/osc-fni-1.0.0-8.x86_64.rpm
 
 #### CONFIGURATION
 cp /tmp/cloud.cfg /mnt/etc/cloud/cloud.cfg
