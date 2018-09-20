@@ -6,7 +6,7 @@ cd /tmp
 wget http://cloud-images.ubuntu.com/bionic/current/bionic-server-cloudimg-amd64.img
 mv *.img bionic.img
 qemu-img convert ./bionic.img -O raw /dev/sda
-mount /dev/sda /mnt
+mount /dev/sda1 /mnt
 
 #### CHROOT FIXES
 cp --remove-destination /etc/resolv.conf /mnt/etc/resolv.conf
