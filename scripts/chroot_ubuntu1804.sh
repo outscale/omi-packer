@@ -22,7 +22,8 @@ chroot /mnt/ apt clean
 
 #### CONFIGURATION
 echo 'GRUB_CMDLINE_LINUX="net.ifnames=0 biosdevname=0"' >>/mnt/etc/default/grub
-grub-mkconfig -o /boot/grub/grub.cfg
+chroot /mnt/ grub-mkconfig -o /boot/grub/grub.cfg
+chroot /mnt/ update-grub
 
 #### OUTSCALE PACKAGES
 wget https://osu.eu-west-2.outscale.com/outscale-official-packages/udev/osc-udev-rules_20160516_amd64.deb -P /mnt/tmp
