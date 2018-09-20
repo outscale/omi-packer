@@ -1,14 +1,11 @@
 #!/bin/bash
 
 #### BASIC IMAGE
-yum install -y wget
+yum install -y wget qemu-img
 cd /tmp
-wget  http://cloud-images.ubuntu.com/xenial/current/xenial-server-cloudimg-amd64-root.tar.gz
-tar xvzf xenial-server-cloudimg-amd64-root.tar.gz
-echo -e "n\np\n\n\n\nw\n" | fdisk /dev/sda
-mkfs.ext4 /dev/sda1
+wget http://cloud-images.ubuntu.com/xenial/current/xenial-server-cloudimg-amd64-disk1.img
 mv *.img xenial.img
-dd if=./xenial.img of=/dev/sda1 bs=1G status=progress conv=sparse
+qemu-img convert ./xenial.img -O raw /dev/sda
 mount /dev/sda1 /mnt
 
 #### CHROOT FIXES
