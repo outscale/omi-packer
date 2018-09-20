@@ -20,6 +20,9 @@ chroot /mnt/ apt update -y
 chroot /mnt/ apt upgrade -y
 chroot /mnt/ apt clean
 
+#### CONFIGURATION
+echo 'GRUB_CMDLINE_LINUX="net.ifnames=0"' >>/mnt/etc/default/grub
+
 #### OUTSCALE PACKAGES
 wget https://osu.eu-west-2.outscale.com/outscale-official-packages/udev/osc-udev-rules_20160516_amd64.deb -P /mnt/tmp
 chroot /mnt/ dpkg -i /tmp/osc-udev-rules_20160516_amd64.deb
