@@ -5,8 +5,8 @@ yum install -y wget
 cd /tmp
 wget https://cdimage.debian.org/cdimage/openstack/current-9/debian-9-openstack-amd64.raw
 mv *.raw debian9.raw
-dd if=./debian9.raw of=/dev/sda bs=1G status=progress conv=sparse
-mount -o nouuid /dev/xvdf /mnt
+dd if=./debian9.raw of=/dev/xvdf bs=1G status=progress conv=sparse
+mount /dev/xvdf /mnt
 
 #### CHROOT FIXES
 cp /etc/resolv.conf /mnt/etc/resolv.conf
