@@ -22,7 +22,6 @@ chroot /mnt/ apt clean
 
 #### CONFIGURATION
 echo 'GRUB_CMDLINE_LINUX="net.ifnames=0 biosdevname=0"' >>/mnt/etc/default/grub
-chroot /mnt/ grub-mkconfig -o /boot/grub/grub.cfg
 chroot /mnt/ update-grub
 
 #### OUTSCALE PACKAGES
