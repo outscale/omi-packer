@@ -24,17 +24,6 @@ chroot /mnt/ apt clean
 echo 'GRUB_CMDLINE_LINUX="net.ifnames=0 biosdevname=0"' >>/mnt/etc/default/grub
 chroot /mnt/ update-grub
 
-#### CLOUD-INIT FIX
-cat >>/etc/cloud/cloud.cfg <<EOL 
-datasource_list: [ Ec2 ]
-datastource:
-  Ec2:
-    strict_id: false
-    metadata_urls: [ 'http://169.254.169.254:80' ]
-    timeout: 5
-    max_wait: 10" >> /mnt/etc/cloud/cloud.cfg
-EOL
-
 #### OUTSCALE PACKAGES
 wget https://osu.eu-west-2.outscale.com/outscale-official-packages/udev/osc-udev-rules_20160516_amd64.deb -P /mnt/tmp
 chroot /mnt/ dpkg -i /tmp/osc-udev-rules_20160516_amd64.deb
