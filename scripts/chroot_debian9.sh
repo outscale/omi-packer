@@ -21,7 +21,7 @@ chroot /mnt/ apt clean
 
 #### OUTSCALE PACKAGES
 wget https://osu.eu-west-2.outscale.com/outscale-official-packages/udev/osc-udev-rules_20160516_amd64.deb -P /mnt/tmp
-chroot /mnt/ dpkg -i /tmp/*.deb
+chroot /mnt/ dpkg -i /tmp/osc-udev-rules_20160516_amd64.deb
 
 #### CONFIGURATION
 sed -i 's/^SELINUX=.*/SELINUX=disabled/g' /mnt/etc/selinux/config
