@@ -30,6 +30,16 @@ chroot /mnt/ dpkg -i /tmp/osc-udev-rules_20160516_amd64.deb
 wget https://osu.eu-west-2.outscale.com/outscale-official-packages/fni/osc-fni-1.0.0-x86_64.deb -P /mnt/tmp
 chroot /mnt/ dpkg -i /tmp/osc-fni-1.0.0-x86_64.deb
 
+cat >>/mnt/etc/cloud/cloud.cfg <<EOL
+datasource_list: [ Ec2 ]
+datastource:
+  Ec2:
+    strict_id: false
+    metadata_urls: [ 'http://169.254.169.254:80' ]
+    timeout: 5
+    max_wait: 10
+EOL
+
 #### CLEANUP
 umount /mnt/dev
 umount /mnt/proc
