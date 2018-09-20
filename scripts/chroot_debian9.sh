@@ -30,7 +30,7 @@ umount /mnt/dev
 umount /mnt/proc
 umount /mnt/sys
 umount /mnt
-rm -rf /mnt/var/cache/yum
+rm -rf /mnt/var/cache/apt
 rm -rf /mnt/root/.ssh
 rm -rf /mnt/root/.bash_history
 rm -rf /mnt/home/centos/.ssh
