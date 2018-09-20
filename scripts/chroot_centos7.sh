@@ -24,7 +24,6 @@ chroot /mnt rpm -i http://osu.eu-west-2.outscale.com/outscale-official-packages/
 chroot /mnt rpm -i http://osu.eu-west-2.outscale.com/outscale-official-packages/fni/osc-fni-1.0.0-8.x86_64.rpm
 
 #### CONFIGURATION
-cp /tmp/cloud.cfg /mnt/etc/cloud/cloud.cfg
 sed -i 's/^SELINUX=.*/SELINUX=disabled/g' /mnt/etc/selinux/config
 
 #### CLEANUP
