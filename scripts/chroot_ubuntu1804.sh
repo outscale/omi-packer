@@ -5,8 +5,8 @@ yum install -y wget qemu-img
 cd /tmp
 wget http://cloud-images.ubuntu.com/bionic/current/bionic-server-cloudimg-amd64.img
 mv *.img bionic.img
-qemu-img convert ./bionic.img -O raw /dev/sda
-sleep 10
+qemu-img convert ./bionic.img -O raw bionic.raw
+dd if=./bionic.raw of=/dev/sda bs=1G conv=sparse
 mount /dev/sda1 /mnt
 
 #### CHROOT FIXES
