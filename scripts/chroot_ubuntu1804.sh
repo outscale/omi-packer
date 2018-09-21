@@ -10,7 +10,7 @@ dd if=./bionic.raw of=/dev/sda bs=1G conv=sparse
 mount /dev/sda1 /mnt
 
 #### CHROOT FIXES
-ln -sf /etc/resolv.conf /mnt/etc/resolv.conf
+mount -o bind /etc/resolv.conf /mnt/etc/resolv.conf
 mount -o bind /dev /mnt/dev
 mount -o bind /proc /mnt/proc
 mount -o bind /sys /mnt/sys
