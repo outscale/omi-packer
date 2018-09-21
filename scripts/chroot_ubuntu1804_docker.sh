@@ -42,7 +42,7 @@ EOL
 #### ADDITIONAL
 chroot /mnt/ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | chroot /mnt/ sudo apt-key add -
 chroot /mnt/ apt install -y software-properties-common
-chroot /mnt/ add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu zesty stable"
+chroot /mnt/ add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable"
 chroot /mnt/ apt update -y
 chroot /mnt/ apt install -y docker-ce
 
