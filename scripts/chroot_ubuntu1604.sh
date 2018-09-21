@@ -6,6 +6,7 @@ cd /tmp
 wget http://cloud-images.ubuntu.com/xenial/current/xenial-server-cloudimg-amd64-disk1.img
 mv *.img xenial.img
 qemu-img convert ./xenial.img -O raw /dev/sda
+partprobe /dev/sda
 mount /dev/sda1 /mnt
 
 #### CHROOT FIXES
