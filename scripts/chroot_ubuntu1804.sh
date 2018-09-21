@@ -41,6 +41,7 @@ datastource:
 EOL
 
 #### CLEANUP
+umount /mnt/etc/resolv.conf
 umount /mnt/dev
 umount /mnt/proc
 umount /mnt/sys
