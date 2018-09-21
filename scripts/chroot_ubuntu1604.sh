@@ -13,7 +13,7 @@ mount -o bind /dev /mnt/dev
 mount -o bind /proc /mnt/proc
 mount -o bind /sys /mnt/sys
 mv /mnt/etc/resolv.conf{,.bak}
-cp /etc/resolv.conf /mnt/run/resolvconf/resolv.conf
+cp /etc/resolv.conf /mnt/etc/resolv.conf
 
 #### UPDATES
 chroot /mnt/ apt update -y
