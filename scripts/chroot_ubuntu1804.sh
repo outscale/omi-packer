@@ -10,10 +10,10 @@ dd if=./bionic.raw of=/dev/sda bs=1G conv=sparse
 mount /dev/sda1 /mnt
 
 #### CHROOT FIXES
-mount -o bind /etc/resolv.conf /mnt/etc/systemd/resolv.conf
 mount -o bind /dev /mnt/dev
 mount -o bind /proc /mnt/proc
 mount -o bind /sys /mnt/sys
+mount -o bind /etc/resolv.conf /mnt/run/resolvconf/resolv.conf
 
 #### UPDATES
 chroot /mnt/ apt update -y
@@ -41,7 +41,7 @@ datastource:
 EOL
 
 #### CLEANUP
-umount /mnt/etc/systemd/resolv.conf
+umount /mnt/run/resolvconf/resolv.conf
 umount /mnt/dev
 umount /mnt/proc
 umount /mnt/sys
