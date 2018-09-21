@@ -12,8 +12,7 @@ mount /dev/sda1 /mnt
 mount -o bind /dev /mnt/dev
 mount -o bind /proc /mnt/proc
 mount -o bind /sys /mnt/sys
-mkdir -p /mnt/run/resolvconf
-mount -o bind /etc/resolv.conf /mnt/run/resolvconf/resolv.conf
+cp /etc/resolv.conf /mnt/run/resolvconf/resolv.conf
 
 #### UPDATES
 chroot /mnt/ apt update -y
@@ -27,7 +26,6 @@ wget https://osu.eu-west-2.outscale.com/outscale-official-packages/fni/osc-fni-1
 chroot /mnt/ dpkg -i /tmp/osc-fni-1.0.0-x86_64.deb
 
 #### CLEANUP
-umount /mnt/run/resolvconf/resolv.conf
 umount /mnt/dev
 umount /mnt/proc
 umount /mnt/sys
