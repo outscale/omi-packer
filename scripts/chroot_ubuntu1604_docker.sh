@@ -18,7 +18,6 @@ mount -o bind /sys /mnt/sys
 #### UPDATES
 chroot /mnt/ apt update -y
 chroot /mnt/ apt upgrade -y
-chroot /mnt/ apt clean
 
 #### CONFIGURATION
 echo 'GRUB_CMDLINE_LINUX="net.ifnames=0 biosdevname=0"' >>/mnt/etc/default/grub
@@ -41,13 +40,14 @@ datastource:
 EOL
 
 #### ADDITIONAL
-chroot /mnt/ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+chroot /mnt/ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | chroot /mnt/ sudo apt-key add -
 chroot /mnt/ apt install -y software-properties-common
-chroot /mnt/ add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+chroot /mnt/ add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu zesty stable"
 chroot /mnt/ apt update -y
 chroot /mnt/ apt install -y docker-ce
 
 #### CLEANUP
+chroot /mnt/ apt clean
 umount /mnt/dev
 umount /mnt/proc
 umount /mnt/sys
