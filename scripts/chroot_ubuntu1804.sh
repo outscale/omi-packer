@@ -13,7 +13,7 @@ mount /dev/sda1 /mnt
 mount -o bind /dev /mnt/dev
 mount -o bind /proc /mnt/proc
 mount -o bind /sys /mnt/sys
-chroot /mnt/ ls -la /etc/resolv.conf
+mount -o bind /etc/resolv.conf /mnt/run/systemd/resolve/stub-resolv.conf
 
 #### UPDATES
 chroot /mnt/ apt update -y
@@ -41,6 +41,7 @@ datastource:
 EOL
 
 #### CLEANUP
+umount /run/systemd/resolve/stub-resolv.conf
 umount /mnt/dev
 umount /mnt/proc
 umount /mnt/sys
