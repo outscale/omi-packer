@@ -12,6 +12,7 @@ mount /dev/sda1 /mnt
 mount -o bind /dev /mnt/dev
 mount -o bind /proc /mnt/proc
 mount -o bind /sys /mnt/sys
+mkdir -p /mnt/run/resolvconf
 mount -o bind /etc/resolv.conf /mnt/run/resolvconf/resolv.conf
 
 #### UPDATES
