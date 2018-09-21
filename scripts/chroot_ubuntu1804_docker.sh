@@ -10,10 +10,11 @@ dd if=./bionic.raw of=/dev/sda bs=1G conv=sparse
 mount /dev/sda1 /mnt
 
 #### CHROOT FIXES
-cp --remove-destination /etc/resolv.conf /mnt/etc/resolv.conf
 mount -o bind /dev /mnt/dev
 mount -o bind /proc /mnt/proc
 mount -o bind /sys /mnt/sys
+mv /mnt/etc/resolv.conf{,.bak}
+cp /etc/resolv.conf /mnt/etc/resolv.conf
 
 #### UPDATES
 chroot /mnt/ apt update -y
@@ -48,6 +49,8 @@ chroot /mnt/ apt install -y docker-ce
 
 #### CLEANUP
 chroot /mnt/ apt clean
+rm -f /mnt/etc/resolv.conf
+mv /mnt/etc/resolv.conf.bak /mnt/etc/resolv.conf
 umount /mnt/dev
 umount /mnt/proc
 umount /mnt/sys
