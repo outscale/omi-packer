@@ -7,7 +7,8 @@ wget "http://omi-packer.osu.eu-west-2.outscale.com/oracle/OracleLinux-7.4-x86_64
 mv Oracle* oracle.qcow2
 qemu-img convert ./oracle.qcow2 -O raw oracle.raw
 dd if=./oracle.raw of=/dev/sda bs=1G status=progress conv=sparse
-mount -o nouuid /dev/sda2 /mnt
+partprobe /dev/sda
+mount /dev/sda2 /mnt
 
 #### CHROOT FIXES
 mount -o bind /dev /mnt/root/dev
