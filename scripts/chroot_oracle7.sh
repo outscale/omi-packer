@@ -3,7 +3,7 @@
 #### BASIC IMAGE
 yum install -y wget qemu-img
 cd /tmp
-wget http://omi-packer.osu.eu-west-2.outscale.com/oracle/OracleLinux-7.4-x86_64.qcow2?AWSAccessKeyId=MTXAS23YQ67OUWJWJR3C&Expires=1569495828&Signature=pkqLTZ9oWBrZYIHEyMKuXeguyyk%3D
+wget "http://omi-packer.osu.eu-west-2.outscale.com/oracle/OracleLinux-7.4-x86_64.qcow2?AWSAccessKeyId=MTXAS23YQ67OUWJWJR3C&Expires=1569495828&Signature=pkqLTZ9oWBrZYIHEyMKuXeguyyk%3D"
 mv *.qcow2 oracle.qcow2
 qemu-img convert ./oracle.qcow2 -O raw oracle.raw
 dd if=./oracle.raw of=/dev/sda bs=1G status=progress conv=sparse
