@@ -21,7 +21,6 @@
             },
             "ami_virtualization_type": "hvm",
             "ami_name": "{{user `ami_name`}}",
-	    "ami_description": "{{user `ami_name`}}",
             "availability_zone": "{{user `region`}}a",
             "launch_block_device_mappings": [
                 {
