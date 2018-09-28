@@ -29,7 +29,7 @@
     }
   ],
     "variables": {
-        "ami_name": "{{env `AMI_NAME_WINDOWS`}}",
+        "ami_name": "{{env `AMI_NAME`}}",
         "region": "{{env `REGION`}}",
         "ak": "{{env `ACCESS_KEY`}}",
         "sk": "{{env `SECRET_KEY`}}",
