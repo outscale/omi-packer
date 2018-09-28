@@ -13,7 +13,7 @@
         "access_key": "{{user `ak`}}",
         "secret_key": "{{user `sk`}}",
         "region": "{{user `region`}}",
-        "availability_zone":"{{user `region`}}a"",
+        "availability_zone":"{{user `region`}}a",
         "source_ami": "{{user `source_ami`}}",
         "instance_type" : "c4.2xlarge",
         "ami_name": "{{user `ami_name`}}",
