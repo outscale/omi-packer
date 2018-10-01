@@ -1,9 +1,25 @@
 {
   "provisioners": [
-      {
+            {
           "type": "powershell",
           "scripts": [
-            "scripts/prepare_omi.ps1"
+            "scripts/disable-uac.ps1"
+            ]
+       },
+            {
+          "type": "powershell",
+          "scripts": [
+            "scripts/PS_WinUpdate.ps1"
+            ]
+       },
+            {
+         "type": "windows-restart",
+         "restart_timeout": "20m"
+       },
+            {
+          "type": "powershell",
+          "scripts": [
+            "scripts/sysprep.ps1"
             ]
        }
   ],
@@ -15,7 +31,7 @@
         "region": "{{user `region`}}",
         "availability_zone":"{{user `region`}}a",
         "source_ami": "{{user `source_ami`}}",
-        "instance_type" : "c4.2xlarge",
+        "instance_type" : "c4.xlarge",
         "ami_name": "{{user `ami_name`}}",
         "user_data_file":"scripts/config_winrm_ssl",
         "communicator": "winrm",
