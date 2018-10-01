@@ -34,6 +34,7 @@
         "instance_type" : "c4.xlarge",
         "ami_name": "{{user `ami_name`}}",
         "user_data_file":"scripts/config_winrm_ssl",
+        "disable_stop_instance": true,
         "communicator": "winrm",
         "winrm_use_ssl": true,
         "winrm_insecure": true,
