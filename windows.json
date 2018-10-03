@@ -1,27 +1,27 @@
 {
   "provisioners": [
-            {
-          "type": "powershell",
-          "scripts": [
-            "scripts/disable-uac.ps1"
-            ]
-       },
-            {
-          "type": "powershell",
-          "scripts": [
-            "scripts/PS_WinUpdate.ps1"
-            ]
-       },
-            {
-         "type": "windows-restart",
-         "restart_timeout": "20m"
-       },
-            {
-          "type": "powershell",
-          "scripts": [
-            "scripts/sysprep.ps1"
-            ]
-       }
+    {
+      "type": "powershell",
+      "scripts": [
+        "scripts/disable-uac.ps1"
+      ]
+    },
+    {
+      "type": "powershell",
+      "scripts": [
+        "scripts/PS_WinUpdate.ps1"
+      ]
+    },
+    {
+      "type": "windows-restart",
+      "restart_timeout": "20m"
+    },
+    {
+      "type": "powershell",
+      "scripts": [
+        "scripts/sysprep.ps1"
+      ]
+    }
   ],
   "builders": [
     {
@@ -45,11 +45,11 @@
         }
     }
   ],
-    "variables": {
-        "ami_name": "{{env `AMI_NAME`}}",
-        "region": "{{env `REGION`}}",
-        "ak": "{{env `ACCESS_KEY`}}",
-        "sk": "{{env `SECRET_KEY`}}",
-        "source_ami": "{{env `SOURCE_AMI_WINDOWS`}}"
-    }
+  "variables": {
+    "ami_name": "{{env `AMI_NAME`}}",
+    "region": "{{env `REGION`}}",
+    "ak": "{{env `ACCESS_KEY`}}",
+    "sk": "{{env `SECRET_KEY`}}",
+    "source_ami": "{{env `SOURCE_AMI_WINDOWS`}}"
+  }
 }
