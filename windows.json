@@ -1,55 +1,55 @@
 {
-  "provisioners": [
-    {
-      "type": "powershell",
-      "scripts": [
-        "scripts/disable-uac.ps1"
-      ]
-    },
-    {
-      "type": "powershell",
-      "scripts": [
-        "scripts/PS_WinUpdate.ps1"
-      ]
-    },
-    {
-      "type": "windows-restart",
-      "restart_timeout": "20m"
-    },
-    {
-      "type": "powershell",
-      "scripts": [
-        "scripts/sysprep.ps1"
-      ]
-    }
-  ],
-  "builders": [
-    {
-        "type" : "osc-ebs",
-        "access_key": "{{user `ak`}}",
-        "secret_key": "{{user `sk`}}",
-        "region": "{{user `region`}}",
-        "availability_zone":"{{user `region`}}a",
-        "source_ami": "{{user `source_ami`}}",
-        "instance_type" : "c4.xlarge",
-        "ami_name": "{{user `ami_name`}}",
-        "user_data_file":"scripts/config_winrm_ssl",
-        "disable_stop_instance": true,
-        "communicator": "winrm",
-        "winrm_use_ssl": true,
-        "winrm_insecure": true,
-        "winrm_username": "Administrator",
-        "skip_region_validation": true,
-        "endpoints": {
-            "ec2" : "fcu.{{user `region`}}.outscale.com"
+    "provisioners": [
+        {
+            "type": "powershell",
+            "scripts": [
+                "scripts/disable-uac.ps1"
+            ]
+        },
+        {
+            "type": "powershell",
+            "scripts": [
+                "scripts/PS_WinUpdate.ps1"
+            ]
+        },
+        {
+            "type": "windows-restart",
+            "restart_timeout": "20m"
+        },
+        {
+            "type": "powershell",
+            "scripts": [
+                "scripts/sysprep.ps1"
+            ]
         }
+    ],
+    "builders": [
+        {
+            "type" : "osc-ebs",
+            "access_key": "{{user `ak`}}",
+            "secret_key": "{{user `sk`}}",
+            "region": "{{user `region`}}",
+            "availability_zone":"{{user `region`}}a",
+            "source_ami": "{{user `source_ami`}}",
+            "instance_type" : "c4.xlarge",
+            "ami_name": "{{user `ami_name`}}",
+            "user_data_file":"scripts/config_winrm_ssl",
+            "disable_stop_instance": true,
+            "communicator": "winrm",
+            "winrm_use_ssl": true,
+            "winrm_insecure": true,
+            "winrm_username": "Administrator",
+            "skip_region_validation": true,
+            "endpoints": {
+                "ec2" : "fcu.{{user `region`}}.outscale.com"
+            }
+        }
+    ],
+    "variables": {
+        "ami_name": "{{env `AMI_NAME`}}",
+        "region": "{{env `REGION`}}",
+        "ak": "{{env `ACCESS_KEY`}}",
+        "sk": "{{env `SECRET_KEY`}}",
+        "source_ami": "{{env `SOURCE_AMI_WINDOWS`}}"
     }
-  ],
-  "variables": {
-    "ami_name": "{{env `AMI_NAME`}}",
-    "region": "{{env `REGION`}}",
-    "ak": "{{env `ACCESS_KEY`}}",
-    "sk": "{{env `SECRET_KEY`}}",
-    "source_ami": "{{env `SOURCE_AMI_WINDOWS`}}"
-  }
 }
