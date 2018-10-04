@@ -14,7 +14,7 @@
             "region": "{{user `region`}}",
             "ssh_username": "centos",
             "instance_type": "c4.large",
-            "source_ami": "ami-880caa66",
+            "source_ami": "{{ user `omi`}}",
             "skip_region_validation": true,
             "endpoints": {
                 "ec2": "fcu.{{user `region`}}.outscale.com"
@@ -45,6 +45,7 @@
 	"region": "{{env `REGION`}}",
 	"ak": "{{env `ACCESS_KEY`}}",
 	"sk": "{{env `SECRET_KEY`}}",
-	"script": "{{env `SCRIPT_BASE`}}"
+	"script": "{{env `SCRIPT_BASE`}}",
+	"omi": "{{env `SOURCE_OMI`}}"
     }
 }
