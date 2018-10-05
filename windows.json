@@ -48,8 +48,8 @@
     "variables": {
         "ami_name": "{{env `AMI_NAME`}}",
         "region": "{{env `REGION`}}",
-        "ak": "{{env `ACCESS_KEY`}}",
-        "sk": "{{env `SECRET_KEY`}}",
+        "ak": "{{env `OSC_ACCESS_KEY`}}",
+        "sk": "{{env `OSC_SECRET_KEY`}}",
         "source_ami": "{{env `SOURCE_AMI_WINDOWS`}}"
     }
 }
