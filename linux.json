@@ -17,7 +17,7 @@
             "source_ami": "{{ user `omi`}}",
             "skip_region_validation": true,
             "endpoints": {
-                "ec2": "fcu.{{user `region`}}.outscale.com"
+                "ec2": "{{user `endpoint`}}"
             },
             "ami_virtualization_type": "hvm",
             "ami_name": "{{user `ami_name`}}",
@@ -46,6 +46,7 @@
 	"ak": "{{env `OSC_ACCESS_KEY`}}",
 	"sk": "{{env `OSC_SECRET_KEY`}}",
 	"script": "{{env `SCRIPT_BASE`}}",
-	"omi": "{{env `SOURCE_OMI`}}"
+	"omi": "{{env `SOURCE_OMI`}}",
+	"endpoint": "{{env `ENDPOINT`}}"
     }
 }
