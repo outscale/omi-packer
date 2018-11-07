@@ -40,12 +40,20 @@ datastource:
     max_wait: 10
 EOL
 
-#### ADDITIONAL
+#### DOCKER
 chroot /mnt/ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | chroot /mnt/ sudo apt-key add -
 chroot /mnt/ apt install -y software-properties-common
 chroot /mnt/ add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable"
 chroot /mnt/ apt update -y
 chroot /mnt/ apt install -y docker-ce
+chroot /mnt/ systemctl enable docker-ce
+chroot /mnt/ curl -L "https://github.com/docker/compose/releases/download/1.23.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+chroot /mnt/ chmod +x /usr/local/bin/docker-compose
+chroot /mnt/ mkdir -p /opt/osc-docker-compose-runner/
+cp /tmp/docker-compose-runner.sh /mnt/opt/osc-docker-compose-runner/docker-compose-runner.sh
+cp /tmp/docker-compose-runner.service /mnt/etc/systemd/system/docker-compose-runner.service
+chroot /mnt/ systemctl daemon-reload
+chroot /mnt/ systemctl enable docker-compose-runner
 
 #### CLEANUP
 chroot /mnt/ apt clean
