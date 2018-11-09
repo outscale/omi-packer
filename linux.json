@@ -1,6 +1,11 @@
 {
     "provisioners": [
         {
+            "type": "file",
+	    "source": "./files/*",
+	    "destination": "/tmp/"
+        },
+        {
             "type": "shell",
             "execute_command": "chmod +x {{.Path}}; {{.Vars}} sudo -E -S bash -x '{{.Path}}'",
             "script": "./scripts/chroot_{{user `script`}}.sh"
