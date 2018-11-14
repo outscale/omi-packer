@@ -29,16 +29,8 @@ wget https://osu.eu-west-2.outscale.com/outscale-official-packages/udev/osc-udev
 chroot /mnt/ dpkg -i /tmp/osc-udev-rules_20160516_amd64.deb
 wget https://osu.eu-west-2.outscale.com/outscale-official-packages/fni/osc-fni-1.0.0-x86_64.deb -P /mnt/tmp
 chroot /mnt/ dpkg -i /tmp/osc-fni-1.0.0-x86_64.deb
-
-cat >>/mnt/etc/cloud/cloud.cfg <<EOL
-datasource_list: [ Ec2 ]
-datastource:
-  Ec2:
-    strict_id: false
-    metadata_urls: [ 'http://169.254.169.254:80' ]
-    timeout: 5
-    max_wait: 10
-EOL
+yes | cp -i /tmp/cloud.cfg /mnt/etc/cloud/cloud.cfg
+yes | cp -i /tmp/sshd_config /mnt/etc/ssh/sshd_config
 
 #### DOCKER
 chroot /mnt/ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | chroot /mnt/ sudo apt-key add -
@@ -50,8 +42,8 @@ chroot /mnt/ systemctl enable docker-ce
 chroot /mnt/ curl -L "https://github.com/docker/compose/releases/download/1.23.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 chroot /mnt/ chmod +x /usr/local/bin/docker-compose
 chroot /mnt/ mkdir -p /opt/osc-docker-compose-runner/
-cp /tmp/docker-compose-runner.sh /mnt/opt/osc-docker-compose-runner/docker-compose-runner.sh
-cp /tmp/docker-compose-runner.service /mnt/etc/systemd/system/docker-compose-runner.service
+yes | cp -i /tmp/docker-compose-runner.sh /mnt/opt/osc-docker-compose-runner/docker-compose-runner.sh
+yes | cp -i /tmp/docker-compose-runner.service /mnt/etc/systemd/system/docker-compose-runner.service
 chroot /mnt/ systemctl daemon-reload
 chroot /mnt/ systemctl enable docker-compose-runner
 
