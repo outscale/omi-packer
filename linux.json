@@ -2,8 +2,8 @@
     "provisioners": [
         {
             "type": "file",
-	    "source": "./files/",
-	    "destination": "/tmp/"
+            "source": "./files/",
+            "destination": "/tmp/"
         },
         {
             "type": "shell",
