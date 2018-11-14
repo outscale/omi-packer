@@ -44,7 +44,6 @@ chroot /mnt/ chmod +x /usr/local/bin/docker-compose
 chroot /mnt/ mkdir -p /opt/osc-docker-compose-runner/
 yes | cp -i /tmp/docker-compose-runner.sh /mnt/opt/osc-docker-compose-runner/docker-compose-runner.sh
 yes | cp -i /tmp/docker-compose-runner.service /mnt/etc/systemd/system/docker-compose-runner.service
-chroot /mnt/ systemctl daemon-reload
 chroot /mnt/ systemctl enable docker-compose-runner
 
 #### CLEANUP
