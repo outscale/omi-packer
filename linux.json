@@ -27,7 +27,6 @@
             "ami_virtualization_type": "hvm",
             "ami_name": "{{user `ami_name`}}",
             "availability_zone": "{{user `region`}}a",
-	    "insecure": true,
             "launch_block_device_mappings": [
                 {
             	    "volume_type": "io1",
