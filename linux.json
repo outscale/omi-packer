@@ -21,6 +21,7 @@
             "instance_type": "c4.large",
             "source_ami": "{{ user `omi`}}",
             "skip_region_validation": true,
+	    "ssh_interface": "public_ip",
             "endpoints": {
                 "ec2": "{{user `endpoint`}}"
             },
