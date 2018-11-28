@@ -51,4 +51,5 @@ rm -rf /mnt/var/lib/dhcp/
 rm -rf /mnt/var/tmp/*
 rm -rf /mnt/var/log/*
 rm -rf /mnt/var/lib/cloud/*
+sleep 5
 umount /mnt
