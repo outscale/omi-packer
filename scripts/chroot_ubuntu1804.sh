@@ -38,6 +38,7 @@ yes | cp -i /tmp/blacklist-nouveau.conf /etc/modprobe.d/blacklist-nouveau.conf
 #### CLEANUP
 rm -f /mnt/etc/resolv.conf
 mv /mnt/etc/resolv.conf.bak /mnt/etc/resolv.conf
+sleep 5
 umount /mnt/dev
 umount /mnt/proc
 umount /mnt/sys
