@@ -29,10 +29,6 @@ yes | cp -i /tmp/sshd_config /mnt/etc/ssh/sshd_config
 sed -i 's/^SELINUX=.*/SELINUX=disabled/g' /mnt/etc/selinux/config
 
 #### CLEANUP
-umount /mnt/dev
-umount /mnt/proc
-umount /mnt/sys
-umount /mnt
 rm -rf /mnt/var/cache/yum
 rm -rf /mnt/root/.ssh
 rm -rf /mnt/root/.bash_history
