@@ -38,10 +38,6 @@ yes | cp -i /tmp/blacklist-nouveau.conf /etc/modprobe.d/blacklist-nouveau.conf
 #### CLEANUP
 rm -f /mnt/etc/resolv.conf
 mv /mnt/etc/resolv.conf.bak /mnt/etc/resolv.conf
-sleep 5
-umount /mnt/dev
-umount /mnt/proc
-umount /mnt/sys
 rm -rf /mnt/var/cache/apt
 rm -rf /mnt/root/.ssh
 rm -rf /mnt/root/.bash_history
@@ -52,5 +48,3 @@ rm -rf /mnt/var/lib/dhcp/
 rm -rf /mnt/var/tmp/*
 rm -rf /mnt/var/log/*
 rm -rf /mnt/var/lib/cloud/*
-sleep 5
-umount /mnt
