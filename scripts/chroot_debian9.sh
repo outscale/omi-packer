@@ -26,12 +26,9 @@ wget https://osu.eu-west-2.outscale.com/outscale-official-packages/fni/osc-fni-1
 chroot /mnt/ dpkg -i /tmp/osc-fni-1.0.0-x86_64.deb
 yes | cp -i /tmp/cloud.cfg /mnt/etc/cloud/cloud.cfg
 yes | cp -i /tmp/sshd_config /mnt/etc/ssh/sshd_config
+rm -f /mnt/etc/cloud/cloud.cfg.d/90_dpkg.cfg
 
 #### CLEANUP
-umount /mnt/dev
-umount /mnt/proc
-umount /mnt/sys
-umount /mnt
 rm -rf /mnt/var/cache/apt
 rm -rf /mnt/root/.ssh
 rm -rf /mnt/root/.bash_history
