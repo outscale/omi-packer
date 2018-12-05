@@ -33,7 +33,7 @@
             "source_ami": "{{user `omi`}}",
             "instance_type" : "c4.xlarge",
             "ami_name": "{{user `ami_name`}}",
-	    "ami_groups": ["{{user `qpats`}}"],
+	    "ami_users": ["{{user `qpats`}}"],
             "user_data_file":"scripts/config_winrm_ssl",
             "disable_stop_instance": true,
             "communicator": "winrm",
