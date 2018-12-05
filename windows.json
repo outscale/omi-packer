@@ -33,7 +33,6 @@
             "source_ami": "{{user `omi`}}",
             "instance_type" : "c4.xlarge",
             "ami_name": "{{user `ami_name`}}",
-	    "ami_groups": ["{{user `qpats`}}"],
             "user_data_file":"scripts/config_winrm_ssl",
             "disable_stop_instance": true,
             "communicator": "winrm",
@@ -52,7 +51,6 @@
         "ak": "{{env `OSC_ACCESS_KEY`}}",
         "sk": "{{env `OSC_SECRET_KEY`}}",
         "omi": "{{env `SOURCE_OMI`}}",
-	"endpoint": "{{env `ENDPOINT`}}",
-	"qpats": "{{env `QPATS`}}"
+	"endpoint": "{{env `ENDPOINT`}}"
     }
 }

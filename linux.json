@@ -27,7 +27,6 @@
             },
             "ami_virtualization_type": "hvm",
             "ami_name": "{{user `ami_name`}}",
-	    "ami_groups": ["{{user `qpats`}}"],
             "availability_zone": "{{user `region`}}a",
             "launch_block_device_mappings": [
                 {
@@ -54,7 +53,6 @@
 	"sk": "{{env `OSC_SECRET_KEY`}}",
 	"script": "{{env `SCRIPT_BASE`}}",
 	"omi": "{{env `SOURCE_OMI`}}",
-	"endpoint": "{{env `ENDPOINT`}}",
-	"qpats": "{{env `QPATS`}}"
+	"endpoint": "{{env `ENDPOINT`}}"
     }
 }
