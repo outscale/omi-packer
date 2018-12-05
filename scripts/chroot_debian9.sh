@@ -4,6 +4,8 @@
 yum install -y wget
 cd /tmp
 wget -q https://cdimage.debian.org/cdimage/openstack/current-9/debian-9-openstack-amd64.raw
+wget -q https://cdimage.debian.org/cdimage/openstack/current/MD5SUMS
+if [[ $(md5sum -c MD5SUMS 2>&1 | grep -c OK) < 1 ]]; then exit 1; fi
 mv *.raw debian9.raw
 dd if=./debian9.raw of=/dev/sda bs=1G status=progress conv=sparse
 mount /dev/sda1 /mnt

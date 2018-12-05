@@ -4,7 +4,10 @@
 yum install -y wget
 cd /tmp
 wget -q http://cloud.centos.org/centos/7/images/CentOS-7-x86_64-GenericCloud.raw.tar.gz
-tar -zxvf CentOS-7-x86_64-GenericCloud.raw.tar.gz && mv *.raw centos7.raw
+wget -q https://cloud.centos.org/centos/7/images/sha256sum.txt
+if [[ $(cat sha256sum.txt | grep -c `sha256sum CentOS-7-x86_64-GenericCloud.raw.tar.gz | cut -d\  -f1`) < 1 ]]; then exit 1; fi
+tar -zxvf CentOS-7-x86_64-GenericCloud.raw.tar.gz
+mv *.raw centos7.raw
 dd if=./centos7.raw of=/dev/sda bs=1G status=progress conv=sparse
 mount -o nouuid /dev/sda1 /mnt
 

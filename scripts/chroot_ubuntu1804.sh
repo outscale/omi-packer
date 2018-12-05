@@ -4,6 +4,8 @@
 yum install -y wget qemu-img
 cd /tmp
 wget -q http://cloud-images.ubuntu.com/bionic/current/bionic-server-cloudimg-amd64.img
+wget -q https://cloud-images.ubuntu.com/bionic/current/MD5SUMS
+if [[ $(md5sum -c MD5SUMS 2>&1 | grep -c OK) < 1 ]]; then exit 1; fi
 mv *.img bionic.img
 qemu-img convert ./bionic.img -O raw bionic.raw
 dd if=./bionic.raw of=/dev/sda bs=1G conv=sparse

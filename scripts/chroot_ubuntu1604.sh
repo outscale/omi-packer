@@ -4,6 +4,8 @@
 yum install -y wget qemu-img
 cd /tmp
 wget -q http://cloud-images.ubuntu.com/xenial/current/xenial-server-cloudimg-amd64-disk1.img
+wget -q https://cloud-images.ubuntu.com/xenial/current/MD5SUMS
+if [[ $(md5sum -c MD5SUMS 2>&1 | grep -c OK) < 1 ]]; then exit 1; fi
 mv *.img xenial.img
 qemu-img convert ./xenial.img -O raw /dev/sda
 partprobe /dev/sda
