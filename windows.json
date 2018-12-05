@@ -50,7 +50,7 @@
         "region": "{{env `REGION`}}",
         "ak": "{{env `OSC_ACCESS_KEY`}}",
         "sk": "{{env `OSC_SECRET_KEY`}}",
-        "omi": "{{env `SOURCE_AMI_WINDOWS`}}",
+        "omi": "{{env `SOURCE_OMI`}}",
 	"endpoint": "{{env `ENDPOINT`}}"
     }
 }
