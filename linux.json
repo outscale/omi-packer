@@ -9,6 +9,12 @@
             "type": "shell",
             "execute_command": "chmod +x {{.Path}}; {{.Vars}} sudo -E -S bash -x '{{.Path}}'",
             "script": "./scripts/chroot_{{user `script`}}.sh"
+        },
+        {
+            "type": "file",
+            "source": "/tmp/packages",
+            "destination": "/usr/local/packer/logs/packages/{{user `region`}}-{{user `ami_name`}}",
+            "direction": "download"
         }
     ],
     "builders": [
