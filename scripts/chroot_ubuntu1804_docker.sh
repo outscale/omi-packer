@@ -48,6 +48,8 @@ yes | cp -i /tmp/docker-compose-runner.sh /mnt/opt/osc-docker-compose-runner/doc
 yes | cp -i /tmp/docker-compose-runner.service /mnt/etc/systemd/system/docker-compose-runner.service
 chroot /mnt/ systemctl enable docker-compose-runner
 
+chroot /mnt/ apt list --installed > /tmp/packages
+
 #### CLEANUP
 chroot /mnt/ apt clean
 rm -f /mnt/etc/resolv.conf

@@ -29,6 +29,7 @@ chroot /mnt/ dpkg -i /tmp/osc-fni-1.0.0-x86_64.deb
 yes | cp -i /tmp/cloud.cfg /mnt/etc/cloud/cloud.cfg
 yes | cp -i /tmp/sshd_config /mnt/etc/ssh/sshd_config
 rm -f /mnt/etc/cloud/cloud.cfg.d/90_dpkg.cfg
+chroot /mnt/ apt list --installed > /tmp/packages
 
 #### CLEANUP
 rm -rf /mnt/var/cache/apt

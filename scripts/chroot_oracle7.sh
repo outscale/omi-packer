@@ -27,6 +27,7 @@ chroot /mnt/root/ rpm -i http://osu.eu-west-2.outscale.com/outscale-official-pac
 chroot /mnt/root/ rpm -i http://osu.eu-west-2.outscale.com/outscale-official-packages/fni/osc-fni-1.0.0-8.x86_64.rpm
 yes | cp -i /tmp/cloud.cfg /mnt/etc/cloud/cloud.cfg
 yes | cp -i /tmp/sshd_config /mnt/etc/ssh/sshd_config
+chroot /mnt/root/ yum list installed > /tmp/packages
 
 #### CONFIGURATION
 sed -i 's/^SELINUX=.*/SELINUX=disabled/g' /mnt/root/etc/selinux/config
