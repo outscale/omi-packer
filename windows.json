@@ -41,6 +41,7 @@
             "winrm_insecure": true,
             "winrm_username": "Administrator",
             "skip_region_validation": true,
+	    "ssh_interface": "public_ip",
             "endpoints": {
                 "ec2" : "{{ user `endpoint`}}"
             }
