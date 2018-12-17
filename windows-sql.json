@@ -1,0 +1,77 @@
+{
+  "provisioners": [
+            {
+          "type": "powershell",
+          "scripts": [
+            "scripts/disable-uac.ps1"
+            ]
+       },
+            {
+          "type": "powershell",
+          "inline": "Invoke-WebRequest -Uri https://go.microsoft.com/fwlink/?linkid=853015 -OutFile C:\\Windows\\Temp\\SQLServer2017-SSEI-Eval.exe"
+       },
+            {
+          "type": "powershell",
+          "inline": "C:\\Windows\\Temp\\SQLServer2017-SSEI-Eval.exe /q /ACTION=Install /IACCEPTSQLSERVERLICENSETERMS"
+       },
+           {
+          "type": "windows-restart",
+          "restart_check_command": "powershell -command \"& {Write-Output 'restarted.'}\""
+       },
+            {
+          "type": "powershell",
+          "inline": "C:\\SQLServer2017Media\\Evaluation_ENU\\SETUP.EXE /q /ACTION=PrepareImage l /FEATURES=SQLEngine /InstanceID=SQLSERVER /IACCEPTSQLSERVERLICENSETERMS",
+          "pause_before": "60s"
+       },
+            {
+          "type": "powershell",
+          "scripts": [
+            "scripts/PS_WinUpdate.ps1"
+            ]
+       },
+           {
+          "type": "windows-restart",
+          "restart_check_command": "powershell -command \"& {Write-Output 'restarted.'}\""
+       },
+            {
+          "type": "powershell",
+          "scripts": [
+            "scripts/sysprep.ps1"
+            ],
+          "pause_before": "60s"
+       }
+  ],    
+  "builders": [
+        {
+            "type" : "osc-ebs",
+            "access_key": "{{user `ak`}}",
+            "secret_key": "{{user `sk`}}",
+            "region": "{{user `region`}}",
+            "availability_zone":"{{user `region`}}a",
+            "source_ami": "{{user `omi`}}",
+            "instance_type" : "c4.xlarge",
+            "ami_name": "{{user `ami_name`}}",
+	    "ami_users": ["{{user `qpats`}}"],
+            "user_data_file":"scripts/config_winrm_ssl",
+            "disable_stop_instance": true,
+            "communicator": "winrm",
+            "winrm_use_ssl": true,
+            "winrm_insecure": true,
+            "winrm_username": "Administrator",
+            "skip_region_validation": true,
+	    "ssh_interface": "public_ip",
+            "endpoints": {
+                "ec2" : "{{ user `endpoint`}}"
+            }
+        }
+    ],
+    "variables": {
+        "ami_name": "{{env `AMI_NAME`}}",
+        "region": "{{env `REGION`}}",
+        "ak": "{{env `OSC_ACCESS_KEY`}}",
+        "sk": "{{env `OSC_SECRET_KEY`}}",
+        "omi": "{{env `SOURCE_OMI`}}",
+	"endpoint": "{{env `ENDPOINT`}}",
+	"qpats": "{{env `QPATS`}}"
+    }
+}
