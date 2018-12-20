@@ -29,8 +29,6 @@ chroot /mnt/ update-grub
 #### OUTSCALE PACKAGES
 wget https://osu.eu-west-2.outscale.com/outscale-official-packages/udev/osc-udev-rules_20160516_amd64.deb -P /mnt/tmp
 chroot /mnt/ dpkg -i /tmp/osc-udev-rules_20160516_amd64.deb
-wget https://osu.eu-west-2.outscale.com/outscale-official-packages/fni/osc-fni-1.0.0-x86_64.deb -P /mnt/tmp
-chroot /mnt/ dpkg -i /tmp/osc-fni-1.0.0-x86_64.deb
 yes | cp -i /tmp/cloud.cfg /mnt/etc/cloud/cloud.cfg
 yes | cp -i /tmp/sshd_config /mnt/etc/ssh/sshd_config
 
