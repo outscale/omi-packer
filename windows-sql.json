@@ -8,6 +8,18 @@
        },
             {
           "type": "powershell",
+          "inline": "Invoke-WebRequest -Uri https://aka.ms/vs/15/release/vc_redist.x64.exe -OutFile C:\\Windows\\Temp\\vc_redist.x64.exe"
+       },
+            {
+          "type": "powershell",
+          "inline": "C:\\Windows\\Temp\\vc_redist.x64.exe /q /ACTION=Install /IACCEPTSQLSERVERLICENSETERMS"
+       },
+            {
+          "type": "windows-restart",
+          "restart_check_command": "powershell -command \"& {Write-Output 'restarted.'}\""
+       },
+            {
+          "type": "powershell",
           "inline": "Invoke-WebRequest -Uri https://go.microsoft.com/fwlink/?linkid=853015 -OutFile C:\\Windows\\Temp\\SQLServer2017-SSEI-Eval.exe"
        },
             {
@@ -20,27 +32,25 @@
        },
             {
           "type": "powershell",
-          "inline": "C:\\SQLServer2017Media\\Evaluation_ENU\\SETUP.EXE /q /ACTION=PrepareImage l /FEATURES=SQLEngine /InstanceID=SQLSERVER /IACCEPTSQLSERVERLICENSETERMS",
-          "pause_before": "60s"
+          "inline": "C:\\SQLServer2017Media\\Evaluation_ENU\\SETUP.EXE /q /ACTION=PrepareImage l /FEATURES=SQLEngine /InstanceID=SQLSERVER /IACCEPTSQLSERVERLICENSETERMS"
        },
             {
           "type": "powershell",
           "scripts": [
-            "scripts/PS_WinUpdate.ps1"
+            "scripts/win-update.ps1"
             ]
        },
-           {
-          "type": "windows-restart",
-          "restart_check_command": "powershell -command \"& {Write-Output 'restarted.'}\""
+            {
+          "type": "powershell",
+          "inline": "Remove-Item -Recurse -Force C:\\Windows\\Temp\\"
        },
             {
           "type": "powershell",
           "scripts": [
             "scripts/sysprep.ps1"
-            ],
-          "pause_before": "60s"
+            ]
        }
-  ],    
+  ],  
   "builders": [
         {
             "type" : "osc-ebs",
