@@ -9,7 +9,7 @@
         {
             "type": "powershell",
             "scripts": [
-                "scripts/PS_WinUpdate.ps1"
+                "scripts/win-update.ps1"
             ]
         },
         {
@@ -20,8 +20,7 @@
             "type": "powershell",
             "scripts": [
                 "scripts/sysprep.ps1"
-            ],
-            "pause_before": "60s"
+            ]
         }
     ],
     "builders": [
