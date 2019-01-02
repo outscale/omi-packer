@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 #### BASIC IMAGE
 yum install -y wget
