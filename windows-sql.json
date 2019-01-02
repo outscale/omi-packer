@@ -40,11 +40,7 @@
             "scripts/win-update.ps1"
             ]
        },
-            {
-          "type": "powershell",
-          "inline": "Remove-Item -Recurse -Force C:\\Windows\\Temp\\"
-       },
-            {
+             {
           "type": "powershell",
           "scripts": [
             "scripts/sysprep.ps1"

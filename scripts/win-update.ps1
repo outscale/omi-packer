@@ -1,4 +1,4 @@
 Install-PackageProvider -Name NuGet -Force
 Install-Module PSWindowsUpdate -Force
 Get-WindowsUpdate
-Install-WindowsUpdate -AcceptAll -AutoReboot
+Start-Process powershell -Verb runAs "Install-WindowsUpdate -AcceptAll -AutoReboot"
