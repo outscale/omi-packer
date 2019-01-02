@@ -34,8 +34,6 @@ chroot /mnt/ apt list --installed > /tmp/packages
 rm -rf /mnt/var/cache/apt
 rm -rf /mnt/root/.ssh
 rm -rf /mnt/root/.bash_history
-rm -rf /mnt/home/debian/.ssh
-rm -rf /mnt/home/debian/.bash_history
 rm -rf /mnt/tmp/*
 rm -rf /mnt/var/lib/dhcp/
 rm -rf /mnt/var/tmp/*

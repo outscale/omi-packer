@@ -42,9 +42,6 @@ mv /mnt/etc/resolv.conf.bak /mnt/etc/resolv.conf
 rm -rf /mnt/var/cache/apt
 rm -rf /mnt/root/.ssh
 rm -rf /mnt/root/.bash_history
-rm -rf /mnt/home/ubuntu/.ssh
-rm -rf /mnt/home/ubuntu/.bash_history
-rm -rf /mnt/tmp/*
 rm -rf /mnt/var/lib/dhcp/
 rm -rf /mnt/var/tmp/*
 rm -rf /mnt/var/log/*

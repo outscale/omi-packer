@@ -36,8 +36,6 @@ sed -i 's/^SELINUX=.*/SELINUX=disabled/g' /mnt/etc/selinux/config
 rm -rf /mnt/var/cache/yum
 rm -rf /mnt/root/.ssh
 rm -rf /mnt/root/.bash_history
-rm -rf /mnt/home/centos/.ssh
-rm -rf /mnt/home/centos/.bash_history
 rm -rf /mnt/tmp/*
 rm -rf /mnt/var/lib/dhcp/
 rm -rf /mnt/var/tmp/*
