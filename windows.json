@@ -7,10 +7,7 @@
             ]
         },
         {
-            "type": "powershell",
-            "scripts": [
-                "scripts/win-update.ps1"
-            ]
+            "type": "windows-update",
         },
         {
             "type": "windows-restart",
