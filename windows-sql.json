@@ -1,52 +1,42 @@
 {
-  "provisioners": [
-            {
-          "type": "powershell",
-          "scripts": [
-            "scripts/disable-uac.ps1"
-            ]
-       },
-            {
-          "type": "powershell",
-          "scripts": [
-            "scripts/install-visual.ps1"
-            ]
-       },
-            {
-          "type": "windows-restart",
-          "restart_check_command": "powershell -command \"& {Write-Output 'restarted.'}\""
-       },
-            {
-          "type": "powershell",
-          "scripts": [
-            "scripts/install-sql.ps1"
-            ]
-       },
-           {
-          "type": "windows-restart",
-          "restart_check_command": "powershell -command \"& {Write-Output 'restarted.'}\""
-       },
-            {
-          "type": "powershell",
-          "scripts": [
-            "scripts/prepare-sql.ps1"
-            ]
-       },
-            {
-          "type": "windows-update"
-       },
-            {
-          "type": "windows-restart",
-          "restart_check_command": "powershell -command \"& {Write-Output 'restarted.'}\""
-       },
-            {
-          "type": "powershell",
-          "scripts": [
-            "scripts/sysprep.ps1"
-            ]
-       }
-  ],  
-  "builders": [
+    "provisioners": [
+        {
+            "type": "powershell",
+            "scripts": [ "scripts/disable-uac.ps1" ]
+        },
+        {
+            "type": "powershell",
+            "scripts": [ "scripts/install-visual.ps1" ]
+        },
+        {
+            "type": "windows-restart",
+            "restart_check_command": "powershell -command \"& {Write-Output 'restarted.'}\""
+        },
+        {
+            "type": "powershell",
+            "scripts": [ "scripts/install-sql.ps1" ]
+        },
+        {
+            "type": "windows-restart",
+            "restart_check_command": "powershell -command \"& {Write-Output 'restarted.'}\""
+        },
+        {
+            "type": "powershell",
+            "scripts": [ "scripts/prepare-sql.ps1" ]
+        },
+        {
+            "type": "windows-update"
+        },
+        {
+            "type": "windows-restart",
+            "restart_check_command": "powershell -command \"& {Write-Output 'restarted.'}\""
+        },
+        {
+            "type": "powershell",
+            "scripts": [ "scripts/sysprep.ps1" ]
+        }
+    ],  
+    "builders": [
         {
             "type" : "osc-ebs",
             "access_key": "{{user `ak`}}",
@@ -56,7 +46,7 @@
             "source_ami": "{{user `omi`}}",
             "instance_type" : "c4.xlarge",
             "ami_name": "{{user `ami_name`}}",
-	    "ami_users": ["{{user `qpats`}}"],
+      	    "ami_users": ["{{user `qpats`}}"],
             "user_data_file":"scripts/config_winrm_ssl",
             "disable_stop_instance": true,
             "communicator": "winrm",
@@ -64,7 +54,7 @@
             "winrm_insecure": true,
             "winrm_username": "Administrator",
             "skip_region_validation": true,
-	    "ssh_interface": "public_ip",
+            "ssh_interface": "public_ip",
             "endpoints": {
                 "ec2" : "{{ user `endpoint`}}"
             }
@@ -76,7 +66,7 @@
         "ak": "{{env `OSC_ACCESS_KEY`}}",
         "sk": "{{env `OSC_SECRET_KEY`}}",
         "omi": "{{env `SOURCE_OMI`}}",
-	"endpoint": "{{env `ENDPOINT`}}",
-	"qpats": "{{env `QPATS`}}"
+        "endpoint": "{{env `ENDPOINT`}}",
+        "qpats": "{{env `QPATS`}}"
     }
 }
