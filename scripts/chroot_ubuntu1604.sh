@@ -33,10 +33,6 @@ chroot /mnt/ apt list --installed > /tmp/packages
 #### CLEANUP
 rm -f /mnt/etc/resolv.conf
 mv /mnt/etc/resolv.conf.bak /mnt/etc/resolv.conf
-umount /mnt/dev
-umount /mnt/proc
-umount /mnt/sys
-umount /mnt
 rm -rf /mnt/var/cache/apt
 rm -rf /mnt/root/.ssh
 rm -rf /mnt/root/.bash_history
