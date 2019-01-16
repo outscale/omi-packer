@@ -17,6 +17,9 @@ mount -o bind /dev /mnt/dev
 mount -o bind /proc /mnt/proc
 mount -o bind /sys /mnt/sys
 
+#### REMOVE DEFAULT USER
+chroot /mnt/ userdel -r -f debian
+
 #### UPDATES
 chroot /mnt/ apt update -y
 chroot /mnt/ apt upgrade -y
@@ -32,8 +35,6 @@ chroot /mnt/ apt list --installed > /tmp/packages
 
 chroot /mnt/ dpkg-divert --local --divert /etc/cloud/cloud.cfg.default --rename /etc/cloud/cloud.cfg
 chroot /mnt/ dpkg-divert --local --divert /etc/ssh/sshd_config --rename /etc/ssh/sshd_config.default
-
-chroot /mnt/ userdel -r -f debian
 
 #### CLEANUP
 rm -rf /mnt/var/cache/apt
