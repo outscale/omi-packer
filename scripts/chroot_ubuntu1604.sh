@@ -19,6 +19,10 @@ mount -o bind /sys /mnt/sys
 mv /mnt/etc/resolv.conf{,.bak}
 cp /etc/resolv.conf /mnt/etc/resolv.conf
 
+#### PREVENT APT OVERWRITE
+chroot /mnt/ dpkg-divert --local --divert /etc/cloud/cloud.cfg.default --rename /etc/cloud/cloud.cfg
+chroot /mnt/ dpkg-divert --local --divert /etc/ssh/sshd_config --rename /etc/ssh/sshd_config.default
+
 #### UPDATES
 chroot /mnt/ apt update -y
 chroot /mnt/ apt upgrade -y
@@ -27,11 +31,9 @@ chroot /mnt/ apt clean
 #### OUTSCALE PACKAGES
 wget https://osu.eu-west-2.outscale.com/outscale-official-packages/udev/osc-udev-rules_20160516_amd64.deb -P /mnt/tmp
 chroot /mnt/ dpkg -i /tmp/osc-udev-rules_20160516_amd64.deb
+yes | cp -i /tmp/cloud.cfg /mnt/etc/cloud/cloud.cfg
 yes | cp -i /tmp/sshd_config /mnt/etc/ssh/sshd_config
 chroot /mnt/ apt list --installed > /tmp/packages
-
-chroot /mnt/ dpkg-divert --local --divert /etc/cloud/cloud.cfg.default --rename /etc/cloud/cloud.cfg
-chroot /mnt/ dpkg-divert --local --divert /etc/ssh/sshd_config --rename /etc/ssh/sshd_config.default
 
 #### CLEANUP
 rm -f /mnt/etc/resolv.conf
