@@ -33,6 +33,8 @@ chroot /mnt/ apt list --installed > /tmp/packages
 dpkg-divert --local --divert /etc/cloud/cloud.cfg.default --rename /etc/cloud/cloud.cfg
 dpkg-divert --local --divert /etc/ssh/sshd_config --rename /etc/ssh/sshd_config.default
 
+userdel -Z -r -f debian
+
 #### CLEANUP
 rm -rf /mnt/var/cache/apt
 rm -rf /mnt/root/.ssh
