@@ -30,8 +30,8 @@ yes | cp -i /tmp/sshd_config /mnt/etc/ssh/sshd_config
 rm -f /mnt/etc/cloud/cloud.cfg.d/90_dpkg.cfg
 chroot /mnt/ apt list --installed > /tmp/packages
 
-dpkg-divert --local --divert /etc/cloud/cloud.cfg.default --rename /etc/cloud/cloud.cfg
-dpkg-divert --local --divert /etc/ssh/sshd_config --rename /etc/ssh/sshd_config.default
+chroot /mnt/ dpkg-divert --local --divert /etc/cloud/cloud.cfg.default --rename /etc/cloud/cloud.cfg
+chroot /mnt/ dpkg-divert --local --divert /etc/ssh/sshd_config --rename /etc/ssh/sshd_config.default
 
 #### CLEANUP
 rm -rf /mnt/var/cache/apt

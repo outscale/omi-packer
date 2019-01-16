@@ -30,8 +30,8 @@ chroot /mnt/ dpkg -i /tmp/osc-udev-rules_20160516_amd64.deb
 yes | cp -i /tmp/sshd_config /mnt/etc/ssh/sshd_config
 chroot /mnt/ apt list --installed > /tmp/packages
 
-dpkg-divert --local --divert /etc/cloud/cloud.cfg.default --rename /etc/cloud/cloud.cfg
-dpkg-divert --local --divert /etc/ssh/sshd_config --rename /etc/ssh/sshd_config.default
+chroot /mnt/ dpkg-divert --local --divert /etc/cloud/cloud.cfg.default --rename /etc/cloud/cloud.cfg
+chroot /mnt/ dpkg-divert --local --divert /etc/ssh/sshd_config --rename /etc/ssh/sshd_config.default
 
 #### CLEANUP
 rm -f /mnt/etc/resolv.conf
