@@ -17,9 +17,6 @@ mount -o bind /dev /mnt/dev
 mount -o bind /proc /mnt/proc
 mount -o bind /sys /mnt/sys
 
-#### REMOVE DEFAULT USER
-userdel -r -f debian
-
 #### UPDATES
 chroot /mnt/ apt update -y
 chroot /mnt/ apt upgrade -y
