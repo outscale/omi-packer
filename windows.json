@@ -15,7 +15,7 @@
         },
         {
             "type": "file",
-            "source": "files/windows/",
+            "source": "files/windows2016/",
             "destination": "C:\\Windows\\Outscale\\"
         },
         {
