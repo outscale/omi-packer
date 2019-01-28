@@ -15,7 +15,7 @@
         },
         {
             "type": "file",
-            "source": "files/",
+            "source": "files/windows/",
             "destination": "C:\\Windows\\Outscale\\"
         },
         {
