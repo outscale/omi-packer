@@ -10,8 +10,13 @@
             "type": "windows-update"
         },
         {
-            "type": "windows-restart",
-            "restart_check_command": "powershell -command \"& {Write-Output 'restarted.'}\""
+            "type": "powershell",
+            "inline": "Remove-Item -Recurse -Force C:\\Windows\\Outscale\\"
+        },
+        {
+            "type": "file",
+            "source": "files/",
+            "destination": "C:\\Windows\\Outscale\\"
         },
         {
             "type": "powershell",
