@@ -34,6 +34,7 @@ chroot /mnt yum list installed > /tmp/packages
 sed -i 's/^SELINUX=.*/SELINUX=disabled/g' /mnt/etc/selinux/config
 
 #### CLEANUP
+rm -f /mnt/etc/resolv.conf
 rm -rf /mnt/var/cache/yum
 rm -rf /mnt/root/.ssh
 rm -rf /mnt/root/.bash_history
