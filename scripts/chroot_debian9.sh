@@ -38,11 +38,11 @@ rm -f /mnt/etc/cloud/cloud.cfg.d/90_dpkg.cfg
 chroot /mnt/ apt list --installed > /tmp/packages
 
 #### CLEANUP
-rm -rf /mnt/var/cache/apt
+rm -rf /mnt/var/cache/apt/*
 rm -rf /mnt/root/.ssh
 rm -rf /mnt/root/.bash_history
 rm -rf /mnt/tmp/*
-rm -rf /mnt/var/lib/dhcp/
+rm -rf /mnt/var/lib/dhcp/*
 rm -rf /mnt/var/tmp/*
 rm -rf /mnt/var/log/*
 rm -rf /mnt/var/lib/cloud/*
