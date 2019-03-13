@@ -12,11 +12,10 @@ partprobe /dev/sda
 mount /dev/sda2 /mnt
 
 #### CHROOT FIXES
+cp /etc/resolv.conf /mnt/etc/resolv.conf
 mount -o bind /dev /mnt/root/dev
 mount -o bind /proc /mnt/root/proc
 mount -o bind /sys /mnt/root/sys
-mv /mnt/root/etc/resolv.conf{,.bak}
-cp /etc/resolv.conf /mnt/root/etc/resolv.conf
 
 #### UPDATES
 chroot /mnt/root/ yum upgrade -y
@@ -25,6 +24,7 @@ chroot /mnt/root/ yum clean all
 #### OUTSCALE PACKAGES
 chroot /mnt/root/ rpm -i http://osu.eu-west-2.outscale.com/outscale-official-packages/udev/osc-udev-rules-20160516-1.x86_64.rpm
 chroot /mnt/root/ rpm -i http://osu.eu-west-2.outscale.com/outscale-official-packages/dhclient-configuration/dhclient-configuration-1.0.0-1-Centos7.x86_64.rpm
+chroot /mnt/root/ rpm -i https://osu.eu-west-2.outscale.com/outscale-official-packages/fni/osc-fni-1.1.0-8.x86_64.rpm
 yes | cp -i /tmp/cloud.cfg /mnt/etc/cloud/cloud.cfg
 yes | cp -i /tmp/sshd_config_centos /mnt/etc/ssh/sshd_config
 chroot /mnt/root/ yum list installed > /tmp/packages
@@ -34,11 +34,6 @@ sed -i 's/^SELINUX=.*/SELINUX=disabled/g' /mnt/root/etc/selinux/config
 
 #### CLEANUP
 rm -f /mnt/etc/root/resolv.conf
-mv /mnt/etc/root/resolv.conf.bak /mnt/etc/root/resolv.conf
-umount /mnt/root/dev
-umount /mnt/root/proc
-umount /mnt/root/sys
-umount /mnt
 rm -rf /mnt/var/cache/yum
 rm -rf /mnt/root/.ssh
 rm -rf /mnt/root/.bash_history
