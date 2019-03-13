@@ -41,14 +41,14 @@
 		    "iops": 300,
             	    "device_name": "/dev/xvdf",
             	    "delete_on_termination": true,
-            	    "volume_size": "{{user `vol_size`}}"
+            	    "volume_size": "{{user `volume_size`}}"
                 }
             ],
             "ami_root_device": {
                 "delete_on_termination": true,
                 "source_device_name": "/dev/xvdf",
                 "device_name": "/dev/sda1",
-                "volume_size": "{{user `vol_size`}}",
+                "volume_size": "{{user `volume_size`}}",
                 "volume_type": "standard"
             }
         }
