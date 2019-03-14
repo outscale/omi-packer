@@ -12,7 +12,7 @@ sleep 5
 mount /dev/sda2 /mnt
 
 #### CHROOT FIXES
-cp /etc/resolv.conf /mnt/etc/resolv.conf
+cp /etc/resolv.conf /mnt/root/etc/resolv.conf
 mount -o bind /dev /mnt/root/dev
 mount -o bind /proc /mnt/root/proc
 mount -o bind /sys /mnt/root/sys
@@ -33,7 +33,7 @@ chroot /mnt/root/ yum list installed > /tmp/packages
 sed -i 's/^SELINUX=.*/SELINUX=disabled/g' /mnt/root/etc/selinux/config
 
 #### CLEANUP
-rm -f /mnt/etc/root/resolv.conf
+rm -f /mnt/root/etc/root/resolv.conf
 rm -rf /mnt/var/cache/yum
 rm -rf /mnt/root/.ssh
 rm -rf /mnt/root/.bash_history
