@@ -30,8 +30,8 @@ chroot /mnt/ dpkg-divert --local --divert /etc/cloud/cloud.cfg.default --rename 
 chroot /mnt/ dpkg-divert --local --divert /etc/ssh/sshd_config --rename /etc/ssh/sshd_config.default
 
 #### OUTSCALE PACKAGES
-wget https://osu.eu-west-2.outscale.com/outscale-official-packages/udev/osc-udev-rules_20160516_amd64.deb -P /mnt/tmp
-chroot /mnt/ dpkg -i /tmp/osc-udev-rules_20160516_amd64.deb
+wget https://osu.eu-west-2.outscale.com/outscale-official-packages/udev/osc-udev-rules-20190314_amd64.deb -P /mnt/tmp
+chroot /mnt/ dpkg -i /tmp/osc-udev-rules-20190314_amd64.deb
 yes | cp -i /tmp/cloud.cfg /mnt/etc/cloud/cloud.cfg
 yes | cp -i /tmp/sshd_config /mnt/etc/ssh/sshd_config
 rm -f /mnt/etc/cloud/cloud.cfg.d/90_dpkg.cfg
