@@ -30,11 +30,11 @@ echo 'GRUB_CMDLINE_LINUX="max_loop=256 net.ifnames=0 biosdevname=0 divider=10 no
 chroot /mnt/ update-grub
 
 #### OUTSCALE PACKAGES
-#chroot /mnt/ apt install network-manager -y
+chroot /mnt/ apt install network-manager -y
 wget https://osu.eu-west-2.outscale.com/outscale-official-packages/udev/osc-udev-rules-20190314_amd64.deb -P /mnt/tmp
-#wget https://osu.eu-west-2.outscale.com/outscale-official-packages/fni/osc-fni-1.1.0-8.x86_64-Ubuntu18.deb -P /mnt/tmp
+wget https://osu.eu-west-2.outscale.com/outscale-official-packages/fni/osc-fni-1.1.0-8.x86_64-Ubuntu18.deb -P /mnt/tmp
 chroot /mnt/ dpkg -i /tmp/osc-udev-rules-20190314_amd64.deb
-#chroot /mnt/ dpkg -i /tmp/osc-fni-1.1.0-8.x86_64-Ubuntu18.deb
+chroot /mnt/ dpkg -i /tmp/osc-fni-1.1.0-8.x86_64-Ubuntu18.deb
 yes | cp -i /tmp/cloud.cfg /mnt/etc/cloud/cloud.cfg
 yes | cp -i /tmp/sshd_config /mnt/etc/ssh/sshd_config
 chroot /mnt/ apt list --installed > /tmp/packages
