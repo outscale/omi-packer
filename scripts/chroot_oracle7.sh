@@ -24,7 +24,7 @@ chroot /mnt/root/ yum clean all
 #### OUTSCALE PACKAGES
 chroot /mnt/root/ yum install -y http://osu.eu-west-2.outscale.com/outscale-official-packages/udev/osc-udev-rules-20160516-1.x86_64.rpm
 chroot /mnt/root/ yum install -y http://osu.eu-west-2.outscale.com/outscale-official-packages/dhclient-configuration/dhclient-configuration-1.0.0-1-Centos7.x86_64.rpm
-chroot /mnt/root/ yum install -y https://osu.eu-west-2.outscale.com/outscale-official-packages/fni/osc-fni-1.2.0-2.x86_64.rpm
+chroot /mnt/root/ yum install -y https://osu.eu-west-2.outscale.com/outscale-official-packages/fni/osc-fni-1.2.0-3.x86_64.rpm
 yes | cp -i /tmp/cloud.cfg /mnt/root/etc/cloud/cloud.cfg
 yes | cp -i /tmp/sshd_config_centos /mnt/root/etc/ssh/sshd_config
 chroot /mnt/root/ yum list installed > /tmp/packages
