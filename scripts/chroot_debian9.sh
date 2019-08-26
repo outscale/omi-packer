@@ -38,6 +38,7 @@ rm -f /mnt/etc/cloud/cloud.cfg.d/90_dpkg.cfg
 chroot /mnt/ apt list --installed > /tmp/packages
 
 #### CLEANUP
+rm -f /mnt/etc/resolv.conf
 rm -rf /mnt/var/cache/apt/*
 rm -rf /mnt/root/.ssh
 rm -rf /mnt/root/.bash_history
