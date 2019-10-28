@@ -12,30 +12,30 @@ sleep 5
 mount /dev/sda2 /mnt
 
 #### CHROOT FIXES
-cp /etc/resolv.conf /mnt/root/etc/resolv.conf
-mount -o bind /dev /mnt/root/dev
-mount -o bind /proc /mnt/root/proc
-mount -o bind /sys /mnt/root/sys
+cp /etc/resolv.conf /mnt/etc/resolv.conf
+mount -o bind /dev /mnt/dev
+mount -o bind /proc /mnt/proc
+mount -o bind /sys /mnt/sys
 
 #### UPDATES
-chroot /mnt/root/ yum upgrade -y
-chroot /mnt/root/ yum clean all
+chroot /mnt/ yum upgrade -y
+chroot /mnt/ yum clean all
 
 #### OUTSCALE PACKAGES
-chroot /mnt/root/ yum install -y http://osu.eu-west-2.outscale.com/outscale-official-packages/udev/osc-udev-rules-20160516-1.x86_64.rpm
-chroot /mnt/root/ yum install -y http://osu.eu-west-2.outscale.com/outscale-official-packages/dhclient-configuration/dhclient-configuration-1.0.0-1-Centos7.x86_64.rpm
-yes | cp -i /tmp/cloud.cfg /mnt/root/etc/cloud/cloud.cfg
-yes | cp -i /tmp/sshd_config_centos /mnt/root/etc/ssh/sshd_config
-chroot /mnt/root/ yum list installed > /tmp/packages
+chroot /mnt/ yum install -y http://osu.eu-west-2.outscale.com/outscale-official-packages/udev/osc-udev-rules-20160516-1.x86_64.rpm
+chroot /mnt/ yum install -y http://osu.eu-west-2.outscale.com/outscale-official-packages/dhclient-configuration/dhclient-configuration-1.0.0-1-Centos7.x86_64.rpm
+yes | cp -i /tmp/cloud.cfg /mnt/etc/cloud/cloud.cfg
+yes | cp -i /tmp/sshd_config_centos /mnt/etc/ssh/sshd_config
+chroot /mnt/ yum list installed > /tmp/packages
 
 #### CONFIGURATION
-sed -i 's/^SELINUX=.*/SELINUX=disabled/g' /mnt/root/etc/selinux/config
+sed -i 's/^SELINUX=.*/SELINUX=disabled/g' /mnt/etc/selinux/config
 
 #### CLEANUP
-rm -f /mnt/root/etc/root/resolv.conf
+rm -f /mnt/etc/root/resolv.conf
 rm -rf /mnt/var/cache/yum
-rm -rf /mnt/root/.ssh
-rm -rf /mnt/root/.bash_history
+rm -rf /mnt/.ssh
+rm -rf /mnt/.bash_history
 rm -rf /mnt/tmp/*
 rm -rf /mnt/var/lib/dhcp/
 rm -rf /mnt/var/tmp/*
