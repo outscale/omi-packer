@@ -3,8 +3,8 @@
         {
             "type": "shell",
             "execute_command": "chmod +x {{.Path}}; {{.Vars}} sudo -E -S bash -x '{{.Path}}'",
-            "script": "./scripts/install_mssql.sh",
-            "environment_vars": ["MSSQL_PID={{user `sqledition`}}"]
+            "script": "./scripts/install-{{user `software`}}.sh",
+            "environment_vars": ["ENV1={{user `env1`}}", "ENV2={{user `env2`}}", "ENV3={{user `env3`}}"]
         },
 	{
             "type": "shell",
@@ -35,7 +35,7 @@
             "ami_virtualization_type": "hvm",
             "ami_name": "{{user `ami_name`}}",
 	    "ami_users": ["{{user `qpats`}}"],
-            "ami_product_codes": ["0001", "0008"],
+            "ami_product_codes": ["0001", "{{user `pcode`}}"],
             "availability_zone": "{{user `region`}}a"
         }
     ],
@@ -44,9 +44,13 @@
 	"region": "{{env `REGION`}}",
 	"ak": "{{env `OSC_ACCESS_KEY`}}",
 	"sk": "{{env `OSC_SECRET_KEY`}}",
-	"sqledition": "{{env `MSSQL_PID`}}",
+	"env1": "{{env `ENV1`}}",
+        "env2": "{{env `ENV2`}}",
+        "env3": "{{env `ENV3`}}",
 	"omi": "{{env `SOURCE_OMI`}}",
 	"endpoint": "{{env `ENDPOINT`}}",
-	"qpats": "{{env `QPATS`}}"
+	"qpats": "{{env `QPATS`}}",
+	"software": "{{env `SOFTWARE`}}",
+	"pcode": "{{env `PRODUCT_CODE` }}"
     }
 }

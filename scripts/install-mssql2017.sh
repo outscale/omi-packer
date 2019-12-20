@@ -1,5 +1,6 @@
 #!/bin/bash
 
+export MSSQL_PID=${ENV1}
 export ACCEPT_EULA=Y
 export MSSQL_SA_PASSWORD=Outscale2017
 
@@ -8,3 +9,5 @@ curl https://packages.microsoft.com/config/rhel/7/prod.repo -o /etc/yum.repos.d/
 
 yum -y install mssql-server mssql-tools unixODBC-devel
 /opt/mssql/bin/mssql-conf -n setup
+
+yum list installed > /tmp/packages
