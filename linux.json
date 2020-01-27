@@ -43,7 +43,7 @@
             "launch_block_device_mappings": [
                 {
             	    "volume_type": "io1",
-                    "iops": 1200,
+                    "iops": 3000,
             	    "device_name": "/dev/xvdf",
             	    "delete_on_termination": true,
             	    "volume_size": "{{user `volume_size`}}"
