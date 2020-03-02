@@ -19,10 +19,6 @@ mount -o bind /sys /mnt/sys
 mv /mnt/etc/resolv.conf{,.bak}
 cp /etc/resolv.conf /mnt/etc/resolv.conf
 
-#### PREVENT APT OVERWRITE
-chroot /mnt/ dpkg-divert --local --divert /etc/cloud/cloud.cfg.default --rename /etc/cloud/cloud.cfg
-chroot /mnt/ dpkg-divert --local --divert /etc/ssh/sshd_config --rename /etc/ssh/sshd_config.default
-
 #### UPDATES
 chroot /mnt/ apt update -y
 chroot /mnt/ apt upgrade -y
@@ -30,19 +26,9 @@ chroot /mnt/ apt clean
 
 #### OUTSCALE PACKAGES
 wget https://osu.eu-west-2.outscale.com/outscale-official-packages/udev/osc-udev-rules-20190314_amd64.deb -P /mnt/tmp
+wget https://osu.eu-west-2.outscale.com/outscale-official-packages/fni/osc-fni-1.0.1.noarch.deb -P /mnt/tmp
 chroot /mnt/ dpkg -i /tmp/osc-udev-rules-20190314_amd64.deb
+chroot /mnt/ dpkg -i /tmp/osc-fni-1.0.1.noarch.deb
 yes | cp -i /tmp/cloud.cfg /mnt/etc/cloud/cloud.cfg
 yes | cp -i /tmp/sshd_config /mnt/etc/ssh/sshd_config
 chroot /mnt/ apt list --installed > /tmp/packages
-
-#### CLEANUP
-rm -f /mnt/etc/resolv.conf
-mv /mnt/etc/resolv.conf.bak /mnt/etc/resolv.conf
-rm -rf /mnt/var/cache/apt
-rm -rf /mnt/root/.ssh
-rm -rf /mnt/root/.bash_history
-rm -rf /mnt/tmp/*
-rm -rf /mnt/var/lib/dhcp/
-rm -rf /mnt/var/tmp/*
-rm -rf /mnt/var/log/*
-rm -rf /mnt/var/lib/cloud/*

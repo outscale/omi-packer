@@ -1,14 +1,10 @@
 {
     "provisioners": [
         {
-            "type": "file",
-            "source": "./files/",
-            "destination": "/tmp/"
-        },
-        {
             "type": "shell",
             "execute_command": "chmod +x {{.Path}}; {{.Vars}} sudo -E -S bash -x '{{.Path}}'",
-            "script": "./scripts/chroot_{{user `script`}}.sh"
+            "script": "./scripts/install-{{user `software`}}.sh",
+            "environment_vars": ["ENV1={{user `env1`}}", "ENV2={{user `env2`}}", "ENV3={{user `env3`}}"]
         },
 	{
             "type": "shell",
@@ -24,7 +20,7 @@
     ],
     "builders": [
         {
-            "type": "osc-ebssurrogate",
+            "type": "osc-ebs",
             "access_key": "{{user `ak`}}",
             "secret_key": "{{user `sk`}}",
             "region": "{{user `region`}}",
@@ -39,23 +35,8 @@
             "ami_virtualization_type": "hvm",
             "ami_name": "{{user `ami_name`}}",
 	    "ami_users": ["{{user `qpats`}}"],
-            "availability_zone": "{{user `region`}}a",
-            "launch_block_device_mappings": [
-                {
-            	    "volume_type": "io1",
-                    "iops": 3000,
-            	    "device_name": "/dev/xvdf",
-            	    "delete_on_termination": true,
-            	    "volume_size": "{{user `volume_size`}}"
-                }
-            ],
-            "ami_root_device": {
-                "delete_on_termination": true,
-                "source_device_name": "/dev/xvdf",
-                "device_name": "/dev/sda1",
-                "volume_size": "{{user `volume_size`}}",
-                "volume_type": "standard"
-            }
+            "ami_product_codes": ["0001", "{{user `pcode`}}"],
+            "availability_zone": "{{user `region`}}a"
         }
     ],
     "variables": {
@@ -63,10 +44,13 @@
 	"region": "{{env `REGION`}}",
 	"ak": "{{env `OSC_ACCESS_KEY`}}",
 	"sk": "{{env `OSC_SECRET_KEY`}}",
-	"script": "{{env `SCRIPT_BASE`}}",
+	"env1": "{{env `ENV1`}}",
+        "env2": "{{env `ENV2`}}",
+        "env3": "{{env `ENV3`}}",
 	"omi": "{{env `SOURCE_OMI`}}",
 	"endpoint": "{{env `ENDPOINT`}}",
 	"qpats": "{{env `QPATS`}}",
-	"volume_size": "{{env `VOL_SIZE`}}"
+	"software": "{{env `SOFTWARE`}}",
+	"pcode": "{{env `PRODUCT_CODE` }}"
     }
 }

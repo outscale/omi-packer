@@ -1,5 +1,8 @@
 # autoexecutepowershell
 
+# Start WinRM
+cmd.exe /c net start winrm
+
 # Remove HTTP listener
 Remove-Item -Path WSMan:\Localhost\listener\listener* -Recurse
 
