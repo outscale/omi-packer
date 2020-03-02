@@ -34,7 +34,6 @@
             },
             "ami_virtualization_type": "hvm",
             "ami_name": "{{user `ami_name`}}",
-	    "ami_users": ["{{user `qpats`}}"],
             "ami_product_codes": ["0001", "{{user `pcode`}}"],
             "availability_zone": "{{user `region`}}a"
         }
@@ -49,7 +48,6 @@
         "env3": "{{env `ENV3`}}",
 	"omi": "{{env `SOURCE_OMI`}}",
 	"endpoint": "{{env `ENDPOINT`}}",
-	"qpats": "{{env `QPATS`}}",
 	"software": "{{env `SOFTWARE`}}",
 	"pcode": "{{env `PRODUCT_CODE` }}"
     }

@@ -34,7 +34,6 @@
 	    "ssh_interface": "public_ip",
             "ami_virtualization_type": "hvm",
             "ami_name": "{{user `ami_name`}}",
-	    "ami_users": ["{{user `qpats`}}"],
             "ami_product_codes": ["0001", "0006"],
             "availability_zone": "{{user `region`}}a",
             "launch_block_device_mappings": [
@@ -63,7 +62,6 @@
 	"script": "{{env `SCRIPT_BASE`}}",
 	"omi": "{{env `SOURCE_OMI`}}",
 	"endpoint": "{{env `ENDPOINT`}}",
-	"qpats": "{{env `QPATS`}}",
 	"volume_size": "{{env `VOL_SIZE`}}"
     }
 }
