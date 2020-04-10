@@ -19,7 +19,7 @@ mount -o bind /sys /mnt/sys
 
 #### SYSTEMD-RESOLVED EMULATION ON HOST
 mount -o bind /run /mnt/run
-mkdir -p /run/systemd/resolv
+mkdir -p /run/systemd/resolve
 cp /etc/resolv.conf /run/systemd/resolve/stub-resolv.conf
 [[ -f /mnt/etc/resolv.conf ]]
 
