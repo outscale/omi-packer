@@ -25,13 +25,9 @@ chroot /mnt/ apt upgrade -y
 chroot /mnt/ apt clean
 
 #### CONFIGURATION
-## GRUB
-echo 'GRUB_CMDLINE_LINUX="max_loop=256 net.ifnames=0 biosdevname=0 divider=10 notsc console=tty0 console=ttyS0,115200n8 elevator=deadline LANG=en_US.UTF-8 KEYTABLE=us nouveau.modeset=0"' >>/mnt/etc/default/grub
-chroot /mnt/ update-grub
-
 #### OUTSCALE PACKAGES
 wget https://osu.eu-west-2.outscale.com/outscale-official-packages/udev/osc-udev-rules-20190314_amd64.deb -P /mnt/tmp
-wget https://osu.eu-west-2.outscale.com/outscale-official-packages/fni/osc-fni-2.0.x86_64.deb -P /mnt/tmp
+#wget https://osu.eu-west-2.outscale.com/outscale-official-packages/fni/osc-fni-2.0.x86_64.deb -P /mnt/tmp
 chroot /mnt/ dpkg -i /tmp/osc-udev-rules-20190314_amd64.deb
 chroot /mnt/ dpkg -i /tmp/osc-fni-2.0.x86_64.deb
 yes | cp -i /tmp/cloud.cfg /mnt/etc/cloud/cloud.cfg
