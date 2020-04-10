@@ -16,8 +16,8 @@ mount /dev/sda1 /mnt
 mount -o bind /dev /mnt/dev
 mount -o bind /proc /mnt/proc
 mount -o bind /sys /mnt/sys
-mv /mnt/etc/resolv.conf{,.bak}
-cp /etc/resolv.conf /mnt/etc/resolv.conf
+#mv /mnt/etc/resolv.conf{,.bak}
+#cp /etc/resolv.conf /mnt/etc/resolv.conf
 
 #### UPDATES
 chroot /mnt/ apt update -y
@@ -35,8 +35,8 @@ yes | cp -i /tmp/sshd_config /mnt/etc/ssh/sshd_config
 chroot /mnt/ apt list --installed > /tmp/packages
 
 #### CLEANUP
-rm -f /mnt/etc/resolv.conf
-mv /mnt/etc/resolv.conf.bak /mnt/etc/resolv.conf
+#rm -f /mnt/etc/resolv.conf
+#mv /mnt/etc/resolv.conf.bak /mnt/etc/resolv.conf
 rm -rf /mnt/var/cache/apt
 rm -rf /mnt/root/.ssh
 rm -rf /mnt/root/.bash_history
