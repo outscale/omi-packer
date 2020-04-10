@@ -18,9 +18,9 @@ mount -o bind /proc /mnt/proc
 mount -o bind /sys /mnt/sys
 
 #### SYSTEMD-RESOLVED EMULATION ON HOST
+mount -o bind /run /mnt/run
 mkdir -p /run/systemd/resolv
 cp /etc/resolv.conf /run/systemd/resolv/stub-resolv.conf
-mount -o bind /run /mnt/run
 
 #### UPDATES
 chroot /mnt/ apt update -y
