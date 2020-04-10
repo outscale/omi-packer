@@ -33,11 +33,12 @@ wget https://osu.eu-west-2.outscale.com/outscale-official-packages/udev/osc-udev
 #wget https://osu.eu-west-2.outscale.com/outscale-official-packages/fni/osc-fni-2.0.x86_64.deb -P /mnt/tmp
 chroot /mnt/ dpkg -i /tmp/osc-udev-rules-20190314_amd64.deb
 #chroot /mnt/ dpkg -i /tmp/osc-fni-2.0.x86_64.deb
-yes | cp -i /tmp/cloud.cfg /mnt/etc/cloud/cloud.cfg
+#yes | cp -i /tmp/cloud.cfg /mnt/etc/cloud/cloud.cfg
 yes | cp -i /tmp/sshd_config /mnt/etc/ssh/sshd_config
 chroot /mnt/ apt list --installed > /tmp/packages
 
 #### CLEANUP
+umount -R /mnt
 rm -rf /mnt/var/cache/apt
 rm -rf /mnt/root/.ssh
 rm -rf /mnt/root/.bash_history
