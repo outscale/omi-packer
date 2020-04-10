@@ -20,7 +20,8 @@ mount -o bind /sys /mnt/sys
 #### SYSTEMD-RESOLVED EMULATION ON HOST
 mount -o bind /run /mnt/run
 mkdir -p /run/systemd/resolv
-cp /etc/resolv.conf /run/systemd/resolv/stub-resolv.conf
+cp /etc/resolv.conf /run/systemd/resolve/stub-resolv.conf
+[[ -f /mnt/etc/resolv.conf ]]
 
 #### UPDATES
 chroot /mnt/ apt update -y
