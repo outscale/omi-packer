@@ -10,6 +10,7 @@ if [[ $(cat sha256sum.txt | grep -c `sha256sum CentOS-7-x86_64-GenericCloud.raw.
 tar -zxvf CentOS-7-x86_64-GenericCloud.raw.tar.gz
 mv *.raw centos7.raw
 dd if=./centos7.raw of=/dev/sda bs=1G status=progress conv=sparse
+rescan-scsi-bus.sh -a
 mount -o nouuid /dev/sda1 /mnt
 
 #### CHROOT FIXES

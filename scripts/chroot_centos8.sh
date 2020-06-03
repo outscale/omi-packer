@@ -9,6 +9,7 @@ wget -q https://cloud.centos.org/centos/8/x86_64/images/CHECKSUM
 mv *.qcow2 centos8.qcow2
 if [[ $(cat CHECKSUM | grep -c `sha256sum centos8.qcow2 | cut -d\  -f1`) < 1 ]]; then exit 1; fi
 qemu-img convert ./centos8.qcow2 -O raw /dev/sda
+rescan-scsi-bus.sh -a
 mount -o nouuid /dev/sda1 /mnt
 
 #### CHROOT FIXES
