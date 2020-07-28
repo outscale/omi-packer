@@ -7,5 +7,5 @@ rm -rf /mnt/root/.bash_history
 rm -rf /mnt/tmp/*
 rm -rf /mnt/var/lib/dhcp/
 rm -rf /mnt/var/tmp/*
-rm -rf /mnt/var/log/*
+find /mnt/var/log ! -type d -exec rm '{}' \;
 rm -rf /mnt/var/lib/cloud/*
