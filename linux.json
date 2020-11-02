@@ -12,7 +12,7 @@
         },
 	{
             "type": "shell",
-            "execute_command": "chmod +x {{.Path}}; {{.Vars}} sudo -E -S bash -x '{{.Path}}' '{{user `script`}}'",
+            "execute_command": "chmod +x {{.Path}}; {{.Vars}} sudo -E -S bash -x '{{.Path}}'",
             "script": "./scripts/cleanup.sh"
         },
         {
