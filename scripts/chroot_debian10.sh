@@ -12,10 +12,15 @@ dd if=./debian10.raw of=/dev/sda bs=1G status=progress conv=sparse
 mount /dev/sda1 /mnt
 
 #### CHROOT FIXES
-cp /etc/resolv.conf /mnt/etc/resolv.conf
 mount -o bind /dev /mnt/dev
 mount -o bind /proc /mnt/proc
 mount -o bind /sys /mnt/sys
+
+#### SYSTEMD-RESOLVED EMULATION ON HOST
+mount -o bind /run /mnt/run
+mkdir -p /run/resolvconf/
+cp /etc/resolv.conf /run/resolvconf/resolv.conf
+chroot /mnt/ bash -c '[[ -f /etc/resolv.conf ]]'
 
 #### UPDATES
 chroot /mnt/ apt update -y
