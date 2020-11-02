@@ -1,6 +1,8 @@
 #!/bin/bash
 
-rm -f /mnt/etc/resolv.conf
+if [ ! "$1" == "debian10" ]; then
+	rm -f /mnt/etc/resolv.conf
+fi
 rm -rf /mnt/var/cache/yum
 rm -rf /mnt/root/.ssh
 rm -rf /mnt/root/.bash_history
