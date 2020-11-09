@@ -4,7 +4,7 @@ set -e
 #### BASIC IMAGE
 yum install -y wget qemu-img
 cd /tmp
-wget -q https://cloud.centos.org/centos/8/x86_64/images/CentOS-8-GenericCloud-8.1.1911-20200113.3.x86_64.qcow2
+wget -q https://cloud.centos.org/centos/8/x86_64/images/CentOS-8-GenericCloud-8.2.2004-20200611.2.x86_64.qcow2
 wget -q https://cloud.centos.org/centos/8/x86_64/images/CHECKSUM
 mv *.qcow2 centos8.qcow2
 if [[ $(cat CHECKSUM | grep -c `sha256sum centos8.qcow2 | cut -d\  -f1`) < 1 ]]; then exit 1; fi
