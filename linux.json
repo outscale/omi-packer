@@ -24,32 +24,29 @@
     ],
     "builders": [
         {
-            "type": "osc-ebssurrogate",
+            "type": "osc-bsusurrogate",
             "access_key": "{{user `ak`}}",
             "secret_key": "{{user `sk`}}",
             "region": "{{user `region`}}",
             "ssh_username": "outscale",
-            "instance_type": "tinav4.c2r4p1",
-            "source_ami": "{{user `omi`}}",
+            "vm_type": "tinav4.c2r4p1",
+            "source_omi": "{{user `omi`}}",
             "skip_region_validation": true,
-	    "ssh_interface": "public_ip",
-            "endpoints": {
-                "ec2": "{{user `endpoint`}}"
-            },
-            "ami_virtualization_type": "hvm",
-            "ami_name": "{{user `ami_name`}}",
-            "availability_zone": "{{user `region`}}a",
+	        "ssh_interface": "public_ip",
+            "omi_virtualization_type": "hvm",
+            "omi_name": "{{user `ami_name`}}",
+            "subregion_name": "{{user `region`}}a",
             "launch_block_device_mappings": [
                 {
             	    "volume_type": "io1",
                     "iops": 3000,
             	    "device_name": "/dev/xvdf",
-            	    "delete_on_termination": true,
+            	    "delete_on_vm_deletion": true,
             	    "volume_size": "{{user `volume_size`}}"
                 }
             ],
-            "ami_root_device": {
-                "delete_on_termination": true,
+            "omi_root_device": {
+                "delete_on_vm_deletion": true,
                 "source_device_name": "/dev/xvdf",
                 "device_name": "/dev/sda1",
                 "volume_size": "{{user `volume_size`}}",
@@ -59,12 +56,12 @@
     ],
     "variables": {
         "ami_name": "{{env `AMI_NAME`}}",
-	"region": "{{env `REGION`}}",
-	"ak": "{{env `OSC_ACCESS_KEY`}}",
-	"sk": "{{env `OSC_SECRET_KEY`}}",
-	"script": "{{env `SCRIPT_BASE`}}",
-	"omi": "{{env `SOURCE_OMI`}}",
-	"endpoint": "{{env `ENDPOINT`}}",
-	"volume_size": "{{env `VOL_SIZE`}}"
+        "region": "{{env `REGION`}}",
+        "ak": "{{env `OSC_ACCESS_KEY`}}",
+        "sk": "{{env `OSC_SECRET_KEY`}}",
+        "script": "{{env `SCRIPT_BASE`}}",
+        "omi": "{{env `SOURCE_OMI`}}",
+        "endpoint": "{{env `ENDPOINT`}}",
+        "volume_size": "{{env `VOL_SIZE`}}"
     }
 }
