@@ -28,7 +28,7 @@
             "access_key": "{{user `ak`}}",
             "secret_key": "{{user `sk`}}",
             "region": "{{user `region`}}",
-            "ssh_username": "outscale",
+            "ssh_username": "centos",
             "vm_type": "tinav4.c2r4p1",
             "source_omi": "{{user `omi`}}",
             "skip_region_validation": true,
