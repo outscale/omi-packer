@@ -2,14 +2,13 @@
 set -e
 
 #### BASIC IMAGE
-yum install -y wget qemu-img
+yum install -y wget qemu-img libgcrypt
 cd /tmp
-wget -q https://cloud.centos.org/centos/8/x86_64/images/CentOS-8-GenericCloud-8.2.2004-20200611.2.x86_64.qcow2
-wget -q https://cloud.centos.org/centos/8/x86_64/images/CHECKSUM
+wget -q https://cloud.centos.org/centos/8/x86_64/images/CentOS-8-GenericCloud-8.3.2011-20201204.2.x86_64.qcow2
 mv *.qcow2 centos8.qcow2
-if [[ $(cat CHECKSUM | grep -c `sha256sum centos8.qcow2 | cut -d\  -f1`) < 1 ]]; then exit 1; fi
 qemu-img convert ./centos8.qcow2 -O raw /dev/sda
 rescan-scsi-bus.sh -a
+partprobe
 mount -o nouuid /dev/sda1 /mnt
 
 #### CHROOT FIXES
@@ -24,8 +23,8 @@ chroot /mnt/ dnf clean all
 
 #### OUTSCALE PACKAGES
 chroot /mnt dnf install -y https://osu.eu-west-2.outscale.com/outscale-official-packages/udev/osc-udev-rules-20160516-1.x86_64.rpm
-yes | cp -i /tmp/cloud.cfg /mnt/etc/cloud/cloud.cfg
-yes | cp -i /tmp/sshd_config_centos /mnt/etc/ssh/sshd_config
+cp /tmp/cloudinit/*.cfg /mnt/etc/cloud/cloud.cfg.d/
+cp /tmp/sshd_config_centos /mnt/etc/ssh/sshd_config
 chroot /mnt yum list installed > /tmp/packages
 
 #### CONFIGURATION
