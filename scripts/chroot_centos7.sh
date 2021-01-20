@@ -2,15 +2,13 @@
 set -e
 
 #### BASIC IMAGE
-yum install -y wget
+yum install -y wget qemu-img libgcrypt
 cd /tmp
-wget -q http://cloud.centos.org/centos/7/images/CentOS-7-x86_64-GenericCloud.raw.tar.gz
-wget -q https://cloud.centos.org/centos/7/images/sha256sum.txt
-if [[ $(cat sha256sum.txt | grep -c `sha256sum CentOS-7-x86_64-GenericCloud.raw.tar.gz | cut -d\  -f1`) < 1 ]]; then exit 1; fi
-tar -zxvf CentOS-7-x86_64-GenericCloud.raw.tar.gz
-mv *.raw centos7.raw
-dd if=./centos7.raw of=/dev/sda bs=1G status=progress conv=sparse
+wget -q https://cloud.centos.org/centos/7/images/CentOS-7-x86_64-GenericCloud-2009.qcow2
+mv *.qcow2 centos7.qcow2
+qemu-img convert ./centos7.qcow2 -O raw /dev/sda
 rescan-scsi-bus.sh -a
+partprobe
 mount -o nouuid /dev/sda1 /mnt
 
 #### CHROOT FIXES
