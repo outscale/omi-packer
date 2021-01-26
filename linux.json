@@ -7,13 +7,17 @@
         },
         {
             "type": "shell",
-            "execute_command": "chmod +x {{.Path}}; {{.Vars}} sudo -E -S bash -x '{{.Path}}'",
-            "script": "./scripts/chroot_{{user `script`}}.sh"
-        },
-	{
-            "type": "shell",
             "execute_command": "chmod +x {{.Path}}; {{.Vars}} sudo -E -S bash -x '{{.Path}}' '{{user `script`}}'",
-            "script": "./scripts/cleanup.sh"
+            "scripts": [
+                "./scripts/base/{{user `script`}}.sh",
+                "./scripts/linux/mount.sh",
+                "./scripts/linux/dns.sh",
+                "./scripts/linux/packages.sh",
+                "./scripts/linux/ssh.sh",
+                "./scripts/linux/cloud-init.sh",
+                "./scripts/linux/selinux.sh",
+                "./scripts/linux/cleanup.sh"
+            ]
         },
         {
             "type": "file",
@@ -61,7 +65,6 @@
         "sk": "{{env `OSC_SECRET_KEY`}}",
         "script": "{{env `SCRIPT_BASE`}}",
         "omi": "{{env `SOURCE_OMI`}}",
-        "endpoint": "{{env `ENDPOINT`}}",
         "volume_size": "{{env `VOL_SIZE`}}"
     }
 }
