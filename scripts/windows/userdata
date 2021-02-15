@@ -1,5 +1,8 @@
 # autoexecutepowershell
 
+# Start
+Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope LocalMachine -Force -ErrorAction Ignore
+
 # Start WinRM
 cmd.exe /c net start winrm
 

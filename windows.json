@@ -1,51 +1,44 @@
 {
     "provisioners": [
         {
-            "type": "powershell",
-            "scripts": [
-                "scripts/disable-uac.ps1"
-            ]
-        },
-        {
             "type": "windows-update"
         },
         {
             "type": "powershell",
-            "inline": "Remove-Item -Recurse -Force C:\\Windows\\Outscale\\"
+            "inline": [
+                "Remove-Item -Force \"C:\\Users\\Administrator\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\SetupComplete.cmd\"",
+                "Remove-Item -Recurse -Force C:\\Windows\\Outscale\\"
+            ]
         },
         {
             "type": "file",
-            "source": "files/windows2016/",
+            "source": "files/windows/",
             "destination": "C:\\Windows\\Outscale\\"
         },
         {
             "type": "powershell",
             "scripts": [
-                "scripts/sysprep.ps1"
+                "scripts/windows/sysprep.ps1"
             ]
         }
     ],
     "builders": [
         {
-            "type" : "osc-ebs",
+            "type" : "osc-bsu",
             "access_key": "{{user `ak`}}",
             "secret_key": "{{user `sk`}}",
             "region": "{{user `region`}}",
-            "availability_zone":"{{user `region`}}a",
-            "source_ami": "{{user `omi`}}",
-            "instance_type" : "c4.xlarge",
-            "ami_name": "{{user `ami_name`}}",
-            "user_data_file":"scripts/config_winrm_ssl",
-            "disable_stop_instance": true,
+            "source_omi": "{{user `omi`}}",
+            "vm_type" : "tinav4.c4r4p1",
+            "omi_name": "{{user `ami_name`}}",
+            "user_data_file": "scripts/windows/userdata",
+            "disable_stop_vm": true,
             "communicator": "winrm",
             "winrm_use_ssl": true,
             "winrm_insecure": true,
             "winrm_username": "Administrator",
             "skip_region_validation": true,
-	    "ssh_interface": "public_ip",
-            "endpoints": {
-                "ec2" : "{{ user `endpoint`}}"
-            }
+	        "ssh_interface": "public_ip"
         }
     ],
     "variables": {
@@ -53,7 +46,6 @@
         "region": "{{env `REGION`}}",
         "ak": "{{env `OSC_ACCESS_KEY`}}",
         "sk": "{{env `OSC_SECRET_KEY`}}",
-        "omi": "{{env `SOURCE_OMI`}}",
-	"endpoint": "{{env `ENDPOINT`}}"
+        "omi": "{{env `SOURCE_OMI`}}"
     }
 }
