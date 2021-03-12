@@ -15,9 +15,11 @@ if [[ "$1" == "debian"* ]] || [[ "$1" == "ubuntu"* ]]; then
     chroot /mnt/ apt list --installed > /tmp/packages
 
 elif [[ "$1" == "centos"* ]] || [[ "$1" == "rhel"* ]]; then
-    #### UPDATES
-    chroot /mnt/ yum upgrade -y
-    chroot /mnt/ yum clean all
+    if [[ "$1" == "centos"* ]]; then
+        #### UPDATES
+        chroot /mnt/ yum upgrade -y
+        chroot /mnt/ yum clean all
+    fi
 
     #### OUTSCALE PACKAGES
     chroot /mnt yum install -y https://osu.eu-west-2.outscale.com/outscale-official-packages/udev/osc-udev-rules-20160516-1.x86_64.rpm
