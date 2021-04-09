@@ -1,6 +1,6 @@
-variable "ami_name" {
+variable "omi_name" {
     type = string
-    default = "${env("AMI_NAME")}"
+    default = "${env("OMI_NAME")}"
 }
 
 variable "omi" {
@@ -31,7 +31,7 @@ source "osc-bsusurrogate" "centos8" {
         volume_size = "${var.volume_size}"
         volume_type = "io1"
     }
-    omi_name = "${var.ami_name}"
+    omi_name = "${var.omi_name}"
     omi_root_device {
         delete_on_vm_deletion = true
         device_name = "/dev/sda1"
@@ -68,7 +68,7 @@ build {
         ]
     }
     provisioner "file" {
-        destination = "/usr/local/packer/logs/packages/${var.region}-${var.ami_name}"
+        destination = "/usr/local/packer/logs/packages/${var.region}-${var.omi_name}"
         direction = "download"
         source = "/tmp/packages"
     }
