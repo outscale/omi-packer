@@ -6,16 +6,15 @@ export HOTFIX=0
 
 if [ -z "$OVERRIDE_NAME" ]
 then
-	export OMI_NAME=$BASE_NAME-`/bin/date +%Y.%m.%d`
-    if [ $BRANCH != "master" ]
-	then
-		export OMI_NAME=$AMI_NAME-$BRANCH-$GIT_COMMIT
+    export OMI_NAME=$BASE_NAME-`/bin/date +%Y.%m.%d`
+    if [ $BRANCH != "master" ]; then
+        export OMI_NAME=$AMI_NAME-$BRANCH-$GIT_COMMIT
     else
-		while [ -f /usr/local/packer/images/$OUTSCALE_REGION-$OMI_NAME-$HOTFIX ] ; do HOTFIX=$((HOTFIX+1)); done;
-    	export OMI_NAME=$OMI_NAME-$HOTFIX
+        while [ -f /usr/local/packer/images/$OUTSCALE_REGION-$OMI_NAME-$HOTFIX ] ; do HOTFIX=$((HOTFIX+1)); done;
+        export OMI_NAME=$OMI_NAME-$HOTFIX
     fi
 else
-	export OMI_NAME=$OVERRIDE_NAME
+    export OMI_NAME=$OVERRIDE_NAME
 fi
 
 export UOMI_NAME=$OUTSCALE_REGION-$OMI_NAME
@@ -33,11 +32,11 @@ if [ "$BRANCH" != "master" ]; then exit 0; fi
 
 # Log handling
 if [ -f /usr/local/packer/logs/$UOMI_NAME.log ]; then
-	ln -fs /usr/local/packer/logs/$UOMI_NAME.log /usr/local/packer/logs/$OUTSCALE_REGION-$BASE_NAME-latest.log
+    ln -fs /usr/local/packer/logs/$UOMI_NAME.log /usr/local/packer/logs/$OUTSCALE_REGION-$BASE_NAME-latest.log
     ln -fs /usr/local/packer/images/$UOMI_NAME /usr/local/packer/images/$OUTSCALE_REGION-$BASE_NAME-latest
 fi
 
 # Packages handling
 if [ -f /usr/local/packer/logs/packages/$UOMI_NAME ]; then
-	ln -s /usr/local/packer/logs/packages/$UOMI_NAME /usr/local/packer/logs/packages/$OMI_ID
+    ln -s /usr/local/packer/logs/packages/$UOMI_NAME /usr/local/packer/logs/packages/$OMI_ID
 fi
