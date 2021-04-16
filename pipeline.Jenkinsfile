@@ -89,7 +89,7 @@ for (region in REGIONS.tokenize(",")) {
     def currentRegion = region
     branches["omi_${region}"] = {
         withCredentials([usernamePassword(credentialsId: 'api_osc-omi_' + currentRegion, usernameVariable: 'OSC_ACCESS_KEY', passwordVariable: 'OSC_SECRET_KEY')]) {
-            build(job: 'build-linux-omi', parameters: [
+            build(job: 'build-omi', parameters: [
                 string(name: 'OUTSCALE_ACCESSKEYID', value: OSC_ACCESS_KEY),
                 string(name: 'OUTSCALE_SECRETKEYID', value: OSC_SECRET_KEY),
                 string(name: 'OUTSCALE_REGION', value: currentRegion),
