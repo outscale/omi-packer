@@ -275,7 +275,7 @@ try {
 
   # BootFailure Ignore
   WriteLog "Applying BootFailure Configuration"
-  Start-Process -filepath "c:\Windows\System32\cmd.exe" -argumentlist "/c bcdedit /set {current} bootstatuspolicy ignoreallfailures" -nonewwindow
+  Start-Process -filepath "c:\Windows\System32\cmd.exe" -argumentlist "/c bcdedit /set '{current}' bootstatuspolicy ignoreallfailures" -nonewwindow
 
   # Windows Activation
   WriteLog "Applying Windows Configuration"
