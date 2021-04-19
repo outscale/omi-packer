@@ -1,6 +1,7 @@
 import org.jenkinsci.plugins.workflow.support.steps.build.RunWrapper
 
 def volume_size = "10"
+def packer_script = "linux.pkr.hcl"
 switch(OS) {
     case "CentOS 8":
         base_name = "CentOS-8"
@@ -41,6 +42,11 @@ switch(OS) {
     case "Debian 10":
         base_name = "Debian-10"
         script_base = "debian10"
+        break
+
+    case "Windows Server 2019":
+        base_name = "WindowsServer-2019"
+        packer_script = "windows.pkr.hcl"
         break
 }
 
@@ -88,14 +94,15 @@ def buildLogs = [:]
 for (region in REGIONS.tokenize(",")) {
     def currentRegion = region
     branches["omi_${region}"] = {
-        withCredentials([usernamePassword(credentialsId: 'api_osc-omi_' + currentRegion, usernameVariable: 'OSC_ACCESS_KEY', passwordVariable: 'OSC_SECRET_KEY')]) {
+        withCredentials([usernamePassword(credentialsId: 'api_osc-omi_' + currentRegion, usernameVariable: 'OUTSCALE_ACCESSKEYID', passwordVariable: 'OUTSCALE_SECRETKEYID')]) {
             build(job: 'build-omi', parameters: [
-                string(name: 'OUTSCALE_ACCESSKEYID', value: OSC_ACCESS_KEY),
-                string(name: 'OUTSCALE_SECRETKEYID', value: OSC_SECRET_KEY),
+                string(name: 'OUTSCALE_ACCESSKEYID', value: OUTSCALE_ACCESSKEYID),
+                string(name: 'OUTSCALE_SECRETKEYID', value: OUTSCALE_SECRETKEYID),
                 string(name: 'OUTSCALE_REGION', value: currentRegion),
                 string(name: 'BASE_NAME', value: base_name),
                 string(name: 'SCRIPT_BASE', value: script_base),
-                string(name: 'SOURCE_OMI', value: source_omi[currentRegion]),
+                string(name: 'PACKER_SCRIPT', value: packer_script),
+                string(name: 'SOURCE_OMI', value: source_omi[currentRegion],
                 string(name: 'ENDPOINT', value: endpoint[currentRegion]),
                 string(name: 'OVERRIDE_NAME', value: OVERRIDE_NAME),
                 string(name: 'BRANCH', value: BRANCH),
@@ -105,83 +112,94 @@ for (region in REGIONS.tokenize(",")) {
     }
 }
 
-stage ("build_omi") {
-    parallel branches
-}
+pipeline {
+    options {
+        ansiColor('xterm')
+    }
 
-if (BRANCH != 'master') {
-    currentBuild.result = 'SUCCESS'
-    return
-}
+    stages {
+        stage ("build_omi") {
+            parallel branches
+        }
 
-stage ("package_list") {
-    node {
+        if (BRANCH != 'master') {
+            currentBuild.result = 'SUCCESS'
+            return
+        }
+
+        stage ("package_list") {
+            when {
+                expression { params.PACKER_SCRIPT == 'linux.pkr.hcl' }
+            }
+            node {
+                for (region in REGIONS.tokenize(",")) {
+                    def currentRegion = region
+                    CUR_OMI_NAME = sh(script: "cat /usr/local/packer/images/${currentRegion}-${base_name}-latest", returnStdout: true).trim()
+                    PACKAGE_LIST = sh(script: "echo /usr/local/packer/logs/packages/${CUR_OMI_NAME}", returnStdout: true).trim()
+                    echo PACKAGE_LIST
+
+                    build(job: 'push-package', parameters: [
+                        string(name: 'REGION', value: currentRegion),
+                        string(name: 'BRANCH', value: base_name),
+                        string(name: 'OMI_NAME', value: CUR_OMI_NAME),
+                        string(name: 'PACKAGE_LIST', value: PACKAGE_LIST)
+                    ])
+                }
+            }
+        }
+
+        stage ("omi_names") {
+            node {
+                for (region in REGIONS.tokenize(",")) {
+                    def currentRegion = region
+                    CUR_OMI_NAME = sh(script: "cat /usr/local/packer/images/${currentRegion}-${base_name}-latest", returnStdout: true).trim()
+                    CUR_OMI_IMGNAME = sh(script: "readlink -f /usr/local/packer/images/${currentRegion}-${base_name}-latest", returnStdout: true)
+                    echo "${currentRegion}: ${CUR_OMI_NAME} (${CUR_OMI_IMGNAME})"
+                }
+            }
+        }
+
         for (region in REGIONS.tokenize(",")) {
             def currentRegion = region
-            CUR_OMI_NAME = sh(script: "cat /usr/local/packer/images/${currentRegion}-${base_name}-latest", returnStdout: true).trim()
-            PACKAGE_LIST = sh(script: "echo /usr/local/packer/logs/packages/${CUR_OMI_NAME}", returnStdout: true).trim()
-            echo PACKAGE_LIST
+            def currentEndpoint = "https://" + api_endpoint[region] + "/api/latest"
 
-            build(job: 'push-package', parameters: [
-                string(name: 'REGION', value: currentRegion),
-                string(name: 'BRANCH', value: base_name),
-                string(name: 'OMI_NAME', value: CUR_OMI_NAME),
-                string(name: 'PACKAGE_LIST', value: PACKAGE_LIST)
-            ])
+            qa_branches["qa_${region}"] = {
+                node {
+                    def CUR_OMI_NAME = sh(script: "cat /usr/local/packer/images/${currentRegion}-${base_name}-latest", returnStdout: true).trim()
+                    build(job: 'qai-omi-linux', parameters: [
+                        string(name: 'OUTSCALE_REGION', value: currentRegion),
+                        string(name: 'TF_VAR_endpoint', value: currentEndpoint),
+                        string(name: 'TF_VAR_image_id', value: CUR_OMI_NAME),
+                        string(name: 'OS', value: base_name)
+                    ])
+                }
+            }
         }
-    }
-}
 
-stage ("omi_names") {
-    node {
-        for (region in REGIONS.tokenize(",")) {
-            def currentRegion = region
-            CUR_OMI_NAME = sh(script: "cat /usr/local/packer/images/${currentRegion}-${base_name}-latest", returnStdout: true).trim()
-            CUR_OMI_IMGNAME = sh(script: "readlink -f /usr/local/packer/images/${currentRegion}-${base_name}-latest", returnStdout: true)
-            echo "${currentRegion}: ${CUR_OMI_NAME} (${CUR_OMI_IMGNAME})"
+        stage ("qa_omi") {
+            parallel qa_branches
         }
-    }
-}
 
-for (region in REGIONS.tokenize(",")) {
-    def currentRegion = region
-    def currentEndpoint = "https://" + api_endpoint[region] + "/api/latest"
-
-    qa_branches["qa_${region}"] = {
-        node {
-            def CUR_OMI_NAME = sh(script: "cat /usr/local/packer/images/${currentRegion}-${base_name}-latest", returnStdout: true).trim()
-            build(job: 'qai-omi-linux', parameters: [
-                string(name: 'OUTSCALE_REGION', value: currentRegion),
-                string(name: 'TF_VAR_endpoint', value: currentEndpoint),
-                string(name: 'TF_VAR_image_id', value: CUR_OMI_NAME),
-                string(name: 'OS', value: base_name)
-            ])
+        stage ("deploy_approval") {
+            input "Publish OMI ?"
         }
-    }
-}
 
-stage ("qa_omi") {
-    parallel qa_branches
-}
+        stage ("publish_omi") {
+            node {
+                for (region in REGIONS.tokenize(",")) {
+                    def currentRegion = region
+                    CUR_OMI_NAME = sh(script: "cat /usr/local/packer/images/${currentRegion}-${base_name}-latest", returnStdout: true).trim()
 
-stage ("deploy_approval") {
-    input "Publish OMI ?"
-}
-
-stage ("publish_omi") {
-    node {
-        for (region in REGIONS.tokenize(",")) {
-            def currentRegion = region
-            CUR_OMI_NAME = sh(script: "cat /usr/local/packer/images/${currentRegion}-${base_name}-latest", returnStdout: true).trim()
-
-            withCredentials([usernamePassword(credentialsId: 'api_osc-omi_' + currentRegion, usernameVariable: 'OSC_ACCESS_KEY', passwordVariable: 'OSC_SECRET_KEY')]) {
-                build(job: 'publish-omi', parameters: [
-                    string(name: 'OSC_ACCESS_KEY', value: OSC_ACCESS_KEY),
-                    string(name: 'OSC_SECRET_KEY', value: OSC_SECRET_KEY),
-                    string(name: 'REGION', value: currentRegion),
-                    string(name: 'OMI_ID', value: CUR_OMI_NAME),
-                    string(name: 'ENDPOINT', value: endpoint[currentRegion])
-                ])
+                    withCredentials([usernamePassword(credentialsId: 'api_osc-omi_' + currentRegion, usernameVariable: 'OSC_ACCESS_KEY', passwordVariable: 'OSC_SECRET_KEY')]) {
+                        build(job: 'publish-omi', parameters: [
+                            string(name: 'OSC_ACCESS_KEY', value: OSC_ACCESS_KEY),
+                            string(name: 'OSC_SECRET_KEY', value: OSC_SECRET_KEY),
+                            string(name: 'REGION', value: currentRegion),
+                            string(name: 'OMI_ID', value: CUR_OMI_NAME),
+                            string(name: 'ENDPOINT', value: endpoint[currentRegion])
+                        ])
+                    }
+                }
             }
         }
     }
