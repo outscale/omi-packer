@@ -107,7 +107,7 @@ for (region in REGIONS.tokenize(",")) {
                 string(name: 'BASE_NAME', value: base_name),
                 string(name: 'SCRIPT_BASE', value: script_base),
                 string(name: 'PACKER_SCRIPT', value: packer_script),
-                string(name: 'SOURCE_OMI', value: source_omi[currentRegion],
+                string(name: 'SOURCE_OMI', value: source_omi[currentRegion]),
                 string(name: 'ENDPOINT', value: endpoint[currentRegion]),
                 string(name: 'OVERRIDE_NAME', value: OVERRIDE_NAME),
                 string(name: 'BRANCH', value: BRANCH),
