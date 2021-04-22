@@ -2,6 +2,7 @@ import org.jenkinsci.plugins.workflow.support.steps.build.RunWrapper
 
 def volume_size = "10"
 def packer_script = "linux.pkr.hcl"
+def script_base = ""
 switch(OS) {
     case "CentOS 8":
         base_name = "CentOS-8"
