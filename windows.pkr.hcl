@@ -1,18 +1,23 @@
-variable "ami_name" {
+variable "omi_name" {
     type    = string
     default = "${env("OMI_NAME")}"
 }
 
-variable "omi" {
+variable "base_name" {
     type    = string
-    default = "${env("SOURCE_OMI")}"
+    default = "${env("BASE_NAME")}"
 }
 
 source "osc-bsu" "windows" {
     communicator = "winrm"
     disable_stop_vm = true
-    omi_name = "${var.ami_name}"
-    source_omi = "${var.omi}"
+    omi_name = "${var.omi_name}"
+    source_omi_filter {
+        filters = {
+            image-name = "${var.base_name}-GOLDEN"
+        }
+        owners = [ "Outscale" ]
+    }
     ssh_interface = "public_ip"
     user_data_file = "scripts/windows/userdata"
     vm_type = "tinav4.c4r4p1"

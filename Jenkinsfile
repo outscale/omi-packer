@@ -48,6 +48,11 @@ switch(OS) {
         base_name = "WindowsServer-2019"
         packer_script = "windows.pkr.hcl"
         break
+
+    case "Windows 10":
+        base_name = "Windows-10"
+        packer_script = "windows.pkr.hcl"
+        break
 }
 
 def source_omi = [
@@ -166,7 +171,7 @@ pipeline {
             qa_branches["qa_${region}"] = {
                 node {
                     def CUR_OMI_NAME = sh(script: "cat /usr/local/packer/images/${currentRegion}-${base_name}-latest", returnStdout: true).trim()
-                    build(job: 'qai-omi-linux', parameters: [
+                    build(job: 'qai-omi', parameters: [
                         string(name: 'OUTSCALE_REGION', value: currentRegion),
                         string(name: 'TF_VAR_endpoint', value: currentEndpoint),
                         string(name: 'TF_VAR_image_id', value: CUR_OMI_NAME),
