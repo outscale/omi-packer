@@ -128,22 +128,21 @@ if (BRANCH != 'master') {
 }
 
 stage ("package_list") {
-    when {
-        expression { params.PACKER_SCRIPT == 'linux.pkr.hcl' }
-    }
-    node {
-        for (region in REGIONS.tokenize(",")) {
-            def currentRegion = region
-            CUR_OMI_NAME = sh(script: "cat /usr/local/packer/images/${currentRegion}-${base_name}-latest", returnStdout: true).trim()
-            PACKAGE_LIST = sh(script: "echo /usr/local/packer/logs/packages/${CUR_OMI_NAME}", returnStdout: true).trim()
-            echo PACKAGE_LIST
+    if (packer_script == 'linux.pkr.hcl') {
+        node {
+            for (region in REGIONS.tokenize(",")) {
+                def currentRegion = region
+                CUR_OMI_NAME = sh(script: "cat /usr/local/packer/images/${currentRegion}-${base_name}-latest", returnStdout: true).trim()
+                PACKAGE_LIST = sh(script: "echo /usr/local/packer/logs/packages/${CUR_OMI_NAME}", returnStdout: true).trim()
+                echo PACKAGE_LIST
 
-            build(job: 'push-package', parameters: [
-                string(name: 'REGION', value: currentRegion),
-                string(name: 'BRANCH', value: base_name),
-                string(name: 'OMI_NAME', value: CUR_OMI_NAME),
-                string(name: 'PACKAGE_LIST', value: PACKAGE_LIST)
-            ])
+                build(job: 'push-package', parameters: [
+                    string(name: 'REGION', value: currentRegion),
+                    string(name: 'BRANCH', value: base_name),
+                    string(name: 'OMI_NAME', value: CUR_OMI_NAME),
+                    string(name: 'PACKAGE_LIST', value: PACKAGE_LIST)
+                ])
+            }
         }
     }
 }
