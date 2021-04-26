@@ -25,7 +25,7 @@ export OUTSCALE_X509KEY='/var/lib/jenkins/cert/key.pem'
 export PACKER_LOG=1
 /sbin/packer build ./$PACKER_SCRIPT | tee /usr/local/packer/logs/$UOMI_NAME.log
 
-export OMI_ID=`cat /usr/local/packer/logs/$OMI_NAME.log | grep ami | tail -1 | cut -d ' ' -f 2`
+export OMI_ID=`cat /usr/local/packer/logs/$UOMI_NAME.log | grep ami | tail -1 | cut -d ' ' -f 2`
 echo $OMI_ID> /usr/local/packer/images/$UOMI_NAME
 
 if [ "$BRANCH" != "master" ]; then exit 0; fi
