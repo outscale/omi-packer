@@ -160,7 +160,7 @@ stage ("omi_names") {
 
 for (region in REGIONS.tokenize(",")) {
     def currentRegion = region
-    def currentEndpoint = "https://" + api_endpoint[region] + "/api/latest"
+    def currentEndpoint = api_endpoint[region]
 
     qa_branches["qa_${region}"] = {
         node {
