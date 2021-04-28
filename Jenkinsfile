@@ -24,20 +24,14 @@ switch(OS) {
         script_base = "rhel8"
         break
 
-    case "Ubuntu 18.04":
-        base_name = "Ubuntu-18.04"
-        script_base = "ubuntu1804"
+    case "RHEL 8":
+        base_name = "RHEL-8"
+        script_base = "rhel8csp"
         break
 
     case "Ubuntu 20.04":
         base_name = "Ubuntu-20.04"
         script_base = "ubuntu2004"
-        break
-
-    case "Oracle Linux 7":
-        base_name = "OracleLinux-7"
-        script_base = "oracle7"
-        volume_size = "15"
         break
 
     case "Debian 10":
