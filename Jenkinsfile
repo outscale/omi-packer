@@ -24,6 +24,11 @@ switch(OS) {
         script_base = "rhel8"
         break
 
+    case "RHEL 7":
+        base_name = "RHEL-7"
+        script_base = "rhel7csp"
+        break
+
     case "RHEL 8":
         base_name = "RHEL-8"
         script_base = "rhel8csp"
