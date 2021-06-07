@@ -201,7 +201,7 @@ try {
     WriteLog "Workstation Edition Detected - Getting KMS Client Key"
     WriteLog "KMS Client Key = $key"
   }
-  $KmsServer="kms.$Zone.compute.internal:1688"
+  $KmsServer="169.254.169.254:1688"
   WriteLog "KMS Server = $KmsServer"
 
   # UserData
