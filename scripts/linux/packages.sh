@@ -27,7 +27,7 @@ elif [[ "$1" == "centos"* ]] || [[ "$1" == "rhel"* ]]; then
 
     #### OUTSCALE PACKAGES
     chroot /mnt yum install -y https://osu.eu-west-2.outscale.com/outscale-official-packages/udev/osc-udev-rules-20160516-1.x86_64.rpm
-    chroot /mnt yum install -y https://oos.eu-west-2.outscale.com/omi/packages/osc-fni-2.0-1.x86_64.rpm
+    chroot /mnt yum install -y https://oos.eu-west-2.outscale.com/omi/packages/osc-fni-2.1-1.x86_64.rpm
 
     #### PACKAGE LIST
     chroot /mnt yum list installed > /tmp/packages
