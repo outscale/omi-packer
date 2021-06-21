@@ -60,7 +60,7 @@ def source_omi = [
     "us-east-2": "ami-9f4e638d",
     "us-west-1": "ami-f738d199",
     "ap-northeast-1": "ami-88a0560e",
-    "in-west-1": "",
+    "in-west-1": "ami-c2515376",
     "in-west-2": "",
     "cloudgouv-eu-west-1": "ami-73bceeed",
     "cloudgouv-eu-west-2": "ami-df27cb3a",
