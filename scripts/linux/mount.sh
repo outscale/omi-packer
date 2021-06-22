@@ -6,7 +6,7 @@ partprobe
 echo 1 > /sys/block/sda/device/rescan
 sleep 2
 
-if [[ "$1" == "centos"* ]] || [[ "$1" == "rhel7"* ]]; then
+if [[ "$1" == "centos"* ]] || [[ "$1" == "rhel7"* ]] || [[ "$1" == "rocky"* ]]; then
     # IN CASE UPSTREAM PARTITION HAS SAME UUID AS HOST
     mount -o nouuid /dev/sda1 /mnt
 elif [[ "$1" == "rhel8"* ]]; then

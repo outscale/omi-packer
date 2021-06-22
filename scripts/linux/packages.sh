@@ -18,8 +18,8 @@ if [[ "$1" == "debian"* ]] || [[ "$1" == "ubuntu"* ]]; then
     #### PACKAGE LIST
     chroot /mnt/ apt list --installed > /tmp/packages
 
-elif [[ "$1" == "centos"* ]] || [[ "$1" == "rhel"* ]]; then
-    if [[ "$1" == "centos"* ]]; then
+elif [[ "$1" == "centos"* ]] || [[ "$1" == "rhel"* ]] || [[ "$1" == "rocky"* ]]; then
+    if [[ "$1" == "centos"* ]] || [[ "$1" == "rocky"* ]]; then
         #### UPDATES
         chroot /mnt/ yum upgrade -y
         chroot /mnt/ yum clean all
