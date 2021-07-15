@@ -25,7 +25,8 @@ And, for Windows image only:
 ```bash
 export BASE_NAME=Windows-10 # Base name, only required for Windows OMI, see below
 ```
-You can then build the image using: 
+You can then build the image using:
+ * `packer init config.pkr.hcl` 
  * `packer build linux.pkr.hcl` (for Linux image)
  * `packer build windows.pkr.hcl` (for Windows image)
 
