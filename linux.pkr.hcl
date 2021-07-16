@@ -13,14 +13,18 @@ variable "script" {
     default = "${env("SCRIPT_BASE")}"
 }
 
-variable "volume_size" {
+variable "volsize" {
     type = string
-    default = "${env("VOL_SIZE")}"
+    default = "10"
 }
 
 variable "region" {
     type = string
     default = "${env("OUTSCALE_REGION")}"
+}
+variable "username" {
+	type = string
+	default = "outscale"
 }
 
 source "osc-bsusurrogate" "centos8" {
@@ -28,7 +32,7 @@ source "osc-bsusurrogate" "centos8" {
         delete_on_vm_deletion = true
         device_name = "/dev/xvdf"
         iops = 3000
-        volume_size = "${var.volume_size}"
+        volume_size = "${var.volsize}"
         volume_type = "io1"
     }
     omi_name = "${var.omi_name}"
@@ -36,13 +40,13 @@ source "osc-bsusurrogate" "centos8" {
         delete_on_vm_deletion = true
         device_name = "/dev/sda1"
         source_device_name = "/dev/xvdf"
-        volume_size = "${var.volume_size}"
+        volume_size = "${var.volsize}"
         volume_type = "standard"
     }
     omi_virtualization_type = "hvm"
     source_omi = "${var.omi}"
     ssh_interface = "public_ip"
-    ssh_username = "centos"
+    ssh_username = "${var.username}"
     vm_type = "tinav4.c2r4p1"
 }
 
@@ -69,7 +73,7 @@ build {
         ]
     }
     provisioner "file" {
-        destination = "/usr/local/packer/logs/packages/${var.region}-${var.omi_name}"
+        destination = "./packages-${var.region}-${var.omi_name}"
         direction = "download"
         source = "/tmp/packages"
     }

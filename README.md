@@ -13,26 +13,32 @@ Set the following environment variables:
 export OUTSCALE_ACCESSKEYID=<ACCESS_KEY>
 export OUTSCALE_SECRETKEYID=<SECRET_KEY>
 export OUTSCALE_REGION=eu-west-2 # Outscale Region
-export VOL_SIZE=10 # Size of OMI in GB
 export OMI_NAME=<OMI_NAME>
 ```
 And, for Linux images only:
 ```bash
 export SCRIPT_BASE=centos8 # Any script located in ./script/base/ without .sh extension
-export SOURCE_OMI=ami-a2d3b6a6 # A working CentOS 8 image, with the username "centos", already present on destination Region
+export SOURCE_OMI=ami-0dd0ab23 # A working CentOS 8 image, with the username "centos", already present on destination Region
 ```
 And, for Windows image only:
 ```bash
 export BASE_NAME=Windows-10 # Base name, only required for Windows OMI, see below
+export PKR_VAR_volsize=50 # Size in GB of produced OMI
 ```
 You can then build the image using:
  * `packer init -upgrade config.pkr.hcl` 
  * `packer build linux.pkr.hcl` (for Linux image)
  * `packer build windows.pkr.hcl` (for Windows image)
 
+### Optional parameters
+```bash
+export PKR_VAR_volsize=<SIZE> # OMI root volume size in GB, default is 10
+```
+
 ## Available images
 ### Linux
-Linux images requires a working CentOS 8 or equivalent image present on destination Region, with a username "centos". This username can be changed in `linux.pkr.hcl` by setting `ssh_username` to a different username.
+Linux images requires a working CentOS 8 or equivalent image present on destination Region, with a username "outscale".   
+This username can be changed by setting `PKR_VAR_username` environment variable to a different username.
 
 The following Linux scripts are provided and can be used in `SCRIPT_BASE`:
 
