@@ -31,8 +31,7 @@ You can then build the image using:
  * `packer build windows.pkr.hcl` (for Windows image)
 
 ### Optional parameters
-
-```
+```bash
 export PKR_VAR_volsize=<SIZE> # OMI root volume size in GB, default is 10
 ```
 
