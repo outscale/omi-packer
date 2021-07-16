@@ -22,6 +22,10 @@ variable "region" {
     type = string
     default = "${env("OUTSCALE_REGION")}"
 }
+variable "username" {
+	type = string
+	default = "outscale"
+}
 
 source "osc-bsusurrogate" "centos8" {
     launch_block_device_mappings {
@@ -42,7 +46,7 @@ source "osc-bsusurrogate" "centos8" {
     omi_virtualization_type = "hvm"
     source_omi = "${var.omi}"
     ssh_interface = "public_ip"
-    ssh_username = "centos"
+    ssh_username = "${var.username}"
     vm_type = "tinav4.c2r4p1"
 }
 

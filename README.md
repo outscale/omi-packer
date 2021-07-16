@@ -32,7 +32,8 @@ You can then build the image using:
 
 ## Available images
 ### Linux
-Linux images requires a working CentOS 8 or equivalent image present on destination Region, with a username "centos". This username can be changed in `linux.pkr.hcl` by setting `ssh_username` to a different username.
+Linux images requires a working CentOS 8 or equivalent image present on destination Region, with a username "outscale".   
+This username can be changed by setting `PKR_VAR_username` environment variable to a different username.
 
 The following Linux scripts are provided and can be used in `SCRIPT_BASE`:
 
