@@ -13,7 +13,6 @@ Set the following environment variables:
 export OUTSCALE_ACCESSKEYID=<ACCESS_KEY>
 export OUTSCALE_SECRETKEYID=<SECRET_KEY>
 export OUTSCALE_REGION=eu-west-2 # Outscale Region
-export VOL_SIZE=10 # Size of OMI in GB
 export OMI_NAME=<OMI_NAME>
 ```
 And, for Linux images only:
@@ -24,11 +23,18 @@ export SOURCE_OMI=ami-0dd0ab23 # A working CentOS 8 image, with the username "ce
 And, for Windows image only:
 ```bash
 export BASE_NAME=Windows-10 # Base name, only required for Windows OMI, see below
+export PKR_VAR_volsize=50 # Size in GB of produced OMI
 ```
 You can then build the image using:
  * `packer init -upgrade config.pkr.hcl` 
  * `packer build linux.pkr.hcl` (for Linux image)
  * `packer build windows.pkr.hcl` (for Windows image)
+
+### Optional parameters
+
+```
+export PKR_VAR_volsize=<SIZE> # OMI root volume size in GB, default is 10
+```
 
 ## Available images
 ### Linux
