@@ -5,7 +5,7 @@ This project creates fully working Outscale Machine Images using Packer and shel
 It requires an already working CentOS 8 image on the destination Outscale Region (for Linux images) or a working Windows Golden Image in the corresponding version of wanted Windows image (for Windows images).
 
 ## Requirements
- * [Packer](https://www.packer.io/downloads)
+ * [Packer](https://www.packer.io/downloads) (>= 1.7.3)
 
 ## Usage
 Set the following environment variables:
@@ -26,7 +26,7 @@ And, for Windows image only:
 export BASE_NAME=Windows-10 # Base name, only required for Windows OMI, see below
 ```
 You can then build the image using:
- * `packer init config.pkr.hcl` 
+ * `packer init -upgrade config.pkr.hcl` 
  * `packer build linux.pkr.hcl` (for Linux image)
  * `packer build windows.pkr.hcl` (for Windows image)
 
