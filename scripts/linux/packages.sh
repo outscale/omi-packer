@@ -8,7 +8,7 @@ if [[ "$1" == "debian"* ]] || [[ "$1" == "ubuntu"* ]]; then
     chroot /mnt/ apt clean
 
     #### OUTSCALE PACKAGES
-    wget https://osu.eu-west-2.outscale.com/outscale-official-packages/udev/osc-udev-rules-20190314_amd64.deb -P /mnt/tmp
+    wget https://oos.eu-west-2.outscale.com/omi/packages/osc-udev-rules-20190314_amd64.deb -P /mnt/tmp
     chroot /mnt/ dpkg -i /tmp/osc-udev-rules-20190314_amd64.deb
     if [[ "$1" == "ubuntu"* ]]; then
         wget https://oos.eu-west-2.outscale.com/omi/packages/osc-fni-ubuntu.deb -P /mnt/tmp
@@ -26,7 +26,7 @@ elif [[ "$1" == "centos"* ]] || [[ "$1" == "rhel"* ]] || [[ "$1" == "rocky"* ]];
     fi
 
     #### OUTSCALE PACKAGES
-    chroot /mnt yum install -y https://osu.eu-west-2.outscale.com/outscale-official-packages/udev/osc-udev-rules-20160516-1.x86_64.rpm
+    chroot /mnt yum install -y https://oos.eu-west-2.outscale.com/omi/packages/osc-udev-rules-20160516-1.x86_64.rpm
 
     #### PACKAGE LIST
     chroot /mnt yum list installed > /tmp/packages
