@@ -73,7 +73,7 @@ build {
         ]
     }
     provisioner "file" {
-        destination = "/usr/local/packer/logs/packages/${var.region}-${var.omi_name}"
+        destination = "./packages-${var.region}-${var.omi_name}"
         direction = "download"
         source = "/tmp/packages"
     }
