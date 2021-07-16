@@ -39,7 +39,7 @@ if [ -f /usr/local/packer/logs/$UOMI_NAME.log ]; then
 fi
 
 # Packages handling
-if [ -f /usr/local/packer/logs/packages/$UOMI_NAME ]; then
+if [ -d /usr/local/packer/logs/packages ] && [ -f ./packages-$UOMI_NAME ]; then
 	mv ./packages-$UOMI_NAME /usr/local/packer/logs/packages/$UOMI_NAME
     ln -s /usr/local/packer/logs/packages/$UOMI_NAME /usr/local/packer/logs/packages/$OMI_ID
 fi
