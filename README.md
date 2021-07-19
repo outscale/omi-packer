@@ -33,6 +33,7 @@ You can then build the image using:
 ### Optional parameters
 ```bash
 export PKR_VAR_volsize=<SIZE> # OMI root volume size in GB, default is 10
+export PKR_VAR_username=outscale # Builder VM SSH Username
 ```
 
 ## Available images

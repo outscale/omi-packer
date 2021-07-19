@@ -23,8 +23,8 @@ variable "region" {
     default = "${env("OUTSCALE_REGION")}"
 }
 variable "username" {
-	type = string
-	default = "outscale"
+    type = string
+    default = "outscale"
 }
 
 source "osc-bsusurrogate" "centos8" {
