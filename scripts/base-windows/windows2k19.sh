@@ -20,12 +20,13 @@ mkdir -p /mnt/hdd /mnt/iso
 
 # DOWNLOAD AND WRITE ISO
 cd /tmp
-wget -q https://oos.eu-west-2.outscale.com/omi/iso/en_windows_10_enterprise_ltsc_2019_x64_dvd_5795bb03.iso
+wget -q https://oos.eu-west-2.outscale.com/omi/iso/SW_DVD9_Win_Server_STD_CORE_2019_1809.17_64Bit_English_DC_STD_MLF_X22-69933.ISO
 mv *.iso win.iso
 mount -o loop /tmp/win.iso /mnt/iso
 mount /dev/sda1 /mnt/hdd
 cp -av /mnt/iso/* /mnt/hdd/
 rm -f /mnt/hdd/sources/boot.wim
+wget -q https://oos.eu-west-2.outscale.com/omi/drivers/boot.wim -P /mnt/hdd/sources/
 umount /mnt/iso
 
 # MAKE ISO BOOTABLE
