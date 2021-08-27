@@ -70,7 +70,8 @@ def source_omi = [
     "cloudgouv-eu-west-1": "ami-73bceeed",
     "cloudgouv-eu-west-2": "ami-df27cb3a",
     "top-west-1": "",
-    "dv-west-1": ""
+    "dv-west-1": "",
+    "eng-west-1": "ami-b0e0138e"
 ]
 def endpoint = [
     "eu-west-2": "fcu.eu-west-2.outscale.com",
@@ -82,7 +83,8 @@ def endpoint = [
     "cloudgouv-eu-west-1": "fcu.cloudgouv-eu-west-1.outscale.com",
     "cloudgouv-eu-west-2": "fcu.cloudgouv-eu-west-2.outscale.com",
     "top-west-1": "fcu.top-west-1.outscale.com",
-    "dv-west-1": "fcu.dv-west-1.outscale.com"
+    "dv-west-1": "fcu.dv-west-1.outscale.com",
+    "eng-west-1": "fcu.eng-west-1.outscale.com"
 ]
 def api_endpoint = [
     "eu-west-2": "api.eu-west-2.outscale.com",
@@ -94,7 +96,8 @@ def api_endpoint = [
     "cloudgouv-eu-west-1": "api.cloudgouv-eu-west-1.outscale.com",
     "cloudgouv-eu-west-2": "api.cloudgouv-eu-west-2.outscale.com",
     "top-west-1": "api.top-west-1.outscale.com",
-    "dv-west-1": "api.dv-west-1.outscale.com"
+    "dv-west-1": "api.dv-west-1.outscale.com",
+    "eng-west-1": "api.eng-west-1.outscale.com"
 ]
 
 def branches = [:]
