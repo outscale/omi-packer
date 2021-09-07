@@ -4,9 +4,9 @@ def volume_size = "10"
 def packer_script = "linux.pkr.hcl"
 def script_base = ""
 switch(OS) {
-    case "CentOS 8":
-        base_name = "CentOS-8"
-        script_base = "centos8"
+    case "Rocky Linux 8":
+        base_name = "RockyLinux-8"
+        script_base = "rocky8"
         break
 
     case "CentOS 7":
