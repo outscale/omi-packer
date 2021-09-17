@@ -29,6 +29,7 @@ elif [[ "$1" == "centos"* ]] || [[ "$1" == "rhel"* ]] || [[ "$1" == "rocky"* ]];
     chroot /mnt yum install -y https://oos.eu-west-2.outscale.com/omi/packages/osc-udev-rules-20160516-1.x86_64.rpm
 
     #### PACKAGE LIST
-    chroot /mnt yum list installed > /tmp/packages
+    date > /tmp/packages
+    chroot /mnt yum list installed >> /tmp/packages
 
 fi
