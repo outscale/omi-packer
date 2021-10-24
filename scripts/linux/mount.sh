@@ -11,6 +11,8 @@ if [[ "$1" == "centos"* ]] || [[ "$1" == "rhel7"* ]] || [[ "$1" == "rocky"* ]]; 
     mount -o nouuid /dev/sda1 /mnt
 elif [[ "$1" == "rhel8"* ]]; then
     mount -o nouuid /dev/sda3 /mnt
+elif [[ "$1" == "arch" ]]; then
+    mount /dev/sda2 /mnt
 else
     mount /dev/sda1 /mnt
 fi

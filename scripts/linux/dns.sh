@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-if [[ "$1" == "debian"* ]] || [[ "$1" == "ubuntu"* ]]; then
+if [[ "$1" == "debian"* ]] || [[ "$1" == "ubuntu"* ]] || [[ "$1" == "arch" ]]; then
     # SYSTEMD-RESOLVED EMULATION
     mount -o bind /run /mnt/run
     mkdir -p /run/resolvconf/

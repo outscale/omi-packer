@@ -30,6 +30,18 @@ elif [[ "$1" == "centos"* ]] || [[ "$1" == "rhel"* ]] || [[ "$1" == "rocky"* ]];
 
     #### PACKAGE LIST
     date > /tmp/packages
-    chroot /mnt yum list installed >> /tmp/packages
+    chroot /mnt yum list installed > /tmp/packages
+
+elif [[ "$1" == "arch" ]]; then
+    chroot /mnt pacman-key --init
+    chroot /mnt pacman-key --populate archlinux
+    chroot /mnt pacman -Syu --noconfirm
+    wget https://oos.eu-west-2.outscale.com/omi/packages/osc-udev-storage-2.0-1-any.pkg.tar.zst -P /mnt/tmp
+    chroot /mnt pacman -U --noconfirm /tmp/osc-udev-storage-2.0-1-any.pkg.tar.zst
+    chroot /mnt pacman -Q > /tmp/packages
+    rm -rf /mnt/etc/pacman.d/gnupg
+
+else
+    touch /tmp/packages
 
 fi

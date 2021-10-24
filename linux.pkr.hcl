@@ -58,9 +58,13 @@ build {
         source = "./files/"
     }
     provisioner "shell" {
+        execute_command = "chmod +x {{ .Path }}; {{ .Vars }} sudo -E -S bash -x '{{ .Path }}'"
+        scripts = [ "./scripts/base/${var.script}.sh" ]
+        expect_disconnect = true
+    }
+    provisioner "shell" {
         execute_command = "chmod +x {{ .Path }}; {{ .Vars }} sudo -E -S bash -x '{{ .Path }}' '${var.script}'"
         scripts = [
-            "./scripts/base/${var.script}.sh",
             "./scripts/linux/mount.sh",
             "./scripts/linux/dns.sh",
             "./scripts/linux/rhel-activation.sh",
@@ -71,6 +75,7 @@ build {
             "./scripts/linux/selinux.sh",
             "./scripts/linux/cleanup.sh"
         ]
+        pause_before = "10s"
     }
     provisioner "file" {
         destination = "./packages-${var.region}-${var.omi_name}"
