@@ -54,6 +54,11 @@ switch(OS) {
         packer_script = "windows.pkr.hcl"
         break
 
+    case "Windows Server 2019 SQL Standard 2019":
+        base_name = "WindowsServer-2019-SQL-Standard-2019"
+        packer_script = "windows-sql.pkr.hcl"
+        break
+
     case "Windows 10":
         base_name = "Windows-10"
         packer_script = "windows.pkr.hcl"
@@ -68,7 +73,6 @@ def source_omi = [
     "in-west-1": "ami-c2515376",
     "in-west-2": "",
     "cloudgouv-eu-west-1": "ami-73bceeed",
-    "cloudgouv-eu-west-2": "ami-df27cb3a",
     "top-west-1": "",
     "dv-west-1": "",
     "eng-west-1": "ami-b0e0138e"
@@ -81,7 +85,6 @@ def endpoint = [
     "in-west-1": "fcu.in-west-1.outscale.com",
     "in-west-2": "fcu.in-west-2.outscale.com",
     "cloudgouv-eu-west-1": "fcu.cloudgouv-eu-west-1.outscale.com",
-    "cloudgouv-eu-west-2": "fcu.cloudgouv-eu-west-2.outscale.com",
     "top-west-1": "fcu.top-west-1.outscale.com",
     "dv-west-1": "fcu.dv-west-1.outscale.com",
     "eng-west-1": "fcu.eng-west-1.outscale.com"
@@ -94,7 +97,6 @@ def api_endpoint = [
     "in-west-1": "api.in-west-1.outscale.com",
     "in-west-2": "api.in-west-2.outscale.com",
     "cloudgouv-eu-west-1": "api.cloudgouv-eu-west-1.outscale.com",
-    "cloudgouv-eu-west-2": "api.cloudgouv-eu-west-2.outscale.com",
     "top-west-1": "api.top-west-1.outscale.com",
     "dv-west-1": "api.dv-west-1.outscale.com",
     "eng-west-1": "api.eng-west-1.outscale.com"

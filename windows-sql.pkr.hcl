@@ -23,7 +23,7 @@ source "osc-bsu" "windows" {
     omi_name = "${var.omi_name}"
     source_omi_filter {
         filters = {
-            image-name = "${var.base_name}-GOLDEN"
+            image-name = "WindowsServer-2019-GOLDEN"
         }
         owners = [ "Outscale" ]
     }
@@ -43,12 +43,16 @@ build {
         inline = [
             "Remove-Item -Recurse -Force C:\\Windows\\Outscale\\",
             "Remove-Item -Recurse -Force 'C:\\Users\\Administrator\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\SetupComplete.cmd'",
-            "Remove-Item -Recurse -Force 'C:\\Users\\Default\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\SetupComplete.cmd'"
+            "Remove-Item -Recurse -Force 'C:\\Users\\Default\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\SetupComplete.cmd'",
+            "Remove-Item -Recurse -Force 'C:\\Users\\Administrator\\AppData\\Local\\Microsoft_Corporation'"
         ]
     }
     provisioner "file" {
         destination = "C:\\Windows\\Outscale\\"
         source = "files/windows/"
+    }
+    provisioner "powershell" {
+        scripts = [ "scripts/windows/mssql.ps1" ]
     }
     provisioner "powershell" {
         scripts = [ "scripts/windows/sysprep.ps1" ]
