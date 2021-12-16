@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 set -o pipefail
 
 # Generate OMI name and Universal OMI Name
@@ -26,6 +27,9 @@ export PKR_VAR_volsize=$VOL_SIZE
 export PKR_VAR_username=centos
 /sbin/packer init -upgrade ./config.pkr.hcl
 /sbin/packer build ./$PACKER_SCRIPT | tee /usr/local/packer/logs/$UOMI_NAME.log
+
+# Workaround for bad Packer exit code
+grep successful /usr/local/packer/logs/$UOMI_NAME.log > /dev/null
 
 export OMI_ID=`cat /usr/local/packer/logs/$UOMI_NAME.log | grep ami | tail -1 | cut -d ' ' -f 2`
 echo $OMI_ID> /usr/local/packer/images/$UOMI_NAME
