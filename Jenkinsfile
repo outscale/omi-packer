@@ -3,6 +3,7 @@ import org.jenkinsci.plugins.workflow.support.steps.build.RunWrapper
 def volume_size = "10"
 def packer_script = "linux.pkr.hcl"
 def script_base = ""
+def iso_url = ""
 switch(OS) {
     case "Rocky Linux 8":
         base_name = "RockyLinux-8"
@@ -55,8 +56,15 @@ switch(OS) {
         break
 
     case "Windows Server 2019 SQL Standard 2019":
-        base_name = "WindowsServer-2019-SQL-Standard-2019"
+        base_name = "WindowsServer-2019-MSSQL-Std2019"
         packer_script = "windows-sql.pkr.hcl"
+        iso_url = "https://oos.eu-west-2.outscale.com/omi/iso/SW_DVD9_NTRL_SQL_Svr_Standard_Edtn_2019Dec2019_64Bit_English_OEM_VL_X22-22109.ISO"
+        break
+
+    case "Windows Server 2019 SQL Enterprise 2019":
+        base_name = "WindowsServer-2019-MSSQL-Ent2019"
+        packer_script = "windows-sql.pkr.hcl"
+        iso_url = "https://oos.eu-west-2.outscale.com/omi/iso/SW_DVD9_NTRL_SQL_Svr_Ent_Core_2019Dec2019_64Bit_English_OEM_VL_X22-22120.ISO"
         break
 
     case "Windows 10":
@@ -118,10 +126,10 @@ for (region in REGIONS.tokenize(",")) {
                 string(name: 'SCRIPT_BASE', value: script_base),
                 string(name: 'PACKER_SCRIPT', value: packer_script),
                 string(name: 'SOURCE_OMI', value: source_omi[currentRegion]),
-                string(name: 'ENDPOINT', value: endpoint[currentRegion]),
                 string(name: 'OVERRIDE_NAME', value: OVERRIDE_NAME),
                 string(name: 'BRANCH', value: BRANCH),
-                string(name: 'VOL_SIZE', value: volume_size)
+                string(name: 'VOL_SIZE', value: volume_size),
+                string(name: 'ISO_URL', value: iso_url)
             ])
         }
     }

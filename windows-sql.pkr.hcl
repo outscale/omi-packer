@@ -3,9 +3,9 @@ variable "omi_name" {
     default = "${env("OMI_NAME")}"
 }
 
-variable "base_name" {
+variable "iso" {
     type    = string
-    default = "${env("BASE_NAME")}"
+    default = "${env("ISO_URL")}"
 }
 
 source "osc-bsu" "windows" {
@@ -33,8 +33,6 @@ build {
     provisioner "powershell" {
         inline = [
             "Remove-Item -Recurse -Force C:\\Windows\\Outscale\\",
-            "Remove-Item -Recurse -Force 'C:\\Users\\Administrator\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\SetupComplete.cmd'",
-            "Remove-Item -Recurse -Force 'C:\\Users\\Default\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\SetupComplete.cmd'",
             "Remove-Item -Recurse -Force 'C:\\Users\\Administrator\\AppData\\Local\\Microsoft_Corporation'"
         ]
     }
@@ -43,7 +41,12 @@ build {
         source = "files/windows/"
     }
     provisioner "powershell" {
-        scripts = [ "scripts/windows/mssql.ps1" ]
+        environment_vars = ["ISO_URL=${var.iso}"]
+        scripts = [ 
+            "scripts/windows/mssql.ps1",
+            "scripts/windows/ssms.ps1",
+            "scripts/windows/firewall-tcp-1433.ps1"
+        ]
     }
     provisioner "powershell" {
         scripts = [ "scripts/windows/sysprep.ps1" ]
