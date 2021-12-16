@@ -22,10 +22,11 @@ export UOMI_NAME=$OUTSCALE_REGION-$OMI_NAME
 # Generate OMI
 export OUTSCALE_X509CERT='/var/lib/jenkins/cert/cert.pem'
 export OUTSCALE_X509KEY='/var/lib/jenkins/cert/key.pem'
+export PACKER_LOG_PATH=/usr/local/packer/logs/$UOMI_NAME.log
 export PKR_VAR_volsize=$VOL_SIZE
 export PKR_VAR_username=centos
 /sbin/packer init -upgrade ./config.pkr.hcl
-/sbin/packer build ./$PACKER_SCRIPT | tee /usr/local/packer/logs/$UOMI_NAME.log
+/sbin/packer build ./$PACKER_SCRIPT
 
 export OMI_ID=`cat /usr/local/packer/logs/$UOMI_NAME.log | grep ami | tail -1 | cut -d ' ' -f 2`
 echo $OMI_ID> /usr/local/packer/images/$UOMI_NAME
