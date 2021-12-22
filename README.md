@@ -5,7 +5,7 @@ This project creates fully working Outscale Machine Images using Packer and shel
 It requires an already working CentOS 8 image on the destination Outscale Region (for Linux images) or a working Windows Golden Image in the corresponding version of wanted Windows image (for Windows images).
 
 ## Requirements
- * [Packer](https://www.packer.io/downloads) (>= 1.7.3)
+ * [Packer](https://www.packer.io/downloads) (>= 1.7.8)
 
 ## Usage
 Set the following environment variables:
