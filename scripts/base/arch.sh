@@ -5,7 +5,7 @@ set -e
 #### BASIC IMAGE
 yum install -y wget qemu-img libgcrypt git
 cd /tmp
-wget -q https://mirror.pkgbuild.com/images/latest/Arch-Linux-x86_64-cloudimg-20211001.0.qcow2
+wget -q https://mirror.pkgbuild.com/images/latest/Arch-Linux-x86_64-cloudimg-20211201.40458.qcow2
 mv *.qcow2 arch.qcow2
 qemu-img convert ./arch.qcow2 -O raw /dev/sda
 
