@@ -10,10 +10,6 @@ if [[ "$1" == "debian"* ]] || [[ "$1" == "ubuntu"* ]]; then
     #### OUTSCALE PACKAGES
     wget https://oos.eu-west-2.outscale.com/omi/packages/osc-udev-rules-20190314_amd64.deb -P /mnt/tmp
     chroot /mnt/ dpkg -i /tmp/osc-udev-rules-20190314_amd64.deb
-    if [[ "$1" == "ubuntu"* ]]; then
-        wget https://oos.eu-west-2.outscale.com/omi/packages/osc-fni-ubuntu.deb -P /mnt/tmp
-        chroot /mnt/ dpkg -i /tmp/osc-fni-ubuntu.deb
-    fi
 
     #### PACKAGE LIST
     chroot /mnt/ apt list --installed > /tmp/packages
