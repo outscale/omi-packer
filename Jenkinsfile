@@ -74,16 +74,16 @@ switch(OS) {
 }
 
 def source_omi = [
-    "eu-west-2": "ami-9d4e6d52",
-    "us-east-2": "ami-9f4e638d",
-    "us-west-1": "ami-f738d199",
-    "ap-northeast-1": "ami-88a0560e",
-    "in-west-1": "ami-c2515376",
+    "eu-west-2": "ami-5ef28d69",
+    "us-east-2": "ami-604fcb3f",
+    "us-west-1": "ami-12d3f3c9",
+    "ap-northeast-1": "ami-e9af44fd",
+    "in-west-1": "",
     "in-west-2": "",
-    "cloudgouv-eu-west-1": "ami-73bceeed",
+    "cloudgouv-eu-west-1": "ami-1e87016d",
     "top-west-1": "",
     "dv-west-1": "",
-    "eng-west-1": "ami-b0e0138e"
+    "eng-west-1": ""
 ]
 def endpoint = [
     "eu-west-2": "fcu.eu-west-2.outscale.com",
