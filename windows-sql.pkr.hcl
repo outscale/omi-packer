@@ -8,6 +8,15 @@ variable "iso" {
     default = "${env("ISO_URL")}"
 }
 
+packer {
+    required_plugins {
+        windows-update = {
+            version = ">=0.14.0"
+            source = "github.com/rgl/windows-update"
+        }
+    }
+}
+
 source "osc-bsu" "windows" {
     communicator = "winrm"
     disable_stop_vm = true
