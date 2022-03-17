@@ -46,7 +46,7 @@ source "osc-bsusurrogate" "builder" {
     source_omi = "${var.omi}"
     ssh_interface = "public_ip"
     ssh_username = "${var.username}"
-    vm_type = "tinav4.c2r4p1"
+    vm_type = "tinav5.c2r4p1"
 }
 
 build {
