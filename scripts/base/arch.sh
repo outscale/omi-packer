@@ -5,9 +5,8 @@ set -e
 #### BASIC IMAGE
 yum install -y wget qemu-img libgcrypt git
 cd /tmp
-wget -q https://mirror.pkgbuild.com/images/latest/Arch-Linux-x86_64-cloudimg-20220123.45392.qcow2
-mv *.qcow2 arch.qcow2
-qemu-img convert ./arch.qcow2 -O raw /dev/sda
+wget -q https://geo.mirror.pkgbuild.com/images/latest/Arch-Linux-x86_64-cloudimg.qcow2
+qemu-img convert ./*.qcow2 -O raw /dev/sda
 
 #### CUSTOM KERNEL WITH BTRFS SUPPORT
 rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org
