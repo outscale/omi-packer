@@ -83,7 +83,7 @@ def source_omi = [
     "cloudgouv-eu-west-1": "ami-1e87016d",
     "top-west-1": "ami-aabb4394",
     "dv-west-1": "",
-    "eng-west-1": ""
+    "eng-west-1": "ami-d70cbd92"
 ]
 def endpoint = [
     "eu-west-2": "fcu.eu-west-2.outscale.com",
