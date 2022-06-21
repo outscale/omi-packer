@@ -53,8 +53,9 @@ The following Linux scripts are provided and can be used in `SCRIPT_BASE`:
  * ubuntu2204 (Ubuntu 22.04)
  * debian11 (Debian 11)
  * arch (ArchLinux)
+ * alma9 (AlmaLinux 9)
 
-**Beware:** CSP images (rhel9scp) requires edition of ./files/cloudinit-specific/05_rhel7.cfg or ./files/cloudinit-specific/05_rhel8.cfg to set a proper RedHat Satellite Server owned and configured by the customer itself.
+**Beware:** CSP images (rhel9scp) requires edition of ./files/cloudinit-specific/05_rhel9.cfg to set a proper RedHat Satellite Server owned and configured by the customer itself.
 Failing to do so will result in a violation of Outscale Terms and Conditions.
 
 ### Windows
