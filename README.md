@@ -49,6 +49,7 @@ The following Linux scripts are provided and can be used in `SCRIPT_BASE`:
  * rocky8 (Rocky Linux 8)
  * rhel8csp (RedHat Enterprise Linux 8)
  * rhel9 (RedHat Enterprise Linux 9 without license)
+ * rhel9csp (RedHat Enterprise Linux 9)
  * ubuntu2004 (Ubuntu 20.04)
  * ubuntu2204 (Ubuntu 22.04)
  * debian11 (Debian 11)
