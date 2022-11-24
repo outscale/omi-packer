@@ -10,6 +10,11 @@ switch(OS) {
         script_base = "rocky8"
         break
 
+    case "Rocky Linux 9":
+        base_name = "RockyLinux-9"
+        script_base = "rocky9"
+        break
+
     case "CentOS 7":
         base_name = "CentOS-7"
         script_base = "centos7"
@@ -38,6 +43,11 @@ switch(OS) {
     case "Ubuntu 20.04":
         base_name = "Ubuntu-20.04"
         script_base = "ubuntu2004"
+        break
+
+    case "Ubuntu 22.04":
+        base_name = "Ubuntu-22.04"
+        script_base = "ubuntu2204"
         break
 
     case "Debian 11":

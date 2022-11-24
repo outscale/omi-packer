@@ -47,6 +47,7 @@ The following Linux scripts are provided and can be used in `SCRIPT_BASE`:
 
  * centos7 (CentOS 7)
  * rocky8 (Rocky Linux 8)
+ * rocky9 (Rocky Linux 9)
  * rhel8csp (RedHat Enterprise Linux 8)
  * rhel9 (RedHat Enterprise Linux 9 without license)
  * rhel9csp (RedHat Enterprise Linux 9)
