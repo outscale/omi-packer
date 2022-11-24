@@ -27,7 +27,7 @@ variable "username" {
     default = "outscale"
 }
 
-source "osc-bsusurrogate" "builder" {
+source "outscale-bsusurrogate" "builder" {
     launch_block_device_mappings {
         delete_on_vm_deletion = true
         device_name = "/dev/xvdf"
@@ -50,7 +50,7 @@ source "osc-bsusurrogate" "builder" {
 }
 
 build {
-    sources = [ "source.osc-bsusurrogate.builder" ]
+    sources = [ "source.outscale-bsusurrogate.builder" ]
 
     provisioner "file" {
         destination = "/tmp/"
