@@ -6,10 +6,13 @@ partprobe
 echo 1 > /sys/block/sda/device/rescan
 sleep 2
 
+# Get the biggest partition of /dev/sda as root partition
+root_partition=$(fdisk -lo device,size /dev/sda | grep -E '^\/dev\/' | tr -s ' ' | sort -rhk2 | head -n1 | cut -d ' ' -f1)
+
 if [[ "$1" == "centos"* ]] || [[ "$1" == "rocky"* ]] || [[ "$1" == "alma"* ]] || [[ "$1" == "rhel"* ]]; then
-    mount -o nouuid /dev/sda$(grep -c 'sda[0-9]' /proc/partitions) /mnt
+    mount -o nouuid $root_partition /mnt
 else
-    mount /dev/sda$(grep -c 'sda[0-9]' /proc/partitions) /mnt
+    mount $root_partition /mnt
 fi
 
 mount -o bind /dev /mnt/dev
