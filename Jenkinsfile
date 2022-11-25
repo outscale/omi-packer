@@ -20,24 +20,24 @@ switch(OS) {
         script_base = "centos7"
         break
 
-    case "RHEL 8 BYOL":
-        base_name = "RHEL-8-BYOL"
-        script_base = "rhel8"
-        break
-
-    case "RHEL 9 BYOL":
-        base_name = "RHEL-9-BYOL"
-        script_base = "rhel9"
-        break
-
     case "RHEL 8":
         base_name = "RHEL-8"
         script_base = "rhel8csp"
         break
 
+    case "RHEL 8 BYOL":
+        base_name = "RHEL-8-BYOL"
+        script_base = "rhel8"
+        break
+
     case "RHEL 9":
         base_name = "RHEL-9"
         script_base = "rhel9csp"
+        break
+
+    case "RHEL 9 BYOL":
+        base_name = "RHEL-9-BYOL"
+        script_base = "rhel9"
         break
 
     case "Ubuntu 20.04":
