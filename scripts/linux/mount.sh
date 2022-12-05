@@ -23,5 +23,5 @@ if [[ "$1" == "debian"* ]]; then
     # Get EFI partition
     efi_partition=$(fdisk -lo device,type /dev/sda | grep -E '^\/dev\/' | tr -s ' ' | grep -E 'EFI' | head -n1 | cut -d ' ' -f1)
     mkdir -p /mnt/boot/efi
-    mount -o bind $efi_partition /mnt/boot/efi
+    mount $efi_partition /mnt/boot/efi
 fi
