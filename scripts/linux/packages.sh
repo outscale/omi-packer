@@ -4,7 +4,8 @@ set -e
 if [[ "$1" == "debian"* ]] || [[ "$1" == "ubuntu"* ]]; then
     #### UPDATES
     chroot /mnt/ apt update -y
-    chroot /mnt/ apt upgrade -y
+    chroot /mnt/ apt install unattended-upgrade  -y
+    chroot /mnt/ unattended-upgrade
     chroot /mnt/ apt clean
 
     #### OUTSCALE PACKAGES
@@ -17,7 +18,7 @@ if [[ "$1" == "debian"* ]] || [[ "$1" == "ubuntu"* ]]; then
 elif [[ "$1" == "centos"* ]] || [[ "$1" == "rhel"* ]] || [[ "$1" == "rocky"* ]] || [[ "$1" == "alma"* ]]; then
     if [[ "$1" == "centos"* ]] || [[ "$1" == "rocky"* ]] || [[ "$1" == "alma"* ]]; then
         #### UPDATES
-        chroot /mnt/ yum upgrade -y
+        chroot /mnt/ yum upgrade -y --security --secseverity=Critical
         chroot /mnt/ yum clean all
     fi
 
