@@ -17,7 +17,7 @@ packer {
     }
 }
 
-source "osc-bsu" "windows" {
+source "outscale-bsu" "windows" {
     communicator = "winrm"
     disable_stop_vm = true
     omi_name = "${var.omi_name}"
@@ -36,7 +36,7 @@ source "osc-bsu" "windows" {
 }
 
 build {
-    sources = [ "source.osc-bsu.windows" ]
+    sources = [ "source.outscale-bsu.windows" ]
 
     provisioner "windows-update" {}
     provisioner "powershell" {
