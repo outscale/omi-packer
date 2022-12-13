@@ -69,6 +69,9 @@ build {
         ]
     }
     provisioner "powershell" {
+        scripts = [ "scripts/windows/enable-rtc.ps1" ]
+    }
+    provisioner "powershell" {
         scripts = [ "scripts/windows/sysprep.ps1" ]
     }
 }
