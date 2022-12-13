@@ -26,7 +26,7 @@ source "outscale-bsu" "windows" {
     communicator = "winrm"
     disable_stop_vm = true
     omi_name = "${var.omi_name}"
-    launch_block_device_mappings {
+    omi_block_device_mappings {
         delete_on_vm_deletion = true
         device_name = "/dev/sda1"
         volume_size = "${var.volsize}"
