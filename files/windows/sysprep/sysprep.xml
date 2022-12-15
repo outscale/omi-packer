@@ -50,7 +50,4 @@
       <DoNotOpenServerManagerAtLogon>true</DoNotOpenServerManagerAtLogon>
   </component>
 </settings>
-
-<cpi:offlineImage cpi:source="wim:d:/iso/en_windows_server_2008_r2_with_sp1_vl_build_x64_dvd_617403/sources/install.wim#Windows Server 2008 R2 SERVERDATACENTER" xmlns:cpi="urn:schemas-microsoft-com:cpi" />
-
 </unattend>

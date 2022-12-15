@@ -26,7 +26,9 @@ source "outscale-bsu" "windows" {
     communicator = "winrm"
     disable_stop_vm = true
     omi_name = "${var.omi_name}"
-    omi_block_device_mappings {
+    force_delete_snapshot = true
+    bsu_optimized = true
+    launch_block_device_mappings {
         delete_on_vm_deletion = true
         device_name = "/dev/sda1"
         volume_size = "${var.volsize}"
@@ -51,10 +53,10 @@ build {
 
     provisioner "windows-update" {}
     provisioner "powershell" {
-        inline = [
-            "Remove-Item -Recurse -Force C:\\Windows\\Outscale\\",
-            "Remove-Item -Recurse -Force 'C:\\Users\\Administrator\\AppData\\Local\\Microsoft_Corporation'"
-        ]
+        scripts = [ "scripts/windows/cleanup.ps1" ]
+    }
+    provisioner "powershell" {
+        inline = [ "Remove-Item -Recurse -Force -ErrorAction SilentlyContinue 'C:\\Users\\Administrator\\AppData\\Local\\Microsoft_Corporation'" ]
     }
     provisioner "file" {
         destination = "C:\\Windows\\Outscale\\"
@@ -65,11 +67,9 @@ build {
         scripts = [ 
             "scripts/windows/mssql.ps1",
             "scripts/windows/ssms.ps1",
-            "scripts/windows/firewall-tcp-1433.ps1"
+            "scripts/windows/firewall-tcp-1433.ps1",
+            "scripts/windows/enable-rtc.ps1"
         ]
-    }
-    provisioner "powershell" {
-        scripts = [ "scripts/windows/enable-rtc.ps1" ]
     }
     provisioner "powershell" {
         scripts = [ "scripts/windows/sysprep.ps1" ]
