@@ -389,3 +389,24 @@ try {
 catch [Exception]{
   WriteLog "### FAILED ### -> $_"
 }
+
+try {
+  WriteLog "MSSQL Server"
+  if (Test-Path “HKLM:\Software\Microsoft\Microsoft SQL Server\Instance Names\SQL”) {
+    WriteLog  "*******************************************************************************"
+    WriteLog "Update MSSQL server hostname"
+    $DBHostName = (Invoke-sqlcmd -query "select @@SERVERNAME" | ConvertTo-Csv -NoTypeInformation | select -Skip 1).Trim('"')
+    $HostName = [System.Net.DNS]::GetHostByName('').HostName.Trim()
+    Invoke-Sqlcmd -Query "EXEC sp_dropserver '$DBHostName';"
+    Invoke-Sqlcmd -Query "EXEC sp_addserver '$HostName','local';"
+    net stop MSSQLSERVER
+    net start MSSQLSERVER
+    ConsoleOutput 1
+    WriteLog "*******************************************************************************"
+    WriteLog "### END OF SCRIPT ###"
+    break
+  }
+}
+  catch [Exception]{
+    WriteLog "### FAILED ### -> $_"
+}
