@@ -42,7 +42,7 @@ source "outscale-bsu" "windows" {
     }
     ssh_interface = "public_ip"
     user_data_file = "scripts/windows/userdata"
-    vm_type = "tinav4.c4r4p1"
+    vm_type = "tinav5.c4r8p1"
     winrm_insecure = true
     winrm_use_ssl = true
     winrm_username = "Administrator"
