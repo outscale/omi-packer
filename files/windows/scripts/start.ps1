@@ -6,8 +6,8 @@
 .NOTES
     Name of file    : start.ps1
     Author          : Outscale
-    Date            : December 2016
-    Version         : 1.3
+    Date            : December 2022
+    Version         : 1.4
     #>
 
     <# Functions #>
@@ -329,6 +329,35 @@ try {
 catch [Exception]{
   WriteLog "### FAILED ### -> $_"
   WriteLog  "*******************************************************************************"
+}
+
+try {
+  if (Test-Path "HKLM:\Software\Microsoft\Microsoft SQL Server\Instance Names\SQL") {
+    WriteLog  "*******************************************************************************"
+    WriteLog "MSSQL Server configuration checks..."
+    $DBHostName = (Invoke-sqlcmd -query "select @@SERVERNAME" | ConvertTo-Csv -NoTypeInformation | select -Skip 1).Trim('"')
+    $HostName = [System.Net.DNS]::GetHostByName('').HostName.Trim()
+    $srvStatus = (get-service -ComputerName $HostName -Name MSSQLSERVER).Status
+    WriteLog "MSSQLSERVER status: $srvStatus"
+    if ($HostName.ToString() -eq $DBHostName.ToString()) {
+       WriteLog "Hostname matches DBHostName: $HostName, no actions needed!!"
+    }
+    else{
+      WriteLog "Updating MSSQL server hostname..."
+      WriteLog "EXEC sp_dropserver '$DBHostName';"
+      Invoke-Sqlcmd -Query "EXEC sp_dropserver '$DBHostName';"
+      WriteLog "EXEC sp_addserver '$HostName','local';"
+      Invoke-Sqlcmd -Query "EXEC sp_addserver '$HostName','local';"
+      WriteLog "stopping MSSQLserver..."
+      net stop MSSQLSERVER
+      WriteLog "starting MSSQLserver..."
+      net start MSSQLSERVER
+    }
+    WriteLog "MSSQL Server configuration checks complete..."
+  }
+}
+  catch [Exception] {
+   WriteLog "### FAILED ### -> $_"
 }
 
 try {
