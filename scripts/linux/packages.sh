@@ -23,7 +23,7 @@ elif [[ "$1" == "centos"* ]] || [[ "$1" == "rhel"* ]] || [[ "$1" == "rocky"* ]] 
     fi
 
     #### OUTSCALE PACKAGES
-    chroot /mnt yum install -y https://oos.eu-west-2.outscale.com/omi/packages/osc-udev-rules-20221219-1.x86_64.rpm
+    chroot /mnt yum install -y https://oos.eu-west-2.outscale.com/omi/packages/osc-udev-rules-20230103-1.x86_64.rpm
 
     #### PACKAGE LIST
     date > /tmp/packages
