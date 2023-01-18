@@ -1,3 +1,4 @@
+[![Project Graduated](https://docs.outscale.com/fr/userguide/_images/Project-Graduated-green.svg)](https://docs.outscale.com/en/userguide/Open-Source-Projects.html)
 
 # OMI Builder
 This project creates fully working Outscale Machine Images using Packer and shell scripts.
