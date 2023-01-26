@@ -1,3 +1,4 @@
+[![Project Graduated](https://docs.outscale.com/fr/userguide/_images/Project-Graduated-green.svg)](https://docs.outscale.com/en/userguide/Open-Source-Projects.html)
 
 # OMI Builder
 This project creates fully working Outscale Machine Images using Packer and shell scripts.
@@ -56,6 +57,7 @@ The following Linux scripts are provided and can be used in `SCRIPT_BASE`:
  * debian11 (Debian 11)
  * arch (ArchLinux)
  * alma9 (AlmaLinux 9)
+ * opensuse154 (OpenSuse 15.4)
 
 **Beware:** CSP images (rhel9scp) requires edition of ./files/cloudinit-specific/05_rhel9.cfg to set a proper RedHat Satellite Server owned and configured by the customer itself.
 Failing to do so will result in a violation of Outscale Terms and Conditions.
