@@ -23,7 +23,11 @@ export UOMI_NAME=$OUTSCALE_REGION-$OMI_NAME
 # Generate OMI
 export OUTSCALE_X509CERT='/var/lib/jenkins/cert/cert.pem'
 export OUTSCALE_X509KEY='/var/lib/jenkins/cert/key.pem'
-export PKR_VAR_volsize=$VOL_SIZE
+if [ "$VOL_SIZE" == 0 || -z "$VOL_SIZE" ] then;
+    unset PKR_VAR_volsize
+else
+    export PKR_VAR_volsize=$VOL_SIZE
+fi
 /bin/packer init -upgrade ./config.pkr.hcl
 /bin/packer build ./$PACKER_SCRIPT | tee /usr/local/packer/logs/$UOMI_NAME.log
 
