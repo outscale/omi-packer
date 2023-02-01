@@ -1,6 +1,6 @@
 import org.jenkinsci.plugins.workflow.support.steps.build.RunWrapper
 
-def volume_size = "10"
+def volume_size = "0"
 def packer_script = "linux.pkr.hcl"
 def script_base = ""
 def iso_url = ""
