@@ -1,6 +1,6 @@
 import org.jenkinsci.plugins.workflow.support.steps.build.RunWrapper
 
-def volume_size = "10"
+def volume_size = "0"
 def packer_script = "linux.pkr.hcl"
 def script_base = ""
 def iso_url = ""
@@ -63,27 +63,23 @@ switch(OS) {
     case "Windows Server 2019":
         base_name = "WindowsServer-2019"
         packer_script = "windows.pkr.hcl"
-        volume_size = "50"
         break
 
     case "Windows Server 2019 SQL Standard 2019":
         base_name = "WindowsServer-2019-MSSQL-Std2019"
         packer_script = "windows-sql.pkr.hcl"
         iso_url = "https://oos.eu-west-2.outscale.com/omi/iso/SW_DVD9_NTRL_SQL_Svr_Standard_Edtn_2019Dec2019_64Bit_English_OEM_VL_X22-22109.ISO"
-        volume_size = "50"
         break
 
     case "Windows Server 2019 SQL Enterprise 2019":
         base_name = "WindowsServer-2019-MSSQL-Ent2019"
         packer_script = "windows-sql.pkr.hcl"
-        volume_size = "50"
         iso_url = "https://oos.eu-west-2.outscale.com/omi/iso/SW_DVD9_NTRL_SQL_Svr_Ent_Core_2019Dec2019_64Bit_English_OEM_VL_X22-22120.ISO"
         break
 
     case "Windows 10":
         base_name = "Windows-10"
         packer_script = "windows.pkr.hcl"
-        volume_size = "50"
         break
 }
 
