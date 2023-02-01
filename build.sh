@@ -23,7 +23,7 @@ export UOMI_NAME=$OUTSCALE_REGION-$OMI_NAME
 # Generate OMI
 export OUTSCALE_X509CERT='/var/lib/jenkins/cert/cert.pem'
 export OUTSCALE_X509KEY='/var/lib/jenkins/cert/key.pem'
-if [ "$VOL_SIZE" == 0 || -z "$VOL_SIZE" ] then;
+if [ "$VOL_SIZE" == 0 ] || [ -z "$VOL_SIZE" ]; then
     unset PKR_VAR_volsize
 else
     export PKR_VAR_volsize=$VOL_SIZE
