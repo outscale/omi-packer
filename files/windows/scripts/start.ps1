@@ -6,8 +6,8 @@
 .NOTES
     Name of file    : start.ps1
     Author          : Outscale
-    Date            : December 2022
-    Version         : 1.4
+    Date            : February 2nd, 2023
+    Version         : 1.5
     #>
 
     <# Functions #>
@@ -115,6 +115,7 @@
      $date = $([DateTime]::Now.ToString("G"))
      Write-Host "$date : $data"
      Out-File -InputObject "$date : $data" -FilePath $pathLogFile -Append
+     SerialWrite($data)
    }
 
    # Return Windows License Status
@@ -323,7 +324,7 @@ try {
   Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
 
   # Cleanup
-  Set-ExecutionPolicy RemoteSigned -Force
+  Set-ExecutionPolicy RemoteSigned -Scope LocalMachine -Force
 }
 
 catch [Exception]{
