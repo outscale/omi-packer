@@ -54,8 +54,9 @@ build {
     provisioner "windows-update" {}
     provisioner "powershell" {
         scripts = [
-            "scripts/windows/cleanup.ps1",
-            "scripts/windows/enable-rtc.ps1"
+            "scripts/windows/virtio.ps1",
+            "scripts/windows/enable-rtc.ps1",
+            "scripts/windows/cleanup.ps1"
         ]
     }
     provisioner "file" {
