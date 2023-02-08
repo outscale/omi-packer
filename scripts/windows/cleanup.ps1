@@ -1,3 +1,17 @@
+<#
+.SYNOPSIS
+    Outscale Script to cleanup logs and files used pre-build
+
+.DESCRIPTION
+    Powershell cmdlet to cleanup logs and files used pre-build.
+
+.NOTES
+    Name of file    : cleanup.ps1
+    Author          : Outscale
+    Date            : February 8th, 2022
+    Version         : 1.0
+#>
+
 Write-Host "Running cleanup script"
 if (Test-Path "C:\Windows\Outscale\") {
   Write-Host "Removing Windows Outscale folder"
