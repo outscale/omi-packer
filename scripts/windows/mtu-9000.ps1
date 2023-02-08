@@ -28,9 +28,9 @@ try {
         $mtu = $netAdapter | Where-Object {$_.DisplayName -eq "Init.MTUSize"}
         if ($mtu.DisplayValue -ne 8950) {
           Set-NetAdapterAdvancedProperty -Name "Ethernet" -DisplayName "Init.MTUSize" -DisplayValue 8950
-          write-host "Set-NetAdapterAdvancedProperty Ethernet Init.MTUSize 8950"
+          Write-Host "Set-NetAdapterAdvancedProperty Ethernet Init.MTUSize 8950"
          } else {
-          write-host "NetAdapterAdvancedProperty Ethernet Init.MTUSize 8950 already set"
+          Write-Host "NetAdapterAdvancedProperty Ethernet Init.MTUSize 8950 already set"
          }
       }
 
@@ -39,12 +39,12 @@ try {
     $path = $adapter.ServiceName
     try {
       Get-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\services\Tcpip\Parameters\Interfaces\$path\" | Select-Object -ExpandProperty MTU | Out-Null
-      write-host "ItemProperty Ethernet MTU 9000 already set"
+      Write-Host "ItemProperty Ethernet MTU 9000 already set"
      }
      catch
      {
       New-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\services\Tcpip\Parameters\Interfaces\$path\" -Name "MTU" -Value 9000 -PropertyType "DWord" | Out-Null
-      write-hot "Applied New-ItemProperty Ethernet MTU 9000"
+      Write-Host "Applied New-ItemProperty Ethernet MTU 9000"
      }
 }
 catch [Exception] {
