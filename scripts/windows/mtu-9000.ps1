@@ -38,7 +38,7 @@ try {
 
     $mtu = (Get-NetIPInterface -InterfaceAlias "Ethernet").NlMtu
     if ($mtu -ne 8950) {
-      Set-NetIPInterface -InterfaceAlias "Ethernet" -NlMtuBytes 8950
+      Set-NetAdapterAdvancedProperty -Name "Ethernet" -DisplayName "Jumbo Packet" -DisplayValue "9014"
       Write-Host "Set-NetIPInterface Ethernet NlMtuBytes 8950"
     } else {
       Write-Host "Set-NetIPInterface Ethernet NlMtuBytes 8950 already set"
