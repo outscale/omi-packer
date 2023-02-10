@@ -113,7 +113,7 @@
      param([string]$data)
 
      $date = $([DateTime]::Now.ToString("G"))
-     SerialWrite("$date : $data")
+     Write-Host "$date : $data"
      Out-File -InputObject "$date : $data" -FilePath $pathLogFile -Append
      SerialWrite($data)
    }
@@ -329,7 +329,7 @@ try {
    {
     New-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\services\Tcpip\Parameters\Interfaces\$path\" -Name "MTU" -Value 9000 -PropertyType "DWord" | Out-Null
     WriteLog("Applied Registry New-ItemProperty Ethernet MTU 9000")
-   }
+  }
 
   WriteLog "Enable Remote Desktop"
   # Registry
