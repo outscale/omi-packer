@@ -64,7 +64,7 @@ build {
     }
     provisioner "powershell" {
         environment_vars = ["ISO_URL=${var.iso}"]
-        scripts = [ 
+        scripts = [
             "scripts/windows/mssql.ps1",
             "scripts/windows/ssms.ps1",
             "scripts/windows/firewall-tcp-1433.ps1",
