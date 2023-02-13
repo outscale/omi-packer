@@ -67,8 +67,7 @@ build {
         scripts = [
             "scripts/windows/mssql.ps1",
             "scripts/windows/ssms.ps1",
-            "scripts/windows/firewall-tcp-1433.ps1",
-            "scripts/windows/enable-rtc.ps1"
+            "scripts/windows/firewall-tcp-1433.ps1"
         ]
     }
     provisioner "powershell" {
