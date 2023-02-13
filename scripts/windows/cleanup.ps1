@@ -27,4 +27,10 @@ if (Test-Path "C:\\Users\\Default\\AppData\\Roaming\\Microsoft\\Windows\\Start M
   Write-Host "Removing Default User SetupComplete.cmd"
   Remove-Item -Recurse -Force "C:\\Users\\Default\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\SetupComplete.cmd"
 }
+
+if (Test-Path "C:\\Users\\Administrator\\AppData\\Local\\Microsoft_Corporation") {
+  Write-Host "Removing Microsoft_Corporation folder"
+  Remove-Item -Recurse -Force -ErrorAction SilentlyContinue "C:\\Users\\Administrator\\AppData\\Local\\Microsoft_Corporation"
+}
+
 Write-Host "Exit cleanup script"
