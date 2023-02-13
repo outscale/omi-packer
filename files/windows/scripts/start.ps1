@@ -6,8 +6,8 @@
 .NOTES
     Name of file    : start.ps1
     Author          : Outscale
-    Date            : February 2nd, 2023
-    Version         : 1.5
+    Date            : February 10th, 2023
+    Version         : 1.6
     #>
 
     <# Functions #>
@@ -289,29 +289,32 @@ try {
   WriteLog "Windows Activation Status = $(Get-ActivationStatus | Select -ExpandProperty Status)"
 
   # MTU
-  WriteLog "Updating MTU Ethernet Configuration"
+  WriteLog("*******************************************************************************")
+  WriteLog("Updating MTU Ethernet Configuration")
+
   # Network Interface
   Disable-NetAdapterBinding -InterfaceAlias "Ethernet" -ComponentID ms_tcpip6
   Disable-NetAdapterBinding -InterfaceAlias Ethernet -ComponentID ms_tcpip6
 
-  $netAdapter=Get-NetAdapterAdvancedProperty -Name "Ethernet"
-  $mtu = $netAdapter | Where-Object {$_.DisplayName -eq "Init.MTUSize"}
-
-  if ($mtu.DisplayValue -ne 8950)
-  {
-    Set-NetAdapterAdvancedProperty -Name "Ethernet" -DisplayName "Init.MTUSize" -DisplayValue 8950
+  $mtu = (Get-NetIPInterface -InterfaceAlias "Ethernet").NlMtu
+  if ($mtu -ne 8950) {
+    Set-NetAdapterAdvancedProperty -Name "Ethernet" -DisplayName "Jumbo Packet" -DisplayValue "9014"
+    WriteLog("Set-NetIPInterface Ethernet NlMtuBytes 8950")
+  } else {
+    WriteLog("Set-NetIPInterface Ethernet NlMtuBytes 8950 already set")
   }
 
   $adapterList = Get-ChildItem -Path 'HKLM:\Software\Microsoft\Windows NT\CurrentVersion\NetworkCards\'
   $adapter = Get-ItemProperty -Path Registry::$adapterList -Name ServiceName
   $path = $adapter.ServiceName
-  try
-  {
-    Get-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\services\Tcpip\Parameters\Interfaces\$path\" | Select-Object -ExpandProperty MTU -ErrorAction Stop | Out-Null
-  }
-  catch
-  {
+  try {
+    Get-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\services\Tcpip\Parameters\Interfaces\$path\" | Select-Object -ExpandProperty MTU | Out-Null
+    WriteLog("Registry ItemProperty Ethernet MTU 9000 already set")
+   }
+   catch
+   {
     New-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\services\Tcpip\Parameters\Interfaces\$path\" -Name "MTU" -Value 9000 -PropertyType "DWord" | Out-Null
+    WriteLog("Applied Registry New-ItemProperty Ethernet MTU 9000")
   }
 
   WriteLog "Enable Remote Desktop"
