@@ -55,7 +55,6 @@ build {
     provisioner "powershell" {
         scripts = [
             "scripts/windows/virtio.ps1",
-            "scripts/windows/mtu-9000.ps1",
             "scripts/windows/enable-rtc.ps1",
             "scripts/windows/cleanup.ps1"
         ]
