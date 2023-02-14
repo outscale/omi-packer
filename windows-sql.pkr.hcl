@@ -51,15 +51,8 @@ source "outscale-bsu" "windows" {
 build {
     sources = [ "source.outscale-bsu.windows" ]
 
-    provisioner "windows-update" {}
     provisioner "powershell" {
-        environment_vars = ["ISO_URL=${var.iso}"]
         scripts = [
-            "scripts/windows/mssql.ps1",
-            "scripts/windows/ssms.ps1",
-            "scripts/windows/firewall-tcp-1433.ps1",
-            "scripts/windows/virtio.ps1",
-            "scripts/windows/enable-rtc.ps1",
             "scripts/windows/cleanup.ps1"
         ]
     }
@@ -67,7 +60,17 @@ build {
         destination = "C:\\Windows\\Outscale\\"
         source = "files/windows/"
     }
-
+    provisioner "powershell" {
+        environment_vars = ["ISO_URL=${var.iso}"]
+        scripts = [
+            "scripts/windows/mssql.ps1",
+            "scripts/windows/ssms.ps1",
+            "scripts/windows/firewall-tcp-1433.ps1",
+            "scripts/windows/virtio.ps1",
+            "scripts/windows/enable-rtc.ps1"
+        ]
+    }
+    provisioner "windows-update" {}
     provisioner "powershell" {
         scripts = [ "scripts/windows/sysprep.ps1" ]
     }

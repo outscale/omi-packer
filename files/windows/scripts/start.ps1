@@ -307,8 +307,8 @@ try {
   $adapterList = Get-ChildItem -Path 'HKLM:\Software\Microsoft\Windows NT\CurrentVersion\NetworkCards\'
   $adapter = Get-ItemProperty -Path Registry::$adapterList -Name ServiceName
   $path = $adapter.ServiceName
-  try {
-    Get-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\services\Tcpip\Parameters\Interfaces\$path\" | Select-Object -ExpandProperty MTU | Out-Null
+   try {
+    Get-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\services\Tcpip\Parameters\Interfaces\$path\" | Select-Object -ExpandProperty MTU -ErrorAction Stop | Out-Null
     WriteLog("Registry ItemProperty Ethernet MTU 9000 already set")
    }
    catch

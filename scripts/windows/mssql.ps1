@@ -9,12 +9,12 @@
 .NOTES
     Name of file    : mssql-install.ps1
     Author          : Outscale
-    Date            : November 2021
-    Version         : 1.5
+    Date            : February 14th, 2023
+    Version         : 1.6
 
     #>
 
-
+Write-Host "Running MSSQL SERVER Installation script..."
 
 #SQL Server ISO file URL
 $IsoURL = $Env:ISO_URL
@@ -47,7 +47,7 @@ else {
 }
 
 #Mount the SQL ISO file
-#write-host "Mounting the ISO file..."
+write-host "Mounting the ISO file..."
 $MountISO = Mount-DiskImage -ImagePath $SQLIsoFile -StorageType ISO -PassThru
 
 #Retrieve the ISO drive letter
@@ -62,5 +62,12 @@ Invoke-Expression -Command $command
 Write-Host "---- MS SQL install complete ----" -ForegroundColor Green
 
 #Dismount the ISO File
-#write-host "Dismounting the ISO file..."
+write-host "Dismounting the ISO file..."
 Dismount-DiskImage -ImagePath $SQLIsoFile
+
+#Cleanup, Delete mssql ISO file
+Write-Host "Cleaning up - Removing mssql ISO file"
+Get-ChildItem -Path $WorkingDir -Recurse | Remove-Item -force -recurse
+Remove-Item $WorkingDir -Force -ErrorAction SilentlyContinue
+
+Write-Host "End of MSSQL Installation script..."
