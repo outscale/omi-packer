@@ -4,7 +4,7 @@ set -e
 if [[ "$1" == "debian"* ]] || [[ "$1" == "ubuntu"* ]]; then
     #### UPDATES
     chroot /mnt/ apt update -y
-    chroot /mnt/ apt install unattended-upgrade  -y
+    chroot /mnt/ apt install unattended-upgrades -y
     chroot /mnt/ unattended-upgrade
     chroot /mnt/ apt clean
 
