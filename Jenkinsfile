@@ -206,6 +206,7 @@ stage ("qa_omi") {
     parallel qa_branches
 }
 
+/*
 stage ("deploy_approval") {
     input "Publish OMI ?"
 }
@@ -228,3 +229,4 @@ stage ("publish_omi") {
         }
     }
 }
+*/
