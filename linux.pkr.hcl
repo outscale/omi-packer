@@ -71,6 +71,7 @@ build {
             "./scripts/linux/boot.sh",
             "./scripts/linux/ssh.sh",
             "./scripts/linux/cloud-init.sh",
+            "./scripts/linux/fstrim.sh",
             "./scripts/linux/selinux.sh",
             "./scripts/linux/cleanup.sh"
         ]
