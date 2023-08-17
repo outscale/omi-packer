@@ -13,6 +13,11 @@ variable "volsize" {
     default = "50"
 }
 
+variable "product_codes" {
+    type    = string
+    default = "${env("PRODUCT_CODES")}"
+}
+
 packer {
     required_plugins {
         windows-update = {
@@ -28,6 +33,7 @@ source "outscale-bsu" "windows" {
     omi_name = "${var.omi_name}"
     force_delete_snapshot = true
     bsu_optimized = true
+    product_codes = ["${var.product_codes}"]
     launch_block_device_mappings {
         delete_on_vm_deletion = true
         device_name = "/dev/sda1"
