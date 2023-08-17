@@ -69,12 +69,14 @@ switch(OS) {
         base_name = "WindowsServer-2019-MSSQL-Std2019"
         packer_script = "windows-sql.pkr.hcl"
         iso_url = "https://oos.eu-west-2.outscale.com/omi/iso/SW_DVD9_NTRL_SQL_Svr_Standard_Edtn_2019Dec2019_64Bit_English_OEM_VL_X22-22109.ISO"
+        product_codes = "0002,0008"
         break
 
     case "Windows Server 2019 SQL Enterprise 2019":
         base_name = "WindowsServer-2019-MSSQL-Ent2019"
         packer_script = "windows-sql.pkr.hcl"
         iso_url = "https://oos.eu-west-2.outscale.com/omi/iso/SW_DVD9_NTRL_SQL_Svr_Ent_Core_2019Dec2019_64Bit_English_OEM_VL_X22-22120.ISO"
+        product_codes = "0002,0009"
         break
 
     case "Windows 10":
@@ -139,7 +141,8 @@ for (region in REGIONS.tokenize(",")) {
                 string(name: 'OVERRIDE_NAME', value: OVERRIDE_NAME),
                 string(name: 'BRANCH', value: BRANCH),
                 string(name: 'VOL_SIZE', value: volume_size),
-                string(name: 'ISO_URL', value: iso_url)
+                string(name: 'ISO_URL', value: iso_url),
+                string(name: 'PRODUCT_CODES', value: product_codes)
             ])
         }
     }
