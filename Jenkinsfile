@@ -4,6 +4,7 @@ def volume_size = "0"
 def packer_script = "linux.pkr.hcl"
 def script_base = ""
 def iso_url = ""
+def product_codes = ""
 switch(OS) {
     case "Rocky Linux 8":
         base_name = "RockyLinux-8"
