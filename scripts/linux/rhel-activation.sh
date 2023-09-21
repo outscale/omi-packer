@@ -1,4 +1,4 @@
-#/bin/bash
+#!/bin/bash
 set -e
 
 if [[ "$1" == "rhel"*"csp" ]]; then
