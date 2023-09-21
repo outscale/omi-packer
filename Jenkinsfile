@@ -50,6 +50,11 @@ switch(OS) {
         script_base = "ubuntu2204"
         break
 
+    case "Debian 12":
+        base_name = "Debian-12"
+        script_base = "debian12"
+        break
+
     case "Debian 11":
         base_name = "Debian-11"
         script_base = "debian11"
