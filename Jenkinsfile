@@ -54,6 +54,7 @@ switch(OS) {
     case "Debian 12":
         base_name = "Debian-12"
         script_base = "debian12"
+        volume_size = "20"
         break
 
     case "Debian 11":
