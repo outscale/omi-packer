@@ -7,6 +7,7 @@ if [[ "$1" == "debian"* ]] || [[ "$1" == "ubuntu"* ]] || [[ "$1" == "arch" ]]; t
     mkdir -p /run/resolvconf/
     mkdir -p /run/systemd/resolve/
     cp /etc/resolv.conf /run/resolvconf/resolv.conf
+    cp /etc/resolv.conf /run/systemd/resolve/resolv.conf
     cp /etc/resolv.conf /run/systemd/resolve/stub-resolv.conf
     chroot /mnt/ bash -c '[[ -f /etc/resolv.conf ]]'
 else
