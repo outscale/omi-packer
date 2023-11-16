@@ -6,8 +6,8 @@
 .NOTES
     Name of file    : start.ps1
     Author          : Outscale
-    Date            : February 10th, 2023
-    Version         : 1.6
+    Date            : November 16th, 2023
+    Version         : 1.7
     #>
 
     <# Functions #>
@@ -298,7 +298,7 @@ try {
 
   $mtu = (Get-NetIPInterface -InterfaceAlias "Ethernet").NlMtu
   if ($mtu -ne 8950) {
-    Set-NetAdapterAdvancedProperty -Name "Ethernet" -DisplayName "Jumbo Packet" -DisplayValue "9014"
+    Set-NetAdapterAdvancedProperty -Name "Ethernet" -DisplayName "Jumbo Packet" -DisplayValue "8964"
     WriteLog("Set-NetIPInterface Ethernet NlMtuBytes 8950")
   } else {
     WriteLog("Set-NetIPInterface Ethernet NlMtuBytes 8950 already set")
@@ -309,12 +309,12 @@ try {
   $path = $adapter.ServiceName
   try {
     Get-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\services\Tcpip\Parameters\Interfaces\$path\" | Select-Object -ExpandProperty MTU -ErrorAction Stop | Out-Null
-    WriteLog("Registry ItemProperty Ethernet MTU 9000 already set")
+    WriteLog("Registry ItemProperty Ethernet MTU 8950 already set")
    }
    catch
    {
-    New-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\services\Tcpip\Parameters\Interfaces\$path\" -Name "MTU" -Value 9000 -PropertyType "DWord" | Out-Null
-    WriteLog("Applied Registry New-ItemProperty Ethernet MTU 9000")
+    New-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\services\Tcpip\Parameters\Interfaces\$path\" -Name "MTU" -Value 8950 -PropertyType "DWord" | Out-Null
+    WriteLog("Applied Registry New-ItemProperty Ethernet MTU 8950")
   }
 
   WriteLog "Enable Remote Desktop"
