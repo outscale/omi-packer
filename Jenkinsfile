@@ -149,7 +149,7 @@ for (region in REGIONS.tokenize(",")) {
                 string(name: 'BRANCH', value: BRANCH),
                 string(name: 'VOL_SIZE', value: volume_size),
                 string(name: 'ISO_URL', value: iso_url),
-                string(name: 'PRODUCT_CODES', value: product_codes)
+                string(name: 'OUTSCALE_PRODUCT_CODES', value: product_codes)
             ])
         }
     }
