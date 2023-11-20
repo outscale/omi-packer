@@ -15,7 +15,7 @@ variable "volsize" {
 
 variable "product_codes" {
     type    = string
-    default = "${env("PRODUCT_CODES")}"
+    default = "${env("OUTSCALE_PRODUCT_CODES")}"
 }
 
 packer {
