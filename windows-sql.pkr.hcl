@@ -33,7 +33,6 @@ source "outscale-bsu" "windows" {
     omi_name = "${var.omi_name}"
     force_delete_snapshot = true
     bsu_optimized = true
-    product_codes = ["${var.product_codes}"]
     launch_block_device_mappings {
         delete_on_vm_deletion = true
         device_name = "/dev/sda1"
@@ -52,6 +51,7 @@ source "outscale-bsu" "windows" {
     winrm_insecure = true
     winrm_use_ssl = true
     winrm_username = "Administrator"
+    product_codes = ["${var.product_codes}"]
 }
 
 build {
