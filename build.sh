@@ -28,6 +28,10 @@ if [ "$VOL_SIZE" == 0 ] || [ -z "$VOL_SIZE" ]; then
 else
     export PKR_VAR_volsize=$VOL_SIZE
 fi
+echo "product_code: `echo $OUTSCALE_PRODUCT_CODES`"
+echo "packer version `/bin/packer --version`"
+echo "packer plugins: `/bin/packer plugins installed`"
+
 /bin/packer init -upgrade ./config.pkr.hcl
 /bin/packer build ./$PACKER_SCRIPT | tee /usr/local/packer/logs/$UOMI_NAME.log
 
