@@ -36,7 +36,8 @@ echo "packer plugins: `/bin/packer plugins installed`"
 echo "executing /bin/packer init -upgrade ./config.pkr.hcl"
 /bin/packer init -upgrade ./config.pkr.hcl
 
-echo "executing /bin/packer build ./$PACKER_SCRIPT | tee /usr/local/packer/logs/$UOMI_NAME.log"
+export PACKER_LOG=1
+echo "executing /bin/packer build -debug ./$PACKER_SCRIPT | tee /usr/local/packer/logs/$UOMI_NAME.log"
 /bin/packer build -debug ./$PACKER_SCRIPT | tee /usr/local/packer/logs/$UOMI_NAME.log
 
 # Workaround for bad Packer exit code
