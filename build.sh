@@ -33,8 +33,8 @@ echo "product_code: `echo $OUTSCALE_PRODUCT_CODES`"
 echo "packer version `/bin/packer --version`"
 echo "packer plugins: `/bin/packer plugins installed`"
 
-echo "executing /bin/packer init -upgrade ."
-/bin/packer init -upgrade .
+echo "executing /bin/packer init -upgrade ./config.pkr.hcl"
+/bin/packer init -upgrade ./config.pkr.hcl
 
 echo "executing /bin/packer build ./$PACKER_SCRIPT | tee /usr/local/packer/logs/$UOMI_NAME.log"
 /bin/packer build ./$PACKER_SCRIPT | tee /usr/local/packer/logs/$UOMI_NAME.log
