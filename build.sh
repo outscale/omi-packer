@@ -37,7 +37,7 @@ echo "executing /bin/packer init -upgrade ./config.pkr.hcl"
 /bin/packer init -upgrade ./config.pkr.hcl
 
 echo "executing /bin/packer build ./$PACKER_SCRIPT | tee /usr/local/packer/logs/$UOMI_NAME.log"
-/bin/packer build ./$PACKER_SCRIPT | tee /usr/local/packer/logs/$UOMI_NAME.log
+/bin/packer build -debug ./$PACKER_SCRIPT | tee /usr/local/packer/logs/$UOMI_NAME.log
 
 # Workaround for bad Packer exit code
 grep successful /usr/local/packer/logs/$UOMI_NAME.log > /dev/null
