@@ -68,6 +68,7 @@ build {
             "./scripts/linux/dns.sh",
             "./scripts/linux/rhel-activation.sh",
             "./scripts/linux/ntp.sh",
+            "./scripts/linux/net-tools.sh",
             "./scripts/linux/packages.sh",
             "./scripts/linux/boot.sh",
             "./scripts/linux/ssh.sh",
