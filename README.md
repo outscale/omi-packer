@@ -49,17 +49,19 @@ The following Linux scripts are provided and can be used in `SCRIPT_BASE`:
  * centos7 (CentOS 7)
  * rocky8 (Rocky Linux 8)
  * rocky9 (Rocky Linux 9)
+ * rhel8 (RedHat Enterprise Linux 8 without license)
  * rhel8csp (RedHat Enterprise Linux 8)
  * rhel9 (RedHat Enterprise Linux 9 without license)
  * rhel9csp (RedHat Enterprise Linux 9)
  * ubuntu2004 (Ubuntu 20.04)
  * ubuntu2204 (Ubuntu 22.04)
  * debian11 (Debian 11)
+ * debian12 (Debian 12)
  * arch (ArchLinux)
  * alma9 (AlmaLinux 9)
  * opensuse154 (OpenSuse 15.4)
 
-**Beware:** CSP images (rhel9scp) requires edition of ./files/cloudinit-specific/05_rhel9.cfg to set a proper RedHat Satellite Server owned and configured by the customer itself.
+**Beware:** CSP images (rhel8scp) and (rhel9scp) requires edition of ./files/cloudinit-specific/05_rhelx.cfg to set a proper RedHat Satellite Server owned and configured by the customer itself.
 Failing to do so will result in a violation of Outscale Terms and Conditions.
 
 ### Windows
