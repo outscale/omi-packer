@@ -77,6 +77,13 @@ switch(OS) {
         packer_script = "windows.pkr.hcl"
         break
 
+    case "Windows Server 2019 SQL Server Web 2019":
+        base_name = "WindowsServer-2019-MSSQL-Web2019"
+        packer_script = "windows-sql.pkr.hcl"
+        iso_url = "https://oos.eu-west-2.outscale.com/omi/iso/SW_DVD9_SQL_Svr_Web_Ed_2019Dec2019_64Bit_English_MLF_X22-22250.ISO"
+        product_codes = "0002,0007"
+        break
+
     case "Windows Server 2019 SQL Standard 2019":
         base_name = "WindowsServer-2019-MSSQL-Std2019"
         packer_script = "windows-sql.pkr.hcl"
