@@ -55,6 +55,7 @@ The following Linux scripts are provided and can be used in `SCRIPT_BASE`:
  * rhel9csp (RedHat Enterprise Linux 9)
  * ubuntu2004 (Ubuntu 20.04)
  * ubuntu2204 (Ubuntu 22.04)
+ * ubuntu2404 (Ubuntu 24.04)
  * debian11 (Debian 11)
  * debian12 (Debian 12)
  * arch (ArchLinux)
