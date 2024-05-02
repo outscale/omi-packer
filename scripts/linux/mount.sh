@@ -25,3 +25,10 @@ if [[ "$1" == "debian"* ]]; then
     mkdir -p /mnt/boot/efi
     mount $efi_partition /mnt/boot/efi
 fi
+
+if [[ "$1" == "ubuntu24"* ]]; then
+    # Get Extended Linux partition for boot/grub
+    ext_partition=$(fdisk -lo device,type /dev/sda | grep -E '^\/dev\/' | tr -s ' ' | grep -E 'extended' | head -n1 | cut -d ' ' -f1)
+    mkdir -p /mnt/boot
+    mount $ext_partition /mnt/boot
+fi
