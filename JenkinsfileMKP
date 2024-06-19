@@ -219,7 +219,7 @@ for (region in REGIONS.tokenize(",")) {
     qa_branches["qa_${region}"] = {
         node {
             def CUR_OMI_NAME = sh(script: "cat /usr/local/packer/images/${currentRegion}-${base_name}-latest", returnStdout: true).trim()
-            build(job: 'qai-omi', parameters: [
+            build(job: 'qai-omi-mkp', parameters: [
                 string(name: 'OUTSCALE_REGION', value: currentRegion),
                 string(name: 'TF_VAR_endpoint', value: currentEndpoint),
                 string(name: 'TF_VAR_image_id', value: CUR_OMI_NAME),
