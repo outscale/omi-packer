@@ -13,6 +13,11 @@ variable "volsize" {
     default = "50"
 }
 
+variable "product_codes" {
+    type    = string
+    default = "${env("OUTSCALE_PRODUCT_CODES")}"
+}
+
 packer {
     required_plugins {
         windows-update = {
@@ -46,6 +51,7 @@ source "outscale-bsu" "windows" {
     winrm_insecure = true
     winrm_use_ssl = true
     winrm_username = "Administrator"
+    omi_product_codes = ["${var.product_codes}"]
 }
 
 build {
