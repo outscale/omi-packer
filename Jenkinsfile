@@ -80,6 +80,7 @@ switch(OS) {
     case "Windows Server 2019":
         base_name = "WindowsServer-2019"
         packer_script = "windows.pkr.hcl"
+        product_codes = "0002"
         break
 
     case "Windows Server 2019 SQL Server Web 2019":
@@ -106,6 +107,12 @@ switch(OS) {
     case "Windows 10":
         base_name = "Windows-10"
         packer_script = "windows.pkr.hcl"
+        break
+
+    case "Windows Server 2022":
+        base_name = "WindowsServer-2022"
+        packer_script = "windows.pkr.hcl"
+        product_codes = "0002"
         break
 }
 
