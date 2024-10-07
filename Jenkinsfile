@@ -4,7 +4,7 @@ def volume_size = "0"
 def packer_script = "linux.pkr.hcl"
 def script_base = ""
 def iso_url = ""
-def product_codes = ""
+def product_codes = "0001"
 switch(OS) {
     case "Alma Linux 9":
         base_name = "AlmaLinux-9"
