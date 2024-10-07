@@ -27,6 +27,11 @@ variable "username" {
     default = "outscale"
 }
 
+variable "product_codes" {
+    type    = string
+    default = "${env("OUTSCALE_PRODUCT_CODES")}"
+}
+
 source "outscale-bsusurrogate" "builder" {
     launch_block_device_mappings {
         delete_on_vm_deletion = true
@@ -47,6 +52,7 @@ source "outscale-bsusurrogate" "builder" {
     ssh_interface = "public_ip"
     ssh_username = "${var.username}"
     vm_type = "tinav5.c2r4p1"
+    product_codes = ["${var.product_codes}"]
 }
 
 build {
