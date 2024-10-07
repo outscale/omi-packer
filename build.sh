@@ -30,7 +30,7 @@ else
 fi
 
 # Clean up old packer plugins before installing required
-/bin/packer plugins installed | xargs -n1 packer plugins remove
+#/bin/packer plugins installed | xargs -n1 packer plugins remove
 
 #echo "executing /bin/packer init -upgrade ./config.pkr.hcl"
 /bin/packer init -upgrade ./config.pkr.hcl
