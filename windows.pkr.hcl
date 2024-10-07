@@ -18,15 +18,6 @@ variable "product_codes" {
     default = "${env("OUTSCALE_PRODUCT_CODES")}"
 }
 
-packer {
-    required_plugins {
-        windows-update = {
-            version = ">=0.14.0"
-            source = "github.com/rgl/windows-update"
-        }
-    }
-}
-
 source "outscale-bsu" "windows" {
     communicator = "winrm"
     disable_stop_vm = true
