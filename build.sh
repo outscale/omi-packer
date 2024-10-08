@@ -40,7 +40,12 @@ echo "product_code: `echo $OUTSCALE_PRODUCT_CODES`"
 echo "packer version `/bin/packer --version`"
 echo "packer plugins: `/bin/packer plugins installed`"
 
-#export PACKER_LOG=1
+if [ "$PACKER_DEBUG" == "yes" ]; then
+    export PACKER_LOG=1
+else
+    unset PACKER_LOG
+fi
+
 #echo "executing /bin/packer build -debug ./$PACKER_SCRIPT | tee /usr/local/packer/logs/$UOMI_NAME.log"
 /bin/packer build ./$PACKER_SCRIPT | tee /usr/local/packer/logs/$UOMI_NAME.log
 
