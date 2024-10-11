@@ -4,7 +4,7 @@ def volume_size = "0"
 def packer_script = "linux.pkr.hcl"
 def script_base = ""
 def iso_url = ""
-def product_codes = "0001"
+def product_codes = "'0001'"
 switch(OS) {
     case "Alma Linux 9":
         base_name = "AlmaLinux-9"
@@ -80,32 +80,40 @@ switch(OS) {
     case "Windows Server 2019":
         base_name = "WindowsServer-2019"
         packer_script = "windows.pkr.hcl"
+        product_codes = "'0002'"
         break
 
     case "Windows Server 2019 SQL Server Web 2019":
         base_name = "WindowsServer-2019-MSSQL-Web2019"
         packer_script = "windows-sql.pkr.hcl"
         iso_url = "https://oos.eu-west-2.outscale.com/omi/iso/SW_DVD9_SQL_Svr_Web_Ed_2019Dec2019_64Bit_English_MLF_X22-22250.ISO"
-        product_codes = "0007"
+        product_codes = "'0002'0007'"
         break
 
     case "Windows Server 2019 SQL Standard 2019":
         base_name = "WindowsServer-2019-MSSQL-Std2019"
         packer_script = "windows-sql.pkr.hcl"
         iso_url = "https://oos.eu-west-2.outscale.com/omi/iso/SW_DVD9_NTRL_SQL_Svr_Standard_Edtn_2019Dec2019_64Bit_English_OEM_VL_X22-22109.ISO"
-        product_codes = "0008"
+        product_codes = "'0002'0008'"
         break
 
     case "Windows Server 2019 SQL Enterprise 2019":
         base_name = "WindowsServer-2019-MSSQL-Ent2019"
         packer_script = "windows-sql.pkr.hcl"
         iso_url = "https://oos.eu-west-2.outscale.com/omi/iso/SW_DVD9_NTRL_SQL_Svr_Ent_Core_2019Dec2019_64Bit_English_OEM_VL_X22-22120.ISO"
-        product_codes = "0009"
+        product_codes = "'0002','0009'"
         break
 
     case "Windows 10":
         base_name = "Windows-10"
         packer_script = "windows.pkr.hcl"
+        product_codes = "'0002'"
+        break
+
+    case "Windows Server 2022":
+        base_name = "WindowsServer-2022"
+        packer_script = "windows.pkr.hcl"
+        product_codes = "'0002'"
         break
 }
 
