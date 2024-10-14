@@ -57,7 +57,7 @@ build {
         destination = "C:\\Windows\\Outscale\\"
         source = "files/windows/"
     }
-/*
+
     provisioner "powershell" {
         environment_vars = ["ISO_URL=${var.iso}"]
         scripts = [
@@ -69,7 +69,6 @@ build {
         ]
     }
     provisioner "windows-update" {}
-*/
     provisioner "powershell" {
         scripts = [ "scripts/windows/sysprep.ps1" ]
     }
