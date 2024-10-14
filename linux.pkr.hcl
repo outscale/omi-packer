@@ -28,8 +28,8 @@ variable "username" {
 }
 
 variable "product_codes" {
-    type    = string
-    default = "${env("OUTSCALE_PRODUCT_CODES")}"
+    type    = list(string)
+    default = []
 }
 
 source "outscale-bsusurrogate" "builder" {
@@ -52,7 +52,7 @@ source "outscale-bsusurrogate" "builder" {
     ssh_interface = "public_ip"
     ssh_username = "${var.username}"
     vm_type = "tinav5.c2r4p1"
-    product_codes = ["${var.product_codes}"]
+    product_codes = "${var.product_codes}"
 }
 
 build {
