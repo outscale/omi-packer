@@ -32,7 +32,7 @@ fi
 # Clean up old packer plugins before installing required
 #/bin/packer plugins installed | xargs -n1 packer plugins remove
 
-#echo "executing /bin/packer init -upgrade ./config.pkr.hcl"
+echo "executing /bin/packer init -upgrade ./config.pkr.hcl"
 /bin/packer init -upgrade ./config.pkr.hcl
 
 echo "packer env checks..."
@@ -46,8 +46,7 @@ else
     unset PACKER_LOG
 fi
 
-#echo "executing /bin/packer build -debug ./$PACKER_SCRIPT | tee /usr/local/packer/logs/$UOMI_NAME.log"
-/bin/packer build ./$PACKER_SCRIPT | tee /usr/local/packer/logs/$UOMI_NAME.log
+/bin/packer build -var "product_codes=[\"${OUTSCALE_PRODUCT_CODES//,/\",\"}\"]" ./$PACKER_SCRIPT | tee /usr/local/packer/logs/$UOMI_NAME.log
 
 # Workaround for bad Packer exit code
 grep successful /usr/local/packer/logs/$UOMI_NAME.log > /dev/null

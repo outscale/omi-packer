@@ -14,8 +14,8 @@ variable "volsize" {
 }
 
 variable "product_codes" {
-    type    = string
-    default = "${env("OUTSCALE_PRODUCT_CODES")}"
+    type    = list(string)
+    default = []
 }
 
 source "outscale-bsu" "windows" {
@@ -42,7 +42,7 @@ source "outscale-bsu" "windows" {
     winrm_insecure = true
     winrm_use_ssl = true
     winrm_username = "Administrator"
-    product_codes = ["${var.product_codes}"]
+    product_codes = "${var.product_codes}"
 }
 
 build {
