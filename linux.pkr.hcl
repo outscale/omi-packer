@@ -46,7 +46,7 @@ source "outscale-bsusurrogate" "builder" {
         device_name = "/dev/sda1"
         source_device_name = "/dev/xvdf"
         volume_size = "${var.volsize}"
-        volume_type = "standard"
+        volume_type = "gp2"
     }
     source_omi = "${var.omi}"
     ssh_interface = "public_ip"
