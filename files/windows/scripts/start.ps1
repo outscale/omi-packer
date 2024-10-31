@@ -6,8 +6,8 @@
 .NOTES
     Name of file    : start.ps1
     Author          : Outscale
-    Date            : November 16th, 2023
-    Version         : 1.7
+    Date            : November 1st, 2024
+    Version         : 1.8
     #>
 
     <# Functions #>
@@ -292,13 +292,15 @@ try {
   WriteLog("*******************************************************************************")
   WriteLog("Updating MTU Ethernet Configuration")
 
-  # Network Interface
-  Disable-NetAdapterBinding -InterfaceAlias "Ethernet" -ComponentID ms_tcpip6
-  Disable-NetAdapterBinding -InterfaceAlias Ethernet -ComponentID ms_tcpip6
+  # Get Ethernet Interface name
+  $ethernetAdapter = Get-NetAdapter | Where-Object { $_.Status -eq "Up" -and $_.InterfaceDescription -like "*Ethernet*" } | Select-Object -ExpandProperty Name
 
-  $mtu = (Get-NetIPInterface -InterfaceAlias "Ethernet").NlMtu
+  # Network Interface
+  Disable-NetAdapterBinding -InterfaceAlias $ethernetAdapter -ComponentID ms_tcpip6
+
+  $mtu = (Get-NetIPInterface -InterfaceAlias $ethernetAdapter).NlMtu
   if ($mtu -ne 8950) {
-    Set-NetAdapterAdvancedProperty -Name "Ethernet" -DisplayName "Jumbo Packet" -DisplayValue "8964"
+    Set-NetAdapterAdvancedProperty -Name $ethernetAdapter -DisplayName "Jumbo Packet" -DisplayValue "8964"
     WriteLog("Set-NetIPInterface Ethernet NlMtuBytes 8950")
   } else {
     WriteLog("Set-NetIPInterface Ethernet NlMtuBytes 8950 already set")

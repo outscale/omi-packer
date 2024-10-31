@@ -9,12 +9,12 @@
 .NOTES
     Name of file    : virtio.ps1
     Author          : Outscale
-    Date            : February 3rd, 2022
-    Version         : 1.0
+    Date            : November 1st, 2024
+    Version         : 1.1
 #>
 
 #VirtIO msi file URL
-$MsiURL = "https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/virtio-win-0.1.229-1/virtio-win-gt-x64.msi"
+$MsiURL = "https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/virtio-win-0.1.262-2/virtio-win-gt-x64.msi"
 
 #Downloaded msi file name
 $MsiName = "virtio-win.msi"
