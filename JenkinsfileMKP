@@ -6,6 +6,11 @@ def script_base = ""
 def iso_url = ""
 def product_codes = "0001"
 switch(OS) {
+    case "Alma Linux 8":
+        base_name = "AlmaLinux-8"
+        script_base = "alma8
+        break
+
     case "Alma Linux 9":
         base_name = "AlmaLinux-9"
         script_base = "alma9"
