@@ -59,6 +59,7 @@ The following Linux scripts are provided and can be used in `SCRIPT_BASE`:
  * debian11 (Debian 11)
  * debian12 (Debian 12)
  * arch (ArchLinux)
+ * alma8 (AlmaLinux 8)
  * alma9 (AlmaLinux 9)
  * opensuse154 (OpenSuse 15.4)
 
