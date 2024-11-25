@@ -8,7 +8,7 @@ def product_codes = "0001"
 switch(OS) {
     case "Alma Linux 8":
         base_name = "AlmaLinux-8"
-        script_base = "alma8
+        script_base = "alma8"
         break
 
     case "Alma Linux 9":
