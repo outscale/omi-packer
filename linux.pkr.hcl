@@ -53,6 +53,7 @@ source "outscale-bsusurrogate" "builder" {
     ssh_username = "${var.username}"
     vm_type = "tinav5.c2r4p1"
     product_codes = "${var.product_codes}"
+#    disable_stop_vm = true
 }
 
 build {
